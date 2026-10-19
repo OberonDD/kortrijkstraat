@@ -266,6 +266,7 @@ button.chip { border: 0; cursor: pointer; }
 .card .meta .money { font-family: var(--f-mono); }
 .cgroup { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; padding: 8px 2px 0; display: flex; justify-content: space-between; }
 .ftoggle { display: none; }
+.tab .ts { display: none; }
 @media (max-width: 760px) {
   header.top { align-items: flex-start; }
   .topright { align-items: flex-start; }
@@ -276,7 +277,9 @@ button.chip { border: 0; cursor: pointer; }
   .stat { padding: 8px 12px; }
   .stat .v { font-size: 20px; }
   .ftoggle { display: inline-block; }
-  .toolbar:not(.open) select { display: none; }
+  .toolbar:not(.open) select:not(#fkind) { display: none; }
+  .tab .tl { display: none; }
+  .tab .ts { display: inline; }
   .sheet { display: none; }
   .cards { display: flex; }
   .toolbar .search { flex: 1 1 140px; }
@@ -342,7 +345,7 @@ button.chip { border: 0; cursor: pointer; }
   <div class="banner" id="importHint" hidden>The list is empty. Moving over from the Claude version? <button class="linkbtn" type="button" id="importHintBtn">Import kortrijkstraat-17-data.json</button></div>
 
   <nav class="tabs" role="tablist" aria-label="Lists">
-    <button class="tab" role="tab" id="tab-house" data-tab="house">In the house <span class="n" id="n-house">0</span></button>
+    <button class="tab" role="tab" id="tab-house" data-tab="house"><span class="tl">In the house</span><span class="ts">House</span> <span class="n" id="n-house">0</span></button>
     <button class="tab" role="tab" id="tab-admin" data-tab="admin">Paperwork <span class="n" id="n-admin">0</span></button>
     <button class="tab" role="tab" id="tab-done" data-tab="done">Done <span class="n" id="n-done">0</span></button>
     <button class="tab" role="tab" id="tab-subs" data-tab="subs">Subsidies <span class="n" id="n-subs">0</span></button>
@@ -429,7 +432,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
 
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const eur = (n, d = 0) => n == null || isNaN(n) ? "—" : "€ " + Number(n).toLocaleString("nl-BE", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const eur = (n, d) => { if (n == null || n === "" || isNaN(n)) return "—"; const x = Number(n); if (d == null) d = Number.isInteger(Math.round(x * 100) / 100) ? 0 : 2; return "€ " + x.toLocaleString("nl-BE", { minimumFractionDigits: d, maximumFractionDigits: d }); };
   const numIn = (n) => n == null || n === "" || isNaN(n) ? "" : Number(n).toLocaleString("nl-BE", { maximumFractionDigits: 2 });
   function parseNum(s) {
     s = String(s ?? "").replace(/[€\s ]/g, "");
