@@ -130,8 +130,31 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 
 .sheet { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: auto; max-height: 72vh; }
 table.grid { border-collapse: separate; border-spacing: 0; width: 100%; }
-table.grid.house { min-width: 1320px; }
-table.grid.admin { min-width: 1080px; }
+table.grid.house { min-width: 1800px; }
+table.grid.admin { min-width: 1600px; }
+.grid.house td:nth-child(3), .grid.house th:nth-child(3), .grid.admin td:nth-child(3), .grid.admin th:nth-child(3) { min-width: 300px; }
+.grid.house td:nth-child(4), .grid.house th:nth-child(4) { min-width: 140px; }
+.grid.house td:nth-child(5), .grid.house th:nth-child(5) { min-width: 150px; }
+.grid.house td:nth-child(6), .grid.house th:nth-child(6), .grid.admin td:nth-child(5), .grid.admin th:nth-child(5) { min-width: 125px; }
+.grid.house td:nth-child(7), .grid.house th:nth-child(7), .grid.admin td:nth-child(6), .grid.admin th:nth-child(6) { min-width: 120px; }
+.grid.house td:nth-child(8), .grid.house th:nth-child(8), .grid.admin td:nth-child(7), .grid.admin th:nth-child(7) { min-width: 110px; }
+.grid.house td:nth-child(9), .grid.house th:nth-child(9) { min-width: 180px; }
+.grid.house td:nth-child(10), .grid.house th:nth-child(10), .grid.admin td:nth-child(9), .grid.admin th:nth-child(9) { min-width: 170px; }
+.grid.house td:nth-child(11), .grid.house th:nth-child(11), .grid.house td:nth-child(12), .grid.house th:nth-child(12), .grid.admin td:nth-child(10), .grid.admin th:nth-child(10) { min-width: 105px; }
+.grid.house td:nth-child(13), .grid.house th:nth-child(13), .grid.admin td:nth-child(11), .grid.admin th:nth-child(11) { min-width: 220px; }
+.grid.admin td:nth-child(4), .grid.admin th:nth-child(4) { min-width: 175px; }
+.grid.admin td:nth-child(8), .grid.admin th:nth-child(8) { min-width: 145px; }
+/* freeze row number, done box and title while scrolling sideways */
+.grid.house tbody td:nth-child(-n+3), .grid.admin tbody td:nth-child(-n+3), .grid.house tfoot td:nth-child(-n+3), .grid.admin tfoot td:nth-child(-n+3) { position: sticky; z-index: 1; }
+.grid.house thead th:nth-child(-n+3), .grid.admin thead th:nth-child(-n+3) { left: 0; z-index: 3; }
+.grid.house tr > :nth-child(1), .grid.admin tr > :nth-child(1) { left: 0; width: 40px; min-width: 40px; max-width: 40px; }
+.grid.house tr > :nth-child(2), .grid.admin tr > :nth-child(2) { left: 40px; width: 36px; min-width: 36px; max-width: 36px; }
+.grid.house tr > :nth-child(3), .grid.admin tr > :nth-child(3) { left: 76px; box-shadow: 1px 0 0 var(--line); }
+.grid.house thead th:nth-child(2), .grid.admin thead th:nth-child(2) { left: 40px; }
+.grid.house thead th:nth-child(3), .grid.admin thead th:nth-child(3) { left: 76px; }
+.grid.house tbody td.chk, .grid.house tbody td.titlecell, .grid.admin tbody td.chk, .grid.admin tbody td.titlecell { background: var(--surface); }
+.grid.house tr.group td, .grid.admin tr.group td { position: static; }
+.grid.house tfoot td:nth-child(-n+3), .grid.admin tfoot td:nth-child(-n+3) { z-index: 2; }
 table.grid.subs { min-width: 900px; }
 .grid th, .grid td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 0; vertical-align: middle; text-align: left; }
 .grid th:last-child, .grid td:last-child { border-right: 0; }
@@ -197,10 +220,19 @@ button.chip { border: 0; cursor: pointer; }
 .card .meta { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; font-size: 12px; color: var(--muted); }
 .card .meta .money { font-family: var(--f-mono); }
 .cgroup { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; padding: 8px 2px 0; display: flex; justify-content: space-between; }
+.ftoggle { display: none; }
 @media (max-width: 760px) {
+  header.top { align-items: flex-start; }
+  .topright { align-items: flex-start; }
+  .tabs { gap: 0; }
+  .tab { font-size: 15px; padding: 9px 10px 8px; gap: 6px; }
+  .stat { padding: 8px 12px; }
+  .stat .v { font-size: 20px; }
+  .ftoggle { display: inline-block; }
+  .toolbar:not(.open) select { display: none; }
   .sheet { display: none; }
   .cards { display: flex; }
-  .toolbar .search { flex-basis: 100%; }
+  .toolbar .search { flex: 1 1 0; }
   .toolbar select { flex: 1 1 40%; }
   .toolbar .spacer { display: none; }
   .addbar select { flex: 1 1 auto; }
@@ -238,6 +270,8 @@ button.chip { border: 0; cursor: pointer; }
 .deplist .k { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
 .confirm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; }
 .linkout { font-size: 13px; color: var(--accent); overflow-wrap: anywhere; }
+.toast-undo { all: unset; cursor: pointer; font-weight: 700; text-decoration: underline; margin-left: 10px; padding: 2px 4px; }
+.toast-undo:focus-visible { outline: 2px solid currentColor; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: var(--r); z-index: 30; font-size: 13px; max-width: calc(100% - 32px); }
 @media (prefers-reduced-motion: no-preference) { .panel { animation: slide .18s ease-out; } @keyframes slide { from { transform: translateX(24px); opacity: .6; } } }
 </style>
@@ -393,7 +427,15 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     return !!t && (t.dependsOn || []).some((d) => dependsTransitively(d, targetId, seen));
   }
   let toastTimer;
-  function toast(msg) { const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => (el.hidden = true), 3200); }
+  function toast(msg, undo) {
+    const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer);
+    if (undo) {
+      const b = document.createElement("button"); b.type = "button"; b.className = "toast-undo"; b.textContent = "Undo";
+      b.addEventListener("click", () => { undo(); el.hidden = true; clearTimeout(toastTimer); });
+      el.append(" ", b);
+    }
+    toastTimer = setTimeout(() => (el.hidden = true), undo ? 6000 : 3200);
+  }
 
   function write(colRef, id, fields) {
     if (!colRef || !canWrite) { toast("This list is read-only for you right now."); return Promise.resolve(); }
@@ -443,6 +485,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const v = V(), tb = $("#toolbar");
     const sel = (id, label, pairs, val) => `<select id="${id}" aria-label="${label}">${opts(pairs, val)}</select>`;
     let html = `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
+    if (st.tab !== "subs") html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
     if (st.tab !== "subs") {
       html += sel("fstatus", "Status", [["open", "Open"], ["all", "All"], ...Object.entries(STATUS)], v.status);
       html += sel("fpri", "Priority", [["", "Any priority"], ...Object.entries(PRI)], v.pri);
@@ -459,7 +502,20 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     }
     html += `<span class="spacer"></span><span class="count" id="count"></span><button class="btn" id="exportBtn" type="button"${downloadsNS ? "" : " hidden"}>Export to Excel (.csv)</button>`;
     tb.innerHTML = html;
+    tb.classList.toggle("open", filtersOpen);
     refreshToolSelect();
+    updateFilterButton();
+  }
+  let filtersOpen = false;
+  function activeFilterCount() {
+    const v = V(); if (st.tab === "subs") return 0;
+    return ["pri", "owner", "trade", "tool", "cat", "group"].filter((k) => v[k]).length + (v.status && v.status !== "open" ? 1 : 0);
+  }
+  function updateFilterButton() {
+    const b = $("#ftoggle"); if (!b) return;
+    const n = activeFilterCount();
+    b.textContent = (filtersOpen ? "Hide filters" : "Filters") + (n ? ` (${n})` : "");
+    b.setAttribute("aria-expanded", filtersOpen ? "true" : "false");
   }
   function refreshToolSelect() {
     const el = $("#ftool"); if (!el || document.activeElement === el) return;
@@ -468,8 +524,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   const FILTER_KEYS = { fq: "q", fstatus: "status", fpri: "pri", fowner: "owner", ftrade: "trade", ftool: "tool", fgroup: "group", fcat: "cat" };
   $("#toolbar").addEventListener("input", (e) => { const k = FILTER_KEYS[e.target.id]; if (k === "q") { V().q = e.target.value; saveView(); render(); } });
-  $("#toolbar").addEventListener("change", (e) => { const k = FILTER_KEYS[e.target.id]; if (k && k !== "q") { V()[k] = e.target.value; saveView(); render(); } });
-  $("#toolbar").addEventListener("click", (e) => { if (e.target.id === "exportBtn") exportCsv(); });
+  $("#toolbar").addEventListener("change", (e) => { const k = FILTER_KEYS[e.target.id]; if (k && k !== "q") { V()[k] = e.target.value; saveView(); render(); updateFilterButton(); } });
+  $("#toolbar").addEventListener("click", (e) => {
+    if (e.target.id === "exportBtn") exportCsv();
+    if (e.target.id === "ftoggle") { filtersOpen = !filtersOpen; $("#toolbar").classList.toggle("open", filtersOpen); updateFilterButton(); }
+  });
   document.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; st.tab = b.dataset.tab; saveView(); closePanel(); setupTab(); });
   document.querySelector(".tabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -589,7 +648,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const b = blockers(t);
     const due = t.due ? `<span${!isDone(t) && t.due < today() ? ' style="color:var(--p1);font-weight:600"' : ""}>Due ${esc(fmtDate(t.due))}</span>` : "";
     const money = t.actualCost != null ? `<span class="money">${eur(t.actualCost)} spent</span>` : t.estCost != null ? `<span class="money">≈ ${eur(t.estCost)}</span>` : "";
-    return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0">
+    return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
       <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Mark done"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
       <div class="t">${esc(t.title || "Untitled")}</div>
       <div class="meta">
@@ -622,7 +681,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   function subCard(s) {
     const lt = linkedTasks(s.id);
-    return `<div class="card nochk" data-opensub="${esc(s.id)}" role="button" tabindex="0">
+    return `<div class="card nochk" data-opensub="${esc(s.id)}" role="button" tabindex="0" aria-label="${esc(s.name || "Untitled subsidy")}: open details">
       <div class="t">${esc(s.name || "Untitled subsidy")}</div>
       <div class="meta"><span class="chip sub-${esc(s.status || "check")}">${esc(SUB[s.status] || "To check")}</span>
         ${s.expected != null ? `<span class="money">≈ ${eur(s.expected)}</span>` : ""}${s.received != null ? `<span class="money">${eur(s.received)} received</span>` : ""}
@@ -713,7 +772,12 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const MONEY = ["estCost", "actualCost", "expected", "received", "hours"];
   function applyTaskField(id, f, el) {
     const t = byId.get(id); if (!t) return;
-    if (f === "done") { patch(id, { status: el.checked ? "done" : "todo", doneAt: el.checked ? today() : "" }); return; }
+    if (f === "done") {
+      const prev = { status: t.status || "todo", doneAt: t.doneAt || "" };
+      patch(id, { status: el.checked ? "done" : "todo", doneAt: el.checked ? today() : "" });
+      if (el.checked) toast(`Done: “${t.title}”`, () => patch(id, prev));
+      return;
+    }
     let v;
     if (MONEY.includes(f)) { v = parseNum(el.value); el.value = numIn(v); }
     else if (f === "priority") v = Number(el.value);
@@ -805,7 +869,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         </div>`;
     showPanel(head() + `<div class="panel-body">
         <div class="f"><label for="pTitle">${kind === "house" ? "Fix / job" : "Paperwork"}</label><input id="pTitle" class="title-in" data-p="title" value="${esc(t.title)}"${ro}></div>
-        ${canWrite ? `<div class="kindswitch">In ${kind === "house" ? "In the house" : "Paperwork"} · <button class="btn" type="button" id="pMove">Move to ${kind === "house" ? "Paperwork" : "In the house"}</button></div>` : ""}
+        ${canWrite ? `<div class="kindswitch">Listed under <b>${kind === "house" ? "In the house" : "Paperwork"}</b> · <button class="btn" type="button" id="pMove">Move to ${kind === "house" ? "Paperwork" : "In the house"}</button></div>` : ""}
         <div class="row2">
           <div class="f"><label for="pStatus">Status</label><select id="pStatus" data-p="status"${ro}>${opts(Object.entries(STATUS), t.status || "todo")}</select></div>
           <div class="f"><label for="pPri">Priority</label><select id="pPri" data-p="priority"${ro}>${opts(Object.entries(PRI), t.priority || 3)}</select></div>
