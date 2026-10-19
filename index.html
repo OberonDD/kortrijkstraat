@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#eceef1">
+<title>Kortrijkstraat 17 Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.acct { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.linkbtn { all: unset; cursor: pointer; color: var(--accent); font-weight: 600; }
+.linkbtn:hover { text-decoration: underline; }
+.linkbtn:focus-visible { outline: 2px solid var(--accent); }
+.topright { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+.gate { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px; }
+.gate-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px 24px; width: min(420px, 100%); display: flex; flex-direction: column; gap: 14px; }
+.gate-card h1 { font-family: var(--f-display); font-weight: 700; font-size: 34px; line-height: 1; letter-spacing: -.02em; margin: 0; }
+.gate-card h1 span { color: var(--accent); }
+.gate-card p { margin: 0; color: var(--muted); }
+.gate-card .btn { padding: 12px 16px; font-size: 15px; }
+.gate-err { color: var(--p1) !important; font-size: 13px; overflow-wrap: anywhere; }
+.foot { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* Layout: a working site sheet — header + live totals, three tabs (house / paperwork / subsidies), filter bar, then one spreadsheet grid (cards on phones) with a side panel for details. Accent = carpenter's chalk-line blue on concrete grey. */
+:root {
+  --bg: #eceef1;
+  --surface: #fafbfc;
+  --sunk: #e3e6ea;
+  --ink: #1a1e26;
+  --muted: #5b6372;
+  --line: #d3d8df;
+  --accent: #2c4bd4;
+  --accent-soft: #dfe5fb;
+  --on-accent: #ffffff;
+  --p1: #c4372c; --p1-soft: #f8e1de;
+  --p2: #b8730a; --p2-soft: #f6ead3;
+  --p3: #4c5b70; --p3-soft: #e3e7ed;
+  --p4: #8b929c; --p4-soft: #eceef1;
+  --ok: #2b8150; --ok-soft: #dcefe3;
+  --warn: #a8610a; --warn-soft: #f7ebd8;
+  --shadow: 0 12px 40px rgba(20, 26, 40, .18);
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --r: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #13161b; --surface: #1b1f26; --sunk: #232831; --ink: #e6e9ee; --muted: #98a1af; --line: #2d333d;
+    --accent: #8296ff; --accent-soft: #252d4f; --on-accent: #0f1320;
+    --p1: #ff7f73; --p1-soft: #3d2221; --p2: #f0b34f; --p2-soft: #3a2f1b; --p3: #a9b6c9; --p3-soft: #283040; --p4: #7d8592; --p4-soft: #21252c;
+    --ok: #63c98b; --ok-soft: #1c3426; --warn: #f0b34f; --warn-soft: #3a2f1b;
+    --shadow: 0 12px 40px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #13161b; --surface: #1b1f26; --sunk: #232831; --ink: #e6e9ee; --muted: #98a1af; --line: #2d333d;
+  --accent: #8296ff; --accent-soft: #252d4f; --on-accent: #0f1320;
+  --p1: #ff7f73; --p1-soft: #3d2221; --p2: #f0b34f; --p2-soft: #3a2f1b; --p3: #a9b6c9; --p3-soft: #283040; --p4: #7d8592; --p4-soft: #21252c;
+  --ok: #63c98b; --ok-soft: #1c3426; --warn: #f0b34f; --warn-soft: #3a2f1b;
+  --shadow: 0 12px 40px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px; line-height: 1.45; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; display: flex; flex-direction: column; gap: 14px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.brand h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 4.5vw, 40px); line-height: 1; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.brand h1 span { color: var(--accent); }
+.brand p { margin: 6px 0 0; color: var(--muted); }
+.sync { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.sync i { width: 8px; height: 8px; border-radius: 50%; background: var(--p4); display: inline-block; }
+.sync.live i { background: var(--ok); }
+
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.stat { padding: 12px 16px; border-left: 1px solid var(--line); min-width: 0; }
+.stat:first-child { border-left: 0; }
+.stat .k { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.stat .v { font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 1.15; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.stat .s { font-size: 12px; color: var(--muted); }
+.stat .s b { font-weight: 600; color: var(--ink); }
+.stat .s .hot { color: var(--p1); font-weight: 600; }
+@media (max-width: 900px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat { border-left: 0; border-top: 1px solid var(--line); } .stat:nth-child(-n+2) { border-top: 0; } .stat:nth-child(2n) { border-left: 1px solid var(--line); } .stat:last-child { grid-column: 1 / -1; border-left: 0; } }
+
+.banner { padding: 10px 14px; border-radius: var(--r); background: var(--warn-soft); color: var(--ink); border: 1px solid var(--line); }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tab { all: unset; cursor: pointer; padding: 10px 14px 9px; font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -1px; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.tab .n { font-family: var(--f-mono); font-size: 12px; font-weight: 500; background: var(--sunk); color: var(--muted); border-radius: 999px; padding: 1px 8px; }
+.tab[aria-selected="true"] .n { background: var(--accent-soft); color: var(--accent); }
+
+/* Room chips */
+.roomrow { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.rchip { all: unset; cursor: pointer; white-space: nowrap; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 13px; display: inline-flex; gap: 6px; align-items: center; }
+.rchip:hover { border-color: var(--muted); }
+.rchip .c { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.rchip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.rchip[aria-pressed="true"] .c { color: var(--bg); opacity: .7; }
+.rchip:focus-visible { outline: 2px solid var(--accent); }
+
+.addbar { display: flex; gap: 8px; flex-wrap: wrap; }
+.addbar input { flex: 1 1 260px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); font-size: 15px; }
+.addbar select { padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); max-width: 100%; }
+.btn { border: 1px solid var(--line); background: var(--surface); padding: 8px 12px; border-radius: var(--r); cursor: pointer; white-space: nowrap; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; padding-inline: 18px; }
+.btn.primary:hover { filter: brightness(1.07); }
+.btn.danger { color: var(--p1); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.toolbar .search { flex: 1 1 200px; min-width: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.toolbar select { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); max-width: 100%; }
+.toolbar .spacer { flex: 1 0 0; }
+.count { font-size: 12px; color: var(--muted); }
+
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: auto; max-height: 72vh; }
+table.grid { border-collapse: separate; border-spacing: 0; width: 100%; }
+table.grid.house { min-width: 1320px; }
+table.grid.admin { min-width: 1080px; }
+table.grid.subs { min-width: 900px; }
+.grid th, .grid td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 0; vertical-align: middle; text-align: left; }
+.grid th:last-child, .grid td:last-child { border-right: 0; }
+.grid thead th { position: sticky; top: 0; z-index: 2; background: var(--sunk); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
+.grid thead th button { all: unset; display: flex; align-items: center; gap: 4px; padding: 8px 10px; cursor: pointer; width: 100%; box-sizing: border-box; }
+.grid thead th button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.grid thead th .arr { opacity: .35; font-size: 10px; }
+.grid thead th.sorted .arr { opacity: 1; color: var(--accent); }
+.grid th.r button { justify-content: flex-end; }
+.grid td.r { text-align: right; }
+.grid td.idx { width: 40px; text-align: center; font-family: var(--f-mono); font-size: 11px; color: var(--muted); background: var(--sunk); }
+.grid td.chk { width: 36px; text-align: center; }
+.grid td.chk input { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+.grid tbody tr:hover td { background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface)); }
+.grid tbody tr:hover td.idx { background: var(--sunk); }
+.grid tr.done td:not(.idx):not(.chk) { color: var(--muted); }
+.grid tr.done .cell-title { text-decoration: line-through; text-decoration-color: var(--line); }
+.cell { width: 100%; border: 0; background: transparent; padding: 8px 10px; min-height: 36px; border-radius: 0; }
+.cell:focus { outline: 2px solid var(--accent); outline-offset: -2px; background: var(--surface); }
+select.cell { cursor: pointer; appearance: none; -webkit-appearance: none; padding-right: 22px; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 12px) 52%, calc(100% - 8px) 52%; background-size: 4px 4px; background-repeat: no-repeat; }
+input.cell.money { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+input.cell[type="date"] { font-family: var(--f-mono); font-size: 13px; }
+.cell-title { font-weight: 500; }
+.titlecell { min-width: 260px; }
+.pri-1 select.cell[data-f="priority"] { color: var(--p1); font-weight: 600; }
+.pri-2 select.cell[data-f="priority"] { color: var(--p2); font-weight: 600; }
+.pri-3 select.cell[data-f="priority"] { color: var(--p3); }
+.pri-4 select.cell[data-f="priority"] { color: var(--p4); }
+.chipcell { padding: 6px 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 12px; background: var(--sunk); color: var(--ink); white-space: nowrap; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+button.chip { border: 0; cursor: pointer; }
+.chip.block { background: var(--p1-soft); color: var(--p1); }
+.chip.clear { background: var(--ok-soft); color: var(--ok); }
+.chip.room { background: var(--ink); color: var(--bg); }
+.chip.tool { background: transparent; border: 1px solid var(--line); }
+.chip.sub-check { background: var(--warn-soft); color: var(--warn); }
+.chip.sub-eligible, .chip.sub-applied { background: var(--accent-soft); color: var(--accent); }
+.chip.sub-received { background: var(--ok-soft); color: var(--ok); }
+.chip.sub-no { background: var(--sunk); color: var(--muted); }
+.chip.p1 { background: var(--p1-soft); color: var(--p1); font-weight: 600; }
+.chip.p2 { background: var(--p2-soft); color: var(--p2); font-weight: 600; }
+.chip.p3 { background: var(--p3-soft); color: var(--p3); }
+.chip.p4 { background: var(--p4-soft); color: var(--p4); }
+.chip.st-doing { background: var(--accent-soft); color: var(--accent); }
+.chip.st-waiting { background: var(--warn-soft); color: var(--warn); }
+.chip.st-done { background: var(--ok-soft); color: var(--ok); }
+.open-btn { all: unset; cursor: pointer; padding: 8px 12px; color: var(--accent); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.open-btn:hover { text-decoration: underline; }
+.open-btn:focus-visible { outline: 2px solid var(--accent); }
+.grid tr.group td { background: var(--sunk); font-weight: 600; padding: 6px 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.grid tr.group td .gsum { float: right; font-family: var(--f-mono); text-transform: none; letter-spacing: 0; font-weight: 500; }
+.grid tfoot td { position: sticky; bottom: 0; background: var(--sunk); font-weight: 600; padding: 8px 10px; border-top: 1px solid var(--line); font-size: 13px; }
+.grid tfoot td.r { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+.cards { display: none; flex-direction: column; gap: 8px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 4px 10px; cursor: pointer; }
+.card.nochk { grid-template-columns: minmax(0, 1fr); }
+.card.nochk .meta { grid-column: 1; }
+.card input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); }
+.card .t { font-weight: 600; font-size: 15px; overflow-wrap: anywhere; }
+.card.done .t { text-decoration: line-through; color: var(--muted); }
+.card .meta { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; font-size: 12px; color: var(--muted); }
+.card .meta .money { font-family: var(--f-mono); }
+.cgroup { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; padding: 8px 2px 0; display: flex; justify-content: space-between; }
+@media (max-width: 760px) {
+  .sheet { display: none; }
+  .cards { display: flex; }
+  .toolbar .search { flex-basis: 100%; }
+  .toolbar select { flex: 1 1 40%; }
+  .toolbar .spacer { display: none; }
+  .addbar select { flex: 1 1 auto; }
+}
+.empty { padding: 40px 20px; text-align: center; color: var(--muted); }
+.empty strong { display: block; color: var(--ink); font-family: var(--f-display); font-size: 20px; margin-bottom: 4px; }
+
+.scrim { position: fixed; inset: 0; background: rgba(10, 14, 22, .38); z-index: 20; }
+.panel { position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--surface); z-index: 21; box-shadow: var(--shadow); display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.panel-head { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.panel-head .saved { font-size: 12px; color: var(--muted); flex: 1; }
+.panel-body { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.f { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.f > label, .f > .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.f input, .f select, .f textarea { width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.f textarea { min-height: 90px; resize: vertical; }
+.f input.title-in { font-size: 18px; font-weight: 600; font-family: var(--f-display); background: transparent; border-color: transparent; padding-inline: 0; }
+.f input.title-in:focus { border-color: var(--line); padding-inline: 10px; }
+.kindswitch { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--muted); }
+.row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.section { border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.section h3 { margin: 0; font-family: var(--f-display); font-size: 15px; font-weight: 700; }
+.hint { margin: -4px 0 0; font-size: 12px; color: var(--muted); }
+.tagbox { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.tagbox .chip { padding-right: 4px; }
+.tagbox .chip button { all: unset; cursor: pointer; padding: 0 4px; color: var(--muted); }
+.tagbox .chip button:hover { color: var(--p1); }
+.f .tagbox input { border: 0; background: transparent; padding: 4px; flex: 1 1 120px; width: auto; min-width: 0; }
+.f .tagbox input:focus { outline: none; }
+.deplist { max-height: 200px; overflow-y: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.deplist label { display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-bottom: 1px solid var(--line); cursor: pointer; font-size: 13px; }
+.deplist label:last-child { border-bottom: 0; }
+.deplist label.dis { opacity: .45; cursor: not-allowed; }
+.deplist input { margin-top: 2px; accent-color: var(--accent); }
+.deplist .k { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+.confirm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+.linkout { font-size: 13px; color: var(--accent); overflow-wrap: anywhere; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: var(--r); z-index: 30; font-size: 13px; max-width: calc(100% - 32px); }
+@media (prefers-reduced-motion: no-preference) { .panel { animation: slide .18s ease-out; } @keyframes slide { from { transform: translateX(24px); opacity: .6; } } }
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <div class="brand">
+      <h1>Kortrijkstraat <span>17</span></h1>
+      <p>Borgerhout · shared works list for Oberon &amp; Kilian</p>
+    </div>
+    <div class="topright">
+      <div class="sync" id="sync"><i></i><span>Connecting…</span></div>
+      <div class="acct" id="acct" hidden><span id="acctEmail"></span><span>·</span><button class="linkbtn" type="button" id="signOutBtn">Sign out</button></div>
+    </div>
+  </header>
+
+  <section class="stats" id="stats" aria-label="Totals"></section>
+  <div class="banner" id="banner" hidden></div>
+  <div class="banner" id="importHint" hidden>The list is empty. Moving over from the Claude version? <button class="linkbtn" type="button" id="importHintBtn">Import kortrijkstraat-17-data.json</button></div>
+
+  <nav class="tabs" role="tablist" aria-label="Lists">
+    <button class="tab" role="tab" id="tab-house" data-tab="house">In the house <span class="n" id="n-house">0</span></button>
+    <button class="tab" role="tab" id="tab-admin" data-tab="admin">Paperwork <span class="n" id="n-admin">0</span></button>
+    <button class="tab" role="tab" id="tab-subs" data-tab="subs">Subsidies <span class="n" id="n-subs">0</span></button>
+  </nav>
+
+  <div class="roomrow" id="roomrow" aria-label="Filter by room"></div>
+
+  <form class="addbar" id="addForm" autocomplete="off">
+    <input id="quickAdd" aria-label="New item">
+    <select id="quickSel" aria-label="Room or category"></select>
+    <button class="btn primary" type="submit">Add</button>
+  </form>
+
+  <div class="toolbar" id="toolbar"></div>
+
+  <div class="sheet" id="sheet">
+    <table class="grid" id="grid">
+      <thead id="ghead"></thead>
+      <tbody id="gbody"></tbody>
+      <tfoot id="gfoot"></tfoot>
+    </table>
+  </div>
+  <div class="cards" id="cards"></div>
+
+  <footer class="foot">
+    <button class="linkbtn" type="button" id="backupBtn">Download a backup</button>
+    <span>·</span>
+    <button class="linkbtn" type="button" id="importBtn">Import a backup</button>
+    <input type="file" id="importIn" accept=".json,application/json" hidden>
+    <span id="importConfirm" class="confirm" hidden></span>
+  </footer>
+</div>
+
+<div class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <h1>Kortrijkstraat <span>17</span></h1>
+    <p id="gateMsg">Sign in with your Google account to open the shared works list.</p>
+    <button class="btn primary" type="button" id="gateBtn">Sign in with Google</button>
+    <button class="btn" type="button" id="gateOut" hidden>Use another Google account</button>
+    <p class="gate-err" id="gateErr"></p>
+  </div>
+</div>
+
+<datalist id="roomlist"></datalist>
+<datalist id="toollist"></datalist>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Details" hidden></aside>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script type="module">
+// ============================================================
+// STEP 1 OF SETUP: paste your Firebase web config below.
+// Firebase console → Project settings (gear) → General → Your apps → Web app → "SDK setup and configuration" → Config.
+// These values are not secret; access is controlled by the Firestore rules.
+// ============================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyCbQeImhOB2r4fiZiuCBKFLQyuO3lcvm1w",
+  authDomain: "kortrijkstraat-17.firebaseapp.com",
+  projectId: "kortrijkstraat-17",
+  storageBucket: "kortrijkstraat-17.firebasestorage.app",
+  messagingSenderId: "120287676300",
+  appId: "1:120287676300:web:8b8e8b9eaf0781ff2338a9",
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeFirestore, getFirestore, persistentLocalCache, collection, doc, onSnapshot, updateDoc, addDoc, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+(() => {
+  // ---------- vocab ----------
+  const PRI = { 1: "P1 · Urgent", 2: "P2 · High", 3: "P3 · Normal", 4: "P4 · Someday" };
+  const STATUS = { todo: "To do", doing: "In progress", waiting: "Waiting", done: "Done" };
+  const STATUS_ORDER = { doing: 0, todo: 1, waiting: 2, done: 3 };
+  const OWNERS = ["", "Oberon", "Kilian", "Both", "Contractor"];
+  const DONEBY = ["", "DIY Oberon", "Kilian (personal)", "Kilian's company (invoiced)", "Contractor", "Both of us"];
+  const ROOMS = ["Whole house", "Front facade", "Hall & stairs", "Living room", "Kitchen", "Bathroom", "Toilet", "Bedroom front", "Bedroom back", "Attic", "Roof", "Basement", "Garden"];
+  const TRADES = ["Carpentry", "Electrics", "Plumbing", "Heating", "Insulation", "Windows & doors", "Roofing", "Masonry & facade", "Plastering", "Painting", "Flooring", "Tiling", "Demolition", "Cleaning & clearing", "Garden", "Safety", "Planning"];
+  const CATS = ["Insurance & contracts", "Utilities", "Permits & city", "Notary & legal", "Bank & finance", "Subsidies", "Taxes & registration"];
+  const TOOLS = ["Ladder", "Scaffolding", "Drill", "Multitool", "Circular saw", "Tile cutter", "Paint & rollers", "Plasterboard", "Insulation material", "Skip / container", "Dust extractor", "Protective gear", "Kilian's workshop"];
+  const SUB = { check: "To check", eligible: "Eligible", applied: "Applied", received: "Received", no: "Not eligible" };
+  const SUB_ORDER = { check: 0, eligible: 1, applied: 2, received: 3, no: 4 };
+
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const eur = (n, d = 0) => n == null || isNaN(n) ? "—" : "€ " + Number(n).toLocaleString("nl-BE", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const numIn = (n) => n == null || n === "" || isNaN(n) ? "" : Number(n).toLocaleString("nl-BE", { maximumFractionDigits: 2 });
+  function parseNum(s) {
+    s = String(s ?? "").replace(/[€\s ]/g, "");
+    if (!s) return null;
+    if (s.includes(",")) s = s.replace(/\./g, "").replace(",", ".");
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, "");
+    const n = parseFloat(s);
+    return isNaN(n) ? null : Math.round(n * 100) / 100;
+  }
+  const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: x.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined }); };
+  const today = () => new Date().toISOString().slice(0, 10);
+  const opts = (pairs, v) => pairs.map(([a, b]) => `<option value="${esc(a)}"${String(a) === String(v ?? "") ? " selected" : ""}>${esc(b)}</option>`).join("");
+
+  // ---------- state ----------
+  let tasks = [], subs = [];
+  let byId = new Map(), subById = new Map();
+  let col = null, subCol = null;
+  let canWrite = true, loadedT = false, loadedS = false;
+  let panel = null; // {type:'task'|'sub', id}
+  let editing = false, pendingRender = false;
+  const DEF = {
+    tab: "house",
+    house: { q: "", status: "open", pri: "", owner: "", trade: "", tool: "", room: "", group: "", sortKey: "default", sortDir: 1 },
+    admin: { q: "", status: "open", pri: "", owner: "", cat: "", group: "", sortKey: "default", sortDir: 1 },
+    subs: { q: "", sortKey: "default", sortDir: 1 },
+  };
+  let st = JSON.parse(JSON.stringify(DEF));
+  try { const s = JSON.parse(localStorage.getItem("k17-view2") || "null"); if (s) for (const k of ["house", "admin", "subs"]) st[k] = { ...DEF[k], ...(s[k] || {}) }, st.tab = ["house", "admin", "subs"].includes(s.tab) ? s.tab : "house"; } catch (e) {}
+  if (["house", "admin", "subs", "paperwork", "subsidies"].includes(location.hash.slice(1))) st.tab = { paperwork: "admin", subsidies: "subs" }[location.hash.slice(1)] || location.hash.slice(1);
+  const saveView = () => { try { localStorage.setItem("k17-view2", JSON.stringify(st)); } catch (e) {} };
+  const V = () => st[st.tab];
+
+  // ---------- helpers ----------
+  const kindOf = (t) => t.kind === "admin" ? "admin" : "house";
+  const isDone = (t) => t.status === "done";
+  const deps = (t) => (Array.isArray(t.dependsOn) ? t.dependsOn : []).map((id) => byId.get(id)).filter(Boolean);
+  const blockers = (t) => isDone(t) ? [] : deps(t).filter((d) => !isDone(d));
+  const toolsOf = (t) => Array.isArray(t.tools) ? t.tools : [];
+  const linkedTasks = (sid) => tasks.filter((t) => t.subsidyId === sid);
+  function dependsTransitively(fromId, targetId, seen = new Set()) {
+    if (fromId === targetId) return true;
+    if (seen.has(fromId)) return false;
+    seen.add(fromId);
+    const t = byId.get(fromId);
+    return !!t && (t.dependsOn || []).some((d) => dependsTransitively(d, targetId, seen));
+  }
+  let toastTimer;
+  function toast(msg) { const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => (el.hidden = true), 3200); }
+
+  function write(colRef, id, fields) {
+    if (!colRef || !canWrite) { toast("This list is read-only for you right now."); return Promise.resolve(); }
+    fields.updatedAt = Date.now();
+    const p = colRef.doc(id).update(fields).catch(handleWriteErr);
+    markSaved();
+    return p;
+  }
+  const patch = (id, f) => write(col, id, f);
+  const patchSub = (id, f) => write(subCol, id, f);
+  function handleWriteErr(e) {
+    const code = e && e.code;
+    if (code === "permission-denied") toast("Your account isn’t allowed to change this list.");
+    else if (code === "resource-exhausted") toast("Too many changes at once. Wait a moment and try again.");
+    else if (code === "not-found") toast("That change didn’t save. Someone deleted this item.");
+    else toast("That change didn’t save. Check your connection and try again.");
+  }
+  function setReadOnly() {
+    canWrite = false;
+    const b = $("#banner");
+    b.textContent = "You can see this list but not change it.";
+    b.hidden = false; $("#addForm").hidden = true;
+    render();
+  }
+  function markSaved() { const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saved"; }
+
+  // ---------- tabs, add bar, toolbar ----------
+  function setupTab() {
+    document.querySelectorAll(".tab").forEach((b) => { b.setAttribute("aria-selected", b.dataset.tab === st.tab ? "true" : "false"); b.tabIndex = b.dataset.tab === st.tab ? 0 : -1; });
+    const qa = $("#quickAdd"), qs = $("#quickSel");
+    if (st.tab === "house") {
+      qa.placeholder = "Something to fix, e.g. “Loose stair tread”, then Enter";
+      qs.hidden = false; qs.setAttribute("aria-label", "Room");
+      qs.innerHTML = opts([["", "Which room?"], ...roomList().map((r) => [r, r])], st.house.room);
+    } else if (st.tab === "admin") {
+      qa.placeholder = "Paperwork, e.g. “Ask bank for loan certificate”, then Enter";
+      qs.hidden = false; qs.setAttribute("aria-label", "Category");
+      qs.innerHTML = opts([["", "Category"], ...CATS.map((c) => [c, c])], st.admin.cat);
+    } else {
+      qa.placeholder = "A subsidy to look into, e.g. “Mijn VerbouwPremie – roof insulation”";
+      qs.hidden = true;
+    }
+    buildToolbar();
+    render();
+  }
+  function buildToolbar() {
+    const v = V(), tb = $("#toolbar");
+    const sel = (id, label, pairs, val) => `<select id="${id}" aria-label="${label}">${opts(pairs, val)}</select>`;
+    let html = `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
+    if (st.tab !== "subs") {
+      html += sel("fstatus", "Status", [["open", "Open"], ["all", "All"], ...Object.entries(STATUS)], v.status);
+      html += sel("fpri", "Priority", [["", "Any priority"], ...Object.entries(PRI)], v.pri);
+      html += sel("fowner", "Who", [["", "Anyone"], ["none", "Unassigned"], ...OWNERS.filter(Boolean).map((o) => [o, o])], v.owner);
+    }
+    if (st.tab === "house") {
+      html += sel("ftrade", "Type of work", [["", "Any type of work"], ...TRADES.map((t) => [t, t])], v.trade);
+      html += `<select id="ftool" aria-label="Tools"></select>`;
+      html += sel("fgroup", "Group", [["", "No grouping"], ["room", "Group by room"], ["trade", "Group by type of work"]], v.group);
+    }
+    if (st.tab === "admin") {
+      html += sel("fcat", "Category", [["", "All categories"], ...CATS.map((c) => [c, c])], v.cat);
+      html += sel("fgroup", "Group", [["", "No grouping"], ["cat", "Group by category"]], v.group);
+    }
+    html += `<span class="spacer"></span><span class="count" id="count"></span><button class="btn" id="exportBtn" type="button"${downloadsNS ? "" : " hidden"}>Export to Excel (.csv)</button>`;
+    tb.innerHTML = html;
+    refreshToolSelect();
+  }
+  function refreshToolSelect() {
+    const el = $("#ftool"); if (!el || document.activeElement === el) return;
+    const used = [...new Set(tasks.flatMap(toolsOf))].sort();
+    el.innerHTML = opts([["", "Any tools"], ...used.map((t) => [t, "Needs: " + t])], st.house.tool);
+  }
+  const FILTER_KEYS = { fq: "q", fstatus: "status", fpri: "pri", fowner: "owner", ftrade: "trade", ftool: "tool", fgroup: "group", fcat: "cat" };
+  $("#toolbar").addEventListener("input", (e) => { const k = FILTER_KEYS[e.target.id]; if (k === "q") { V().q = e.target.value; saveView(); render(); } });
+  $("#toolbar").addEventListener("change", (e) => { const k = FILTER_KEYS[e.target.id]; if (k && k !== "q") { V()[k] = e.target.value; saveView(); render(); } });
+  $("#toolbar").addEventListener("click", (e) => { if (e.target.id === "exportBtn") exportCsv(); });
+  document.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; st.tab = b.dataset.tab; saveView(); closePanel(); setupTab(); });
+  document.querySelector(".tabs").addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const order = ["house", "admin", "subs"], i = order.indexOf(st.tab);
+    st.tab = order[(i + (e.key === "ArrowRight" ? 1 : 2)) % 3]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
+  });
+
+  function roomList() { const used = tasks.map((t) => t.room).filter(Boolean); return [...ROOMS, ...[...new Set(used)].filter((r) => !ROOMS.includes(r)).sort()]; }
+  function renderRoomRow() {
+    const row = $("#roomrow");
+    if (st.tab !== "house") { row.hidden = true; return; }
+    row.hidden = false;
+    const house = tasks.filter((t) => kindOf(t) === "house" && !isDone(t));
+    const counts = {}; house.forEach((t) => { const r = t.room || ""; counts[r] = (counts[r] || 0) + 1; });
+    const rooms = roomList().filter((r) => counts[r] || r === st.house.room);
+    const cur = st.house.room;
+    row.innerHTML = `<button class="rchip" type="button" data-room="" aria-pressed="${cur === "" ? "true" : "false"}">All rooms <span class="c">${house.length}</span></button>` +
+      rooms.map((r) => `<button class="rchip" type="button" data-room="${esc(r)}" aria-pressed="${cur === r ? "true" : "false"}">${esc(r)} <span class="c">${counts[r] || 0}</span></button>`).join("") +
+      (counts[""] ? `<button class="rchip" type="button" data-room="__none" aria-pressed="${cur === "__none" ? "true" : "false"}">No room yet <span class="c">${counts[""]}</span></button>` : "");
+    $("#roomlist").innerHTML = roomList().map((r) => `<option value="${esc(r)}">`).join("");
+    $("#toollist").innerHTML = [...new Set([...TOOLS, ...tasks.flatMap(toolsOf)])].map((t) => `<option value="${esc(t)}">`).join("");
+  }
+  $("#roomrow").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-room]"); if (!b) return;
+    st.house.room = b.dataset.room; saveView();
+    const qs = $("#quickSel"); if (st.tab === "house" && b.dataset.room !== "__none") qs.value = b.dataset.room;
+    render();
+  });
+
+  // ---------- filtering & sorting ----------
+  function visibleTasks(kind) {
+    const v = st[kind], q = v.q.trim().toLowerCase();
+    return tasks.filter((t) => {
+      if (kindOf(t) !== kind) return false;
+      if (v.status === "open" && isDone(t)) return false;
+      if (v.status !== "open" && v.status !== "all" && t.status !== v.status) return false;
+      if (v.pri && String(t.priority || 3) !== v.pri) return false;
+      if (v.owner === "none" && t.owner) return false;
+      if (v.owner && v.owner !== "none" && t.owner !== v.owner) return false;
+      if (kind === "house") {
+        if (v.room === "__none" && t.room) return false;
+        if (v.room && v.room !== "__none" && t.room !== v.room) return false;
+        if (v.trade && t.trade !== v.trade) return false;
+        if (v.tool && !toolsOf(t).includes(v.tool)) return false;
+      } else if (v.cat && t.category !== v.cat) return false;
+      if (q) {
+        const s = subById.get(t.subsidyId);
+        if (![t.title, t.room, t.trade, t.category, t.notes, t.owner, toolsOf(t).join(" "), s && s.name].join(" ").toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+  }
+  const cmpVal = (a, b) => (a == null || a === "") && (b == null || b === "") ? 0 : (a == null || a === "") ? 1 : (b == null || b === "") ? -1 : a < b ? -1 : a > b ? 1 : 0;
+  const defTask = (a, b) => (isDone(a) - isDone(b)) || (blockers(a).length > 0) - (blockers(b).length > 0) || (a.priority || 3) - (b.priority || 3) || cmpVal(a.due, b.due) || (a.createdAt || 0) - (b.createdAt || 0);
+  const TASK_GET = {
+    title: (t) => (t.title || "").toLowerCase(), room: (t) => { const i = ROOMS.indexOf(t.room); return t.room ? (i < 0 ? 50 : i) : null; },
+    trade: (t) => t.trade || "", category: (t) => t.category || "", priority: (t) => t.priority || 3, status: (t) => STATUS_ORDER[t.status] ?? 1,
+    owner: (t) => t.owner || "", due: (t) => t.due || "", estCost: (t) => t.estCost, actualCost: (t) => t.actualCost,
+    tools: (t) => toolsOf(t).length || null, subsidy: (t) => (subById.get(t.subsidyId) || {}).name || "", blocked: (t) => blockers(t).length ? 0 : 1,
+  };
+  function sortTasks(list, v) {
+    const g = TASK_GET[v.sortKey];
+    return [...list].sort((a, b) => { if (!g) return defTask(a, b); const r = cmpVal(g(a), g(b)); return r === 0 ? defTask(a, b) : r * v.sortDir; });
+  }
+  const subExp = (s) => Number(s.expected) || 0;
+  const SUB_GET = { name: (s) => (s.name || "").toLowerCase(), status: (s) => SUB_ORDER[s.status] ?? 0, expected: (s) => s.expected, received: (s) => s.received, deadline: (s) => s.deadline || "", linked: (s) => linkedTasks(s.id).length };
+  function visibleSubs() {
+    const v = st.subs, q = v.q.trim().toLowerCase();
+    let list = subs.filter((s) => !q || [s.name, s.conditions, s.notes].join(" ").toLowerCase().includes(q));
+    const g = SUB_GET[v.sortKey];
+    const def = (a, b) => (SUB_ORDER[a.status] ?? 0) - (SUB_ORDER[b.status] ?? 0) || cmpVal(a.deadline, b.deadline) || (a.createdAt || 0) - (b.createdAt || 0);
+    return list.sort((a, b) => { if (!g) return def(a, b); const r = cmpVal(g(a), g(b)); return r === 0 ? def(a, b) : r * v.sortDir; });
+  }
+
+  // ---------- render pieces ----------
+  const COLS = {
+    house: [["", "", "idx"], ["", "", "chk"], ["title", "Fix / job"], ["room", "Room"], ["trade", "Type of work"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["tools", "Tools & materials"], ["subsidy", "Subsidy"], ["estCost", "Estimate", "r"], ["actualCost", "Spent", "r"], ["blocked", "Waits on"], ["", ""]],
+    admin: [["", "", "idx"], ["", "", "chk"], ["title", "Paperwork"], ["category", "Category"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["due", "Due"], ["subsidy", "Subsidy"], ["actualCost", "Cost", "r"], ["blocked", "Waits on"], ["", ""]],
+    subs: [["", "", "idx"], ["name", "Subsidy"], ["status", "Status"], ["expected", "Expected", "r"], ["received", "Received", "r"], ["deadline", "Deadline"], ["linked", "Linked jobs"], ["", ""]],
+  };
+  function renderHead() {
+    const v = V();
+    $("#ghead").innerHTML = `<tr>${COLS[st.tab].map(([k, label, cls]) => {
+      if (!label) return `<th${cls === "chk" ? ' aria-label="Done"' : ""}></th>`;
+      const on = v.sortKey === k;
+      return `<th class="${cls || ""}${on ? " sorted" : ""}" aria-sort="${on ? (v.sortDir === 1 ? "ascending" : "descending") : "none"}"><button type="button" data-sort="${k}">${esc(label)} <span class="arr">${on ? (v.sortDir === 1 ? "▲" : "▼") : "▲▼"}</span></button></th>`;
+    }).join("")}</tr>`;
+  }
+  const selCell = (f, pairs, val) => `<select class="cell" data-f="${f}" aria-label="${f}"${canWrite ? "" : " disabled"}>${opts(pairs, val)}</select>`;
+  const subPairs = () => [["", "—"], ...subs.map((s) => [s.id, s.name || "Untitled subsidy"])];
+  function subChip(t) { const s = subById.get(t.subsidyId); return s ? `<span class="chip sub-${esc(s.status || "check")}" title="${esc(SUB[s.status] || "")}">${esc(s.name)}</span>` : ""; }
+  function depChips(t) {
+    const b = blockers(t);
+    if (b.length) return b.map((d) => `<span class="chip block" title="Waits on: ${esc(d.title)}">${esc(d.title)}</span>`).join("");
+    if (!isDone(t) && deps(t).length) return `<span class="chip clear">Ready</span>`;
+    return "";
+  }
+  const toolChips = (t) => toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}</span>`).join("");
+  function taskRow(t, i, kind) {
+    const ro = canWrite ? "" : " disabled";
+    const common = `<td class="idx">${i}</td><td class="chk"><input type="checkbox" data-f="done" aria-label="Mark done"${isDone(t) ? " checked" : ""}${ro}></td>
+      <td class="titlecell"><input class="cell cell-title" data-f="title" value="${esc(t.title)}" aria-label="Title"${ro}></td>`;
+    const meta = `<td>${selCell("priority", Object.entries(PRI), t.priority || 3)}</td><td>${selCell("status", Object.entries(STATUS), t.status || "todo")}</td><td>${selCell("owner", OWNERS.map((o) => [o, o || "—"]), t.owner)}</td>`;
+    const tail = `<td class="chipcell"><div class="chips">${depChips(t)}</div></td><td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>`;
+    const money = (f, label) => `<td class="r"><input class="cell money" data-f="${f}" inputmode="decimal" value="${numIn(t[f])}" placeholder="—" aria-label="${label}"${ro}></td>`;
+    if (kind === "house") return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
+      <td><input class="cell" data-f="room" list="roomlist" value="${esc(t.room || "")}" placeholder="—" aria-label="Room"${ro}></td>
+      <td>${selCell("trade", [["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</td>${meta}
+      <td class="chipcell"><div class="chips">${toolChips(t)}</div></td>
+      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Estimate")}${money("actualCost", "Spent")}${tail}</tr>`;
+    return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
+      <td>${selCell("category", [["", "—"], ...CATS.map((x) => [x, x])], t.category)}</td>${meta}
+      <td><input class="cell" type="date" data-f="due" value="${esc(t.due || "")}" aria-label="Due date"${ro}></td>
+      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("actualCost", "Cost")}${tail}</tr>`;
+  }
+  function taskCard(t, kind) {
+    const b = blockers(t);
+    const due = t.due ? `<span${!isDone(t) && t.due < today() ? ' style="color:var(--p1);font-weight:600"' : ""}>Due ${esc(fmtDate(t.due))}</span>` : "";
+    const money = t.actualCost != null ? `<span class="money">${eur(t.actualCost)} spent</span>` : t.estCost != null ? `<span class="money">≈ ${eur(t.estCost)}</span>` : "";
+    return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0">
+      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Mark done"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
+      <div class="t">${esc(t.title || "Untitled")}</div>
+      <div class="meta">
+        ${kind === "house" && t.room ? `<span class="chip room">${esc(t.room)}</span>` : ""}
+        <span class="chip p${t.priority || 3}">P${t.priority || 3}</span>
+        ${t.status && t.status !== "todo" ? `<span class="chip st-${t.status}">${esc(STATUS[t.status])}</span>` : ""}
+        ${t.owner ? `<span class="chip">${esc(t.owner)}</span>` : ""}
+        ${kind === "house" && t.trade ? `<span>${esc(t.trade)}</span>` : ""}
+        ${kind === "admin" && t.category ? `<span>${esc(t.category)}</span>` : ""}
+        ${subChip(t)}
+        ${toolsOf(t).length ? `<span>Tools: ${toolsOf(t).map(esc).join(", ")}</span>` : ""}
+        ${b.length ? `<span class="chip block">Waits on ${b.length === 1 ? esc(b[0].title) : b.length + " items"}</span>` : ""}
+        ${due} ${money}
+      </div>
+    </div>`;
+  }
+  function subRow(s, i) {
+    const ro = canWrite ? "" : " disabled";
+    const lt = linkedTasks(s.id);
+    return `<tr data-sid="${esc(s.id)}">
+      <td class="idx">${i}</td>
+      <td class="titlecell"><input class="cell cell-title" data-s="name" value="${esc(s.name)}" aria-label="Subsidy"${ro}></td>
+      <td><select class="cell" data-s="status" aria-label="Status"${ro}>${opts(Object.entries(SUB), s.status || "check")}</select></td>
+      <td class="r"><input class="cell money" data-s="expected" inputmode="decimal" value="${numIn(s.expected)}" placeholder="—" aria-label="Expected"${ro}></td>
+      <td class="r"><input class="cell money" data-s="received" inputmode="decimal" value="${numIn(s.received)}" placeholder="—" aria-label="Received"${ro}></td>
+      <td><input class="cell" type="date" data-s="deadline" value="${esc(s.deadline || "")}" aria-label="Deadline"${ro}></td>
+      <td class="chipcell"><div class="chips">${lt.length ? lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}</button>`).join("") : '<span class="count">Link jobs from their Subsidy column</span>'}</div></td>
+      <td><button class="open-btn" type="button" data-opensub="${esc(s.id)}">Details ›</button></td>
+    </tr>`;
+  }
+  function subCard(s) {
+    const lt = linkedTasks(s.id);
+    return `<div class="card nochk" data-opensub="${esc(s.id)}" role="button" tabindex="0">
+      <div class="t">${esc(s.name || "Untitled subsidy")}</div>
+      <div class="meta"><span class="chip sub-${esc(s.status || "check")}">${esc(SUB[s.status] || "To check")}</span>
+        ${s.expected != null ? `<span class="money">≈ ${eur(s.expected)}</span>` : ""}${s.received != null ? `<span class="money">${eur(s.received)} received</span>` : ""}
+        ${s.deadline ? `<span>Deadline ${esc(fmtDate(s.deadline))}</span>` : ""}<span>${lt.length} linked job${lt.length === 1 ? "" : "s"}</span></div>
+    </div>`;
+  }
+  const sum = (list, f) => list.reduce((s, t) => s + (Number(t[f]) || 0), 0);
+  function renderStats() {
+    const openHouse = tasks.filter((t) => kindOf(t) === "house" && !isDone(t));
+    const openAdmin = tasks.filter((t) => kindOf(t) === "admin" && !isDone(t));
+    const urgentAdmin = openAdmin.filter((t) => (t.priority || 3) === 1).length;
+    const overdue = openAdmin.filter((t) => t.due && t.due < today()).length;
+    const urgentHouse = openHouse.filter((t) => (t.priority || 3) === 1).length;
+    const rooms = new Set(openHouse.map((t) => t.room).filter(Boolean)).size;
+    const est = sum(tasks, "estCost"), spent = sum(tasks, "actualCost");
+    const expd = subs.filter((s) => s.status === "eligible" || s.status === "applied").reduce((a, s) => a + subExp(s), 0);
+    const rec = subs.reduce((a, s) => a + (Number(s.received) || 0), 0);
+    const toCheck = subs.filter((s) => !s.status || s.status === "check").length;
+    const hrs = tasks.filter((t) => t.doneBy === "Kilian (personal)").reduce((s, t) => s + (Number(t.hours) || 0), 0);
+    $("#stats").innerHTML = `
+      <div class="stat"><div class="k">To fix in the house</div><div class="v">${openHouse.length}</div><div class="s">${rooms} room${rooms === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} urgent</span>` : ""}</div></div>
+      <div class="stat"><div class="k">Paperwork open</div><div class="v">${openAdmin.length}</div><div class="s">${urgentAdmin ? `<span class="hot">${urgentAdmin} urgent</span>` : "None urgent"}${overdue ? ` · <span class="hot">${overdue} overdue</span>` : ""}</div></div>
+      <div class="stat"><div class="k">Spent</div><div class="v num">${eur(spent)}</div><div class="s">of <b>${eur(est)}</b> estimated</div></div>
+      <div class="stat"><div class="k">Subsidies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> received${toCheck ? ` · ${toCheck} to check` : ""}</div></div>
+      <div class="stat"><div class="k">Kilian’s own hours</div><div class="v num">${hrs.toLocaleString("nl-BE")} h</div><div class="s">personal work, outside his company</div></div>`;
+    $("#n-house").textContent = openHouse.length; $("#n-admin").textContent = openAdmin.length; $("#n-subs").textContent = subs.length;
+    $("#importHint").hidden = !(loadedT && loadedS && canWrite && !tasks.length && !subs.length);
+  }
+  function render() {
+    if (editing) { pendingRender = true; return; }
+    pendingRender = false;
+    renderStats(); renderRoomRow(); refreshToolSelect(); renderHead();
+    const grid = $("#grid"); grid.className = "grid " + st.tab;
+    const body = $("#gbody"), cards = $("#cards"), foot = $("#gfoot"), ncol = COLS[st.tab].length;
+    const loaded = st.tab === "subs" ? loadedS : loadedT;
+    const emptyRow = (m) => { body.innerHTML = `<tr><td colspan="${ncol}"><div class="empty">${m}</div></td></tr>`; cards.innerHTML = `<div class="empty">${m}</div>`; foot.innerHTML = ""; };
+    if (!loaded) { emptyRow("Loading the shared list…"); $("#count").textContent = ""; return; }
+
+    if (st.tab === "subs") {
+      const list = visibleSubs();
+      $("#count").textContent = `${list.length} subsidies`;
+      if (!list.length) return emptyRow(subs.length ? "<strong>Nothing matches</strong>Clear the search." : "<strong>No subsidies yet</strong>Add one above, then link house jobs to it from their Subsidy column.");
+      body.innerHTML = list.map((s, i) => subRow(s, i + 1)).join("");
+      cards.innerHTML = list.map(subCard).join("");
+      foot.innerHTML = `<tr><td></td><td>Total</td><td></td><td class="r">${eur(list.reduce((a, s) => a + subExp(s), 0))}</td><td class="r">${eur(sum(list, "received"))}</td><td></td><td></td><td></td></tr>`;
+    } else {
+      const kind = st.tab, v = st[kind];
+      const all = tasks.filter((t) => kindOf(t) === kind);
+      const list = sortTasks(visibleTasks(kind), v);
+      $("#count").textContent = `${list.length} of ${all.length}`;
+      if (!list.length) {
+        const m = all.length ? "<strong>Nothing matches these filters</strong>Pick “All rooms”, clear the search, or set Status to “All”." :
+          kind === "house" ? "<strong>Nothing to fix yet</strong>Type a job above, pick the room, and press Enter." : "<strong>No paperwork yet</strong>Type an item above and press Enter.";
+        return emptyRow(m);
+      }
+      const groupKey = v.group === "room" ? (t) => t.room || "No room yet" : v.group === "trade" ? (t) => t.trade || "No type of work" : v.group === "cat" ? (t) => t.category || "No category" : null;
+      if (groupKey) {
+        const order = v.group === "room" ? roomList() : v.group === "trade" ? TRADES : CATS;
+        const keys = [...new Set(list.map(groupKey))].sort((a, b) => { const ia = order.indexOf(a), ib = order.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
+        let html = "", chtml = "", i = 0;
+        for (const k of keys) {
+          const items = list.filter((t) => groupKey(t) === k);
+          const gs = kind === "house" ? `${items.length} · ${eur(sum(items, "estCost"))} est. · ${eur(sum(items, "actualCost"))} spent` : `${items.length}`;
+          html += `<tr class="group"><td colspan="${ncol}">${esc(k)}<span class="gsum">${gs}</span></td></tr>` + items.map((t) => taskRow(t, ++i, kind)).join("");
+          chtml += `<div class="cgroup"><span>${esc(k)}</span><span>${items.length}</span></div>` + items.map((t) => taskCard(t, kind)).join("");
+        }
+        body.innerHTML = html; cards.innerHTML = chtml;
+      } else {
+        body.innerHTML = list.map((t, i) => taskRow(t, i + 1, kind)).join("");
+        cards.innerHTML = list.map((t) => taskCard(t, kind)).join("");
+      }
+      foot.innerHTML = kind === "house"
+        ? `<tr><td></td><td></td><td>Total · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`
+        : `<tr><td></td><td></td><td>Total · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`;
+    }
+    if (panel && !$("#panel").hidden) refreshPanelLinks();
+  }
+
+  // ---------- grid & card events ----------
+  document.addEventListener("focusin", (e) => { if (e.target.closest("#gbody") && e.target.matches("input:not([type=checkbox]), select")) editing = true; });
+  document.addEventListener("focusout", (e) => { if (e.target.closest("#gbody")) setTimeout(() => { if (!document.activeElement || !document.activeElement.closest("#gbody")) { editing = false; if (pendingRender) render(); } }, 0); });
+  $("#ghead").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-sort]"); if (!b) return;
+    const v = V(), k = b.dataset.sort;
+    if (v.sortKey === k) { if (v.sortDir === 1) v.sortDir = -1; else { v.sortKey = "default"; v.sortDir = 1; } } else { v.sortKey = k; v.sortDir = 1; }
+    saveView(); render();
+  });
+  const MONEY = ["estCost", "actualCost", "expected", "received", "hours"];
+  function applyTaskField(id, f, el) {
+    const t = byId.get(id); if (!t) return;
+    if (f === "done") { patch(id, { status: el.checked ? "done" : "todo", doneAt: el.checked ? today() : "" }); return; }
+    let v;
+    if (MONEY.includes(f)) { v = parseNum(el.value); el.value = numIn(v); }
+    else if (f === "priority") v = Number(el.value);
+    else if (f === "title") { v = el.value.trim(); if (!v) { el.value = t.title; return; } }
+    else v = el.value.trim();
+    if ((t[f] ?? "") === (v ?? "")) return;
+    const fields = { [f]: v };
+    if (f === "status") fields.doneAt = v === "done" ? today() : "";
+    patch(id, fields);
+  }
+  function applySubField(id, f, el) {
+    const s = subById.get(id); if (!s) return;
+    let v = MONEY.includes(f) ? parseNum(el.value) : el.value.trim();
+    if (MONEY.includes(f)) el.value = numIn(v);
+    if (f === "name" && !v) { el.value = s.name; return; }
+    if ((s[f] ?? "") === (v ?? "")) return;
+    patchSub(id, { [f]: v });
+  }
+  $("#gbody").addEventListener("change", (e) => {
+    const el = e.target, tr = el.closest("tr"); if (!tr) return;
+    if (el.dataset.f && tr.dataset.id) applyTaskField(tr.dataset.id, el.dataset.f, el);
+    else if (el.dataset.s && tr.dataset.sid) applySubField(tr.dataset.sid, el.dataset.s, el);
+    if (el.tagName === "SELECT" || el.type === "checkbox" || el.type === "date") el.blur();
+  });
+  $("#gbody").addEventListener("keydown", (e) => {
+    if (!e.target.matches("input.cell")) return;
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const td = e.target.closest("td"), tr = td.closest("tr"), idx = [...tr.children].indexOf(td);
+      let n = tr.nextElementSibling; while (n && !(n.dataset.id || n.dataset.sid)) n = n.nextElementSibling;
+      const target = n && n.children[idx] && n.children[idx].querySelector("input.cell");
+      if (target) target.focus(); else e.target.blur();
+    } else if (e.key === "Escape") {
+      const tr = e.target.closest("tr"), rec = tr.dataset.id ? byId.get(tr.dataset.id) : subById.get(tr.dataset.sid), f = e.target.dataset.f || e.target.dataset.s;
+      e.target.value = MONEY.includes(f) ? numIn(rec[f]) : (rec[f] || ""); e.target.blur();
+    }
+  });
+  function clickOpen(e) {
+    if (e.target.matches("input[type=checkbox]") && e.target.closest(".card")) { applyTaskField(e.target.dataset.id, "done", e.target); return; }
+    const t = e.target.closest("[data-open]"); if (t) { openTask(t.dataset.open); return; }
+    const s = e.target.closest("[data-opensub]"); if (s) openSub(s.dataset.opensub);
+  }
+  $("#gbody").addEventListener("click", clickOpen);
+  $("#cards").addEventListener("click", clickOpen);
+  $("#cards").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".card")) { e.preventDefault(); e.target.dataset.open ? openTask(e.target.dataset.open) : openSub(e.target.dataset.opensub); } });
+
+  // ---------- quick add ----------
+  function newTask(kind, title, extra = {}) {
+    return { kind, title, room: "", trade: "", category: "", priority: 3, status: "todo", owner: "", doneBy: "", hours: null, due: "", estCost: null, actualCost: null, tools: [], subsidyId: "", notes: "", dependsOn: [], createdAt: Date.now(), updatedAt: Date.now(), ...extra };
+  }
+  $("#addForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const title = $("#quickAdd").value.trim(), sel = $("#quickSel").value;
+    if (!title) { $("#quickAdd").focus(); return; }
+    if (!canWrite || !col) { toast("You can’t add items here right now."); return; }
+    $("#quickAdd").value = "";
+    try {
+      if (st.tab === "subs") {
+        subCol.add({ name: title, status: "check", expected: null, received: null, deadline: "", link: "", conditions: "", notes: "", createdAt: Date.now(), updatedAt: Date.now() });
+      } else if (st.tab === "admin") {
+        col.add(newTask("admin", title, { category: sel, priority: st.admin.pri ? Number(st.admin.pri) : 3, owner: st.admin.owner && st.admin.owner !== "none" ? st.admin.owner : "" }));
+      } else {
+        col.add(newTask("house", title, { room: sel, trade: st.house.trade, priority: st.house.pri ? Number(st.house.pri) : 3, owner: st.house.owner && st.house.owner !== "none" ? st.house.owner : "" }));
+      }
+      toast(`Added “${title}”${st.tab === "house" && sel ? " to " + sel : ""}`);
+    } catch (err) { $("#quickAdd").value = title; handleWriteErr(err); }
+  });
+
+  // ---------- panel ----------
+  let textTimers = {};
+  function showPanel(html) {
+    $("#panel").innerHTML = html; $("#panel").hidden = false; $("#scrim").hidden = false;
+    document.body.style.overflow = "hidden"; refreshPanelLinks(); $("#pClose").focus();
+  }
+  const head = () => `<div class="panel-head"><span class="saved" aria-live="polite">${canWrite ? "Changes save automatically" : "View only"}</span><button class="btn" type="button" id="pClose">Close</button></div>`;
+  function openTask(id) {
+    const t = byId.get(id); if (!t) return;
+    flushTimers(); panel = { type: "task", id };
+    const ro = canWrite ? "" : " disabled", kind = kindOf(t);
+    const houseBits = kind === "house" ? `
+        <div class="row2">
+          <div class="f"><label for="pRoom">Room</label><input id="pRoom" data-p="room" list="roomlist" value="${esc(t.room || "")}" placeholder="e.g. Attic"${ro}></div>
+          <div class="f"><label for="pTrade">Type of work</label><select id="pTrade" data-p="trade"${ro}>${opts([["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</select></div>
+        </div>
+        <div class="f"><span class="lbl">Tools &amp; materials</span><div class="tagbox" id="pTools"></div></div>` : `
+        <div class="row2">
+          <div class="f"><label for="pCat">Category</label><select id="pCat" data-p="category"${ro}>${opts([["", "—"], ...CATS.map((x) => [x, x])], t.category)}</select></div>
+          <div class="f"><label for="pDue">Due</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>
+        </div>`;
+    showPanel(head() + `<div class="panel-body">
+        <div class="f"><label for="pTitle">${kind === "house" ? "Fix / job" : "Paperwork"}</label><input id="pTitle" class="title-in" data-p="title" value="${esc(t.title)}"${ro}></div>
+        ${canWrite ? `<div class="kindswitch">In ${kind === "house" ? "In the house" : "Paperwork"} · <button class="btn" type="button" id="pMove">Move to ${kind === "house" ? "Paperwork" : "In the house"}</button></div>` : ""}
+        <div class="row2">
+          <div class="f"><label for="pStatus">Status</label><select id="pStatus" data-p="status"${ro}>${opts(Object.entries(STATUS), t.status || "todo")}</select></div>
+          <div class="f"><label for="pPri">Priority</label><select id="pPri" data-p="priority"${ro}>${opts(Object.entries(PRI), t.priority || 3)}</select></div>
+        </div>
+        <div class="row2">
+          <div class="f"><label for="pOwner">Who’s on it</label><select id="pOwner" data-p="owner"${ro}>${opts(OWNERS.map((o) => [o, o || "Unassigned"]), t.owner)}</select></div>
+          ${kind === "house" ? `<div class="f"><label for="pDue">Due</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>` : `<div class="f"><label for="pSub">Subsidy</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select></div>`}
+        </div>
+        ${houseBits}
+        ${kind === "house" ? `<div class="f"><label for="pSub">Subsidy</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select><p class="hint" style="margin:2px 0 0">Add new subsidies in the Subsidies tab, then link them here.</p></div>` : ""}
+        <div class="f"><label for="pNotes">Notes</label><textarea id="pNotes" data-p="notes" placeholder="${kind === "house" ? "Measurements, what to buy, photos taken, contractor’s number…" : "Who to call, reference numbers, links…"}"${ro}>${esc(t.notes || "")}</textarea></div>
+        <div class="section">
+          <h3>${kind === "house" ? "Cost &amp; labour" : "Cost"}</h3>
+          <div class="row2">
+            <div class="f"><label for="pEst">Estimate (€)</label><input id="pEst" class="num" inputmode="decimal" data-p="estCost" value="${numIn(t.estCost)}"${ro}></div>
+            <div class="f"><label for="pAct">Spent (€)</label><input id="pAct" class="num" inputmode="decimal" data-p="actualCost" value="${numIn(t.actualCost)}"${ro}></div>
+          </div>
+          ${kind === "house" ? `<div class="row2">
+            <div class="f"><label for="pBy">Work done by</label><select id="pBy" data-p="doneBy"${ro}>${opts(DONEBY.map((o) => [o, o || "—"]), t.doneBy)}</select></div>
+            <div class="f"><label for="pHrs">Hours</label><input id="pHrs" class="num" inputmode="decimal" data-p="hours" value="${numIn(t.hours)}"${ro}></div>
+          </div>
+          <p class="hint">Hours marked “Kilian (personal)” add up in the header, for the valuation in your partner agreement. Work through his company is invoiced instead.</p>` : ""}
+        </div>
+        <div class="section">
+          <h3>Waits on</h3>
+          <p class="hint">Tick what must be finished first. Paperwork and house jobs can depend on each other.</p>
+          <div class="deplist" id="pDeps"></div>
+          <div class="f" id="pUnlocks"></div>
+        </div>
+        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Delete</button></div></div>` : ""}
+      </div>`);
+  }
+  function openSub(id) {
+    const s = subById.get(id); if (!s) return;
+    flushTimers(); panel = { type: "sub", id };
+    const ro = canWrite ? "" : " disabled";
+    showPanel(head() + `<div class="panel-body">
+        <div class="f"><label for="sName">Subsidy</label><input id="sName" class="title-in" data-sp="name" value="${esc(s.name)}"${ro}></div>
+        <div class="row2">
+          <div class="f"><label for="sStatus">Status</label><select id="sStatus" data-sp="status"${ro}>${opts(Object.entries(SUB), s.status || "check")}</select></div>
+          <div class="f"><label for="sDead">Apply before</label><input id="sDead" type="date" data-sp="deadline" value="${esc(s.deadline || "")}"${ro}></div>
+        </div>
+        <div class="row2">
+          <div class="f"><label for="sExp">Expected (€)</label><input id="sExp" class="num" inputmode="decimal" data-sp="expected" value="${numIn(s.expected)}"${ro}></div>
+          <div class="f"><label for="sRec">Received (€)</label><input id="sRec" class="num" inputmode="decimal" data-sp="received" value="${numIn(s.received)}"${ro}></div>
+        </div>
+        <div class="f"><label for="sCond">Conditions &amp; proof needed</label><textarea id="sCond" data-sp="conditions" placeholder="e.g. contractor invoice, before/after photos, apply within 2 years of final invoice"${ro}>${esc(s.conditions || "")}</textarea></div>
+        <div class="f"><label for="sLink">Website</label><input id="sLink" data-sp="link" type="url" value="${esc(s.link || "")}" placeholder="https://"${ro}><div id="sLinkOut"></div></div>
+        <div class="f"><label for="sNotes">Notes</label><textarea id="sNotes" data-sp="notes"${ro}>${esc(s.notes || "")}</textarea></div>
+        <div class="section"><h3>Linked jobs</h3><div id="sLinked"></div></div>
+        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Delete subsidy</button></div></div>` : ""}
+      </div>`);
+  }
+  function renderTagBox(t) {
+    const box = $("#pTools"); if (!box) return;
+    if (document.activeElement && document.activeElement.id === "pToolIn") { box.querySelectorAll(".chip").forEach((c) => c.remove()); box.insertAdjacentHTML("afterbegin", toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="Remove ${esc(x)}">×</button>` : ""}</span>`).join("")); return; }
+    box.innerHTML = toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="Remove ${esc(x)}">×</button>` : ""}</span>`).join("") +
+      (canWrite ? `<input id="pToolIn" list="toollist" placeholder="${toolsOf(t).length ? "Add another" : "e.g. Ladder, then Enter"}" aria-label="Add tool or material">` : (toolsOf(t).length ? "" : `<span class="count">None</span>`));
+  }
+  function refreshPanelLinks() {
+    if (!panel) return;
+    if (panel.type === "sub") {
+      const s = subById.get(panel.id); if (!s) { closePanel(); return; }
+      const lt = linkedTasks(s.id);
+      $("#sLinked").innerHTML = lt.length ? `<div class="chips">${lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}${t.estCost != null ? " · " + eur(t.estCost) : ""}</button>`).join("")}</div><p class="hint" style="margin:8px 0 0">Estimated cost of linked jobs: <b>${eur(sum(lt, "estCost"))}</b> · spent ${eur(sum(lt, "actualCost"))}</p>` : `<p class="hint" style="margin:0">No jobs linked yet. Pick this subsidy in a job’s Subsidy column.</p>`;
+      const url = (s.link || "").trim();
+      $("#sLinkOut").innerHTML = /^https?:\/\//i.test(url) ? `<a class="linkout" href="${esc(url)}" target="_blank" rel="noopener">Open website ↗</a>` : "";
+      return;
+    }
+    const t = byId.get(panel.id); if (!t) { closePanel(); return; }
+    renderTagBox(t);
+    const box = $("#pDeps"); if (!box) return;
+    const others = tasks.filter((o) => o.id !== t.id).sort((a, b) => isDone(a) - isDone(b) || (a.title || "").localeCompare(b.title || ""));
+    const mine = new Set(t.dependsOn || []);
+    box.innerHTML = others.length ? others.map((o) => {
+      const cyc = !mine.has(o.id) && dependsTransitively(o.id, t.id);
+      return `<label class="${cyc ? "dis" : ""}"><input type="checkbox" value="${esc(o.id)}"${mine.has(o.id) ? " checked" : ""}${cyc || !canWrite ? " disabled" : ""}><span>${esc(o.title)}${isDone(o) ? " · done" : ""}${cyc ? " · already waits on this" : ""}</span><span class="k">${kindOf(o) === "admin" ? "Paperwork" : esc(o.room || "House")}</span></label>`;
+    }).join("") : `<label class="dis"><span>Add more items to link them.</span></label>`;
+    const unlocks = tasks.filter((o) => (o.dependsOn || []).includes(t.id));
+    $("#pUnlocks").innerHTML = unlocks.length ? `<span class="lbl">Finishing this unblocks</span><div class="chips">${unlocks.map((o) => `<button class="chip" type="button" data-open="${esc(o.id)}">${esc(o.title)}</button>`).join("")}</div>` : "";
+  }
+  function flushTimers() { for (const k in textTimers) { clearTimeout(textTimers[k].t); textTimers[k].fn(); } textTimers = {}; }
+  function closePanel() { flushTimers(); panel = null; $("#panel").hidden = true; $("#scrim").hidden = true; document.body.style.overflow = ""; $("#panel").innerHTML = ""; }
+  function panelCommit(el) {
+    if (!panel) return;
+    const isSub = panel.type === "sub", f = isSub ? el.dataset.sp : el.dataset.p;
+    const rec = isSub ? subById.get(panel.id) : byId.get(panel.id); if (!rec) return;
+    let v = MONEY.includes(f) ? parseNum(el.value) : f === "priority" ? Number(el.value) : el.value;
+    if (typeof v === "string" && f !== "notes" && f !== "conditions") v = v.trim();
+    if ((f === "title" || f === "name") && !v) { el.value = rec[f]; return; }
+    if ((rec[f] ?? "") === (v ?? "")) return;
+    const fields = { [f]: v };
+    if (f === "status" && !isSub) fields.doneAt = v === "done" ? today() : "";
+    const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saving…";
+    (isSub ? patchSub : patch)(rec.id, fields);
+  }
+  function addTool(raw) {
+    const t = byId.get(panel && panel.id); if (!t) return;
+    const vals = String(raw).split(",").map((x) => x.trim()).filter(Boolean);
+    const cur = toolsOf(t), next = [...cur];
+    vals.forEach((v) => { if (!next.some((x) => x.toLowerCase() === v.toLowerCase())) next.push(v); });
+    if (next.length !== cur.length) patch(t.id, { tools: next });
+  }
+  $("#panel").addEventListener("input", (e) => {
+    const el = e.target, key = el.dataset.p || el.dataset.sp; if (!key || el.tagName === "SELECT" || el.type === "date") return;
+    const p = panel; if (textTimers[key]) clearTimeout(textTimers[key].t);
+    const fn = () => { if (panel === p) panelCommit(el); delete textTimers[key]; };
+    textTimers[key] = { t: setTimeout(fn, 700), fn };
+  });
+  $("#panel").addEventListener("change", (e) => {
+    const el = e.target;
+    if (el.closest("#pDeps")) {
+      const t = byId.get(panel.id); if (!t) return;
+      const set = new Set(t.dependsOn || []); el.checked ? set.add(el.value) : set.delete(el.value);
+      const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saving…";
+      patch(t.id, { dependsOn: [...set] }); return;
+    }
+    if (el.id === "pToolIn") { if (el.value.trim()) { addTool(el.value); el.value = ""; } return; }
+    const key = el.dataset.p || el.dataset.sp; if (!key) return;
+    if (textTimers[key]) { clearTimeout(textTimers[key].t); delete textTimers[key]; }
+    panelCommit(el);
+    if (MONEY.includes(key)) el.value = numIn(parseNum(el.value));
+  });
+  $("#panel").addEventListener("keydown", (e) => {
+    if (e.target.id === "pToolIn" && (e.key === "Enter" || e.key === ",")) { e.preventDefault(); if (e.target.value.trim()) { addTool(e.target.value); e.target.value = ""; } }
+    else if (e.target.id === "pToolIn" && e.key === "Backspace" && !e.target.value) { const t = byId.get(panel.id); const cur = toolsOf(t); if (cur.length) patch(t.id, { tools: cur.slice(0, -1) }); }
+  });
+  $("#panel").addEventListener("click", async (e) => {
+    const id = e.target.id;
+    if (id === "pClose") return closePanel();
+    const rm = e.target.closest("[data-rmtool]");
+    if (rm) { const t = byId.get(panel.id); patch(t.id, { tools: toolsOf(t).filter((x) => x !== rm.dataset.rmtool) }); return; }
+    const op = e.target.closest("[data-open]"); if (op) { openTask(op.dataset.open); return; }
+    if (id === "pMove") {
+      const t = byId.get(panel.id); const to = kindOf(t) === "house" ? "admin" : "house";
+      patch(t.id, { kind: to }); toast(`Moved to ${to === "admin" ? "Paperwork" : "In the house"}`); setTimeout(() => openTask(t.id), 80); return;
+    }
+    if (id === "pDel") $("#pDelWrap").innerHTML = `<span>Delete for both of you?</span><button class="btn danger" type="button" id="pDelYes">Yes, delete</button><button class="btn" type="button" id="pDelNo">Keep it</button>`;
+    if (id === "pDelNo") $("#pDelWrap").innerHTML = `<button class="btn danger" type="button" id="pDel">Delete</button>`;
+    if (id === "pDelYes") {
+      const p = panel; closePanel();
+      try {
+        if (p.type === "sub") {
+          const s = subById.get(p.id);
+          subCol.doc(p.id).delete().catch(handleWriteErr);
+          for (const t of linkedTasks(p.id)) patch(t.id, { subsidyId: "" });
+          toast(`Deleted “${s ? s.name : "subsidy"}”`);
+        } else {
+          const t = byId.get(p.id);
+          col.doc(p.id).delete().catch(handleWriteErr);
+          for (const o of tasks) if ((o.dependsOn || []).includes(p.id)) patch(o.id, { dependsOn: o.dependsOn.filter((x) => x !== p.id) });
+          toast(`Deleted “${t ? t.title : "item"}”`);
+        }
+      } catch (err) { handleWriteErr(err); }
+    }
+  });
+  $("#scrim").addEventListener("click", closePanel);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && panel) closePanel(); });
+
+  // ---------- export ----------
+  let downloadsNS = null;
+  async function exportCsv() {
+    if (!downloadsNS) return;
+    const q = (v) => { const s = String(v ?? ""); return /[;"\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+    const n = (v) => v == null || v === "" ? "" : String(v).replace(".", ",");
+    let head, rows;
+    if (st.tab === "subs") {
+      head = ["Subsidy", "Status", "Expected EUR", "Received EUR", "Apply before", "Linked jobs", "Conditions", "Website", "Notes"];
+      rows = visibleSubs().map((s) => [s.name, SUB[s.status] || "", n(s.expected), n(s.received), s.deadline, linkedTasks(s.id).map((t) => t.title).join(", "), s.conditions, s.link, s.notes]);
+    } else {
+      const kind = st.tab;
+      head = ["Item", "List", "Room", "Type of work", "Category", "Priority", "Status", "Who", "Done by", "Hours", "Due", "Estimate EUR", "Spent EUR", "Tools & materials", "Subsidy", "Waits on", "Notes"];
+      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", t.room, t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), n(t.actualCost), toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
+    }
+    const csv = "﻿" + [head, ...rows].map((r) => r.map(q).join(";")).join("\r\n");
+    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies" }[st.tab];
+    try { await downloadsNS.save({ filename: `kortrijkstraat-17-${name}-${today()}.csv`, data: csv }); toast("Saved. It opens in Excel or Numbers."); }
+    catch (e) { if (e && e.code === "declined") return; toast(e && e.code === "rate_limited" ? "A save is already waiting for you." : "Export isn’t available here."); }
+  }
+
+  // ---------- boot (Firebase) ----------
+  downloadsNS = {
+    async save({ filename, data }) {
+      const type = filename.endsWith(".json") ? "application/json" : "text/csv;charset=utf-8";
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([data], { type }));
+      a.download = filename; document.body.appendChild(a); a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+      return { status: "saved" };
+    },
+  };
+  setupTab();
+
+  const showApp = (on) => { $("#app").hidden = !on; $("#gate").hidden = on; };
+  function setSync(text, live) { const s = $("#sync"); s.classList.toggle("live", !!live); s.querySelector("span").textContent = text; }
+
+  if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("PASTE")) {
+    loadedT = loadedS = true; canWrite = false;
+    const b = $("#banner"); b.textContent = "Setup isn’t finished: paste your Firebase config at the top of the script in index.html (see README, step 3)."; b.hidden = false;
+    $("#addForm").hidden = true; setSync("Not connected"); render();
+    return;
+  }
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  let fs;
+  try { fs = initializeFirestore(app, { localCache: persistentLocalCache() }); } catch (e) { fs = getFirestore(app); }
+
+  const wrapCol = (name) => {
+    const ref = collection(fs, name);
+    return {
+      path: name,
+      doc: (id) => ({ update: (f) => updateDoc(doc(fs, name, id), f), delete: () => deleteDoc(doc(fs, name, id)) }),
+      add: (data) => addDoc(ref, data).catch(handleWriteErr),
+      onSnapshot: (next, err) => onSnapshot(ref, { includeMetadataChanges: true }, (snap) => next({
+        fromCache: snap.metadata.fromCache,
+        docs: snap.docs.map((d) => ({ id: d.id, exists: true, data: () => d.data() })),
+      }), err),
+    };
+  };
+
+  // sign-in gate
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+  $("#gateBtn").addEventListener("click", async () => {
+    $("#gateErr").textContent = "";
+    try { await signInWithPopup(auth, provider); }
+    catch (e) {
+      const c = e && e.code;
+      if (c === "auth/popup-closed-by-user" || c === "auth/cancelled-popup-request") return;
+      if (c === "auth/popup-blocked" || c === "auth/operation-not-supported-in-this-environment") { try { await signInWithRedirect(auth, provider); return; } catch (e2) { e = e2; } }
+      $("#gateErr").textContent = c === "auth/unauthorized-domain"
+        ? "This web address isn’t allowed yet. In Firebase → Authentication → Settings → Authorized domains, add " + location.hostname + "."
+        : "Sign-in didn’t work (" + (e && e.code || "unknown error") + "). Try again.";
+    }
+  });
+  getRedirectResult(auth).catch((e) => { $("#gateErr").textContent = "Sign-in didn’t work (" + (e && e.code) + ")."; });
+  const doSignOut = () => signOut(auth);
+  $("#signOutBtn").addEventListener("click", doSignOut);
+  $("#gateOut").addEventListener("click", doSignOut);
+
+  let unsubs = [];
+  function showDenied(email) {
+    unsubs.forEach((f) => f()); unsubs = [];
+    showApp(false);
+    $("#gateMsg").textContent = (email || "This account") + " doesn’t have access to this list. Sign in with the Google account Oberon added.";
+    $("#gateBtn").hidden = true; $("#gateOut").hidden = false;
+  }
+  onAuthStateChanged(auth, (u) => {
+    unsubs.forEach((f) => f()); unsubs = [];
+    closePanel();
+    if (!u) {
+      showApp(false);
+      $("#gateMsg").textContent = "Sign in with your Google account to open the shared works list.";
+      $("#gateBtn").hidden = false; $("#gateOut").hidden = true; $("#acct").hidden = true;
+      return;
+    }
+    showApp(true);
+    $("#acct").hidden = false; $("#acctEmail").textContent = u.email || "";
+    canWrite = true; $("#addForm").hidden = false; $("#banner").hidden = true;
+    col = wrapCol("tasks"); subCol = wrapCol("subsidies");
+    tasks = []; subs = []; byId = new Map(); subById = new Map(); loadedT = loadedS = false;
+    setSync("Connecting…"); render();
+    const onErr = (err) => {
+      if (err && err.code === "permission-denied") return showDenied(u.email);
+      setSync("Disconnected · reload the page");
+    };
+    unsubs.push(col.onSnapshot((snap) => {
+      tasks = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      byId = new Map(tasks.map((t) => [t.id, t])); loadedT = true;
+      setSync(snap.fromCache ? "Offline · changes sync later" : "Live · shared", !snap.fromCache); render();
+    }, onErr));
+    unsubs.push(subCol.onSnapshot((snap) => {
+      subs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      subById = new Map(subs.map((s) => [s.id, s])); loadedS = true; render();
+    }, onErr));
+  });
+
+  // backup & import
+  $("#backupBtn").addEventListener("click", () => {
+    const strip = (r) => { const { id, ...rest } = r; return rest; };
+    const out = { format: "kortrijkstraat-17-backup", version: 1, exportedAt: new Date().toISOString(),
+      tasks: Object.fromEntries(tasks.map((t) => [t.id, strip(t)])), subsidies: Object.fromEntries(subs.map((s) => [s.id, strip(s)])) };
+    downloadsNS.save({ filename: `kortrijkstraat-17-backup-${today()}.json`, data: JSON.stringify(out, null, 1) });
+  });
+  const pickFile = () => { if (!canWrite) { toast("Sign in first."); return; } $("#importIn").value = ""; $("#importIn").click(); };
+  $("#importBtn").addEventListener("click", pickFile);
+  $("#importHintBtn").addEventListener("click", pickFile);
+  let pendingImport = null;
+  async function runImport(data) {
+    const entries = [
+      ...Object.entries(data.tasks || {}).map(([id, b]) => ["tasks", id, b]),
+      ...Object.entries(data.subsidies || {}).map(([id, b]) => ["subsidies", id, b]),
+    ];
+    try {
+      for (let i = 0; i < entries.length; i += 400) {
+        const batch = writeBatch(fs);
+        entries.slice(i, i + 400).forEach(([c, id, body]) => batch.set(doc(fs, c, id), body));
+        await batch.commit();
+      }
+      toast(`Imported ${entries.length} items.`);
+    } catch (e) { handleWriteErr(e); }
+  }
+  $("#importIn").addEventListener("change", async (e) => {
+    const file = e.target.files && e.target.files[0]; if (!file) return;
+    let data;
+    try { data = JSON.parse(await file.text()); } catch (err) { toast("That file isn’t a backup of this list."); return; }
+    if (!data || data.format !== "kortrijkstraat-17-backup") { toast("That file isn’t a backup of this list."); return; }
+    const n = Object.keys(data.tasks || {}).length + Object.keys(data.subsidies || {}).length;
+    if (!tasks.length && !subs.length) return runImport(data);
+    pendingImport = data;
+    const c = $("#importConfirm");
+    c.innerHTML = `<span>Import ${n} items? Items with the same ID are replaced by the backup version.</span><button class="btn" type="button" id="impYes">Import</button><button class="btn" type="button" id="impNo">Cancel</button>`;
+    c.hidden = false;
+  });
+  $("#importConfirm").addEventListener("click", (e) => {
+    if (e.target.id === "impYes" && pendingImport) { runImport(pendingImport); }
+    if (e.target.id === "impYes" || e.target.id === "impNo") { pendingImport = null; $("#importConfirm").hidden = true; }
+  });
+})();
+</script>
+
+</body>
+</html>
