@@ -132,7 +132,7 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 table.grid { border-collapse: separate; border-spacing: 0; width: 100%; }
 table.grid.house { min-width: 1800px; }
 table.grid.admin { min-width: 1600px; }
-.grid.house td:nth-child(3), .grid.house th:nth-child(3), .grid.admin td:nth-child(3), .grid.admin th:nth-child(3) { min-width: 300px; }
+.grid.house td:nth-child(3), .grid.house th:nth-child(3), .grid.admin td:nth-child(3), .grid.admin th:nth-child(3) { min-width: 340px; }
 .grid.house td:nth-child(4), .grid.house th:nth-child(4) { min-width: 140px; }
 .grid.house td:nth-child(5), .grid.house th:nth-child(5) { min-width: 150px; }
 .grid.house td:nth-child(6), .grid.house th:nth-child(6), .grid.admin td:nth-child(5), .grid.admin th:nth-child(5) { min-width: 125px; }
@@ -225,14 +225,16 @@ button.chip { border: 0; cursor: pointer; }
   header.top { align-items: flex-start; }
   .topright { align-items: flex-start; }
   .tabs { gap: 0; }
-  .tab { font-size: 15px; padding: 9px 10px 8px; gap: 6px; }
+  .tab { font-size: 14px; padding: 9px 6px 8px; gap: 5px; flex: 1 1 auto; justify-content: center; }
+  .tab .n { padding: 0 6px; font-size: 11px; }
+  .toolbar:not(.open) #exportBtn { display: none; }
   .stat { padding: 8px 12px; }
   .stat .v { font-size: 20px; }
   .ftoggle { display: inline-block; }
   .toolbar:not(.open) select { display: none; }
   .sheet { display: none; }
   .cards { display: flex; }
-  .toolbar .search { flex: 1 1 0; }
+  .toolbar .search { flex: 1 1 140px; }
   .toolbar select { flex: 1 1 40%; }
   .toolbar .spacer { display: none; }
   .addbar select { flex: 1 1 auto; }
