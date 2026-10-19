@@ -113,7 +113,8 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 .rchip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .rchip[aria-pressed="true"] .c { color: var(--bg); opacity: .7; }
 .rchip:focus-visible { outline: 2px solid var(--accent); }
-.rchip.empty { color: var(--muted); }
+.rchip.zero { color: var(--muted); }
+.rchip.zero[aria-pressed="true"] { color: var(--bg); }
 .roomcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
 .rc-head { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
 .rc-head h2 { font-family: var(--f-display); font-weight: 700; font-size: 24px; margin: 0; letter-spacing: -.01em; flex: 1 1 auto; }
@@ -611,7 +612,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const counts = {}; house.forEach((t) => { const r = roomIdOf(t); counts[r] = (counts[r] || 0) + 1; });
     if (loadedR && st.house.room && st.house.room !== "__none" && st.house.room !== WHOLE && !st.house.room.startsWith("legacy:") && !roomById.has(st.house.room)) { st.house.room = ""; saveView(); }
     const cur = st.house.room;
-    const chip = (id, label) => `<button class="rchip${counts[id] ? "" : " empty"}" type="button" data-room="${esc(id)}" aria-pressed="${cur === id ? "true" : "false"}">${esc(label)} <span class="c">${counts[id] || 0}</span></button>`;
+    const chip = (id, label) => `<button class="rchip${counts[id] ? "" : " zero"}" type="button" data-room="${esc(id)}" aria-pressed="${cur === id ? "true" : "false"}">${esc(label)} <span class="c">${counts[id] || 0}</span></button>`;
     const legacy = Object.keys(counts).filter((k) => k.startsWith("legacy:"));
     row.innerHTML = `<button class="rchip" type="button" data-room="" aria-pressed="${cur === "" ? "true" : "false"}">All rooms <span class="c">${house.length}</span></button>` +
       roomPairs().map(([id, label]) => chip(id, label)).join("") + legacy.map((id) => chip(id, roomName(id))).join("") +
@@ -802,7 +803,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       const list = sortTasks(visibleTasks(kind), v);
       $("#count").textContent = `${list.length} of ${all.length}`;
       if (!list.length) {
-        const m = all.length ? "<strong>Nothing matches these filters</strong>Pick “All rooms”, clear the search, or set Status to “All”." :
+        const inRoom = kind === "house" && isRealRoom(v.room) && !visibleTasks(kind).length && !tasks.some((t) => kindOf(t) === "house" && roomIdOf(t) === v.room && !isDone(t));
+        const m = inRoom ? `<strong>No open jobs in ${esc(roomName(v.room))}</strong>Type one above and press Enter; it goes straight into this room.` : all.length ? "<strong>Nothing matches these filters</strong>Pick “All rooms”, clear the search, or set Status to “All”." :
           kind === "house" ? "<strong>Nothing to fix yet</strong>Type a job above, pick the room, and press Enter." : "<strong>No paperwork yet</strong>Type an item above and press Enter.";
         return emptyRow(m);
       }
@@ -1089,7 +1091,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   async function addRoom(name) {
     name = name.trim(); if (!name) return null;
-    if (roomNameTaken(name)) { toast(`There’s already a room called “${name}”.`); return null; }
+    if (roomNameTaken(name)) { toast(`There’s already a room with that name.`); return null; }
     const order = rooms.reduce((m, r) => Math.max(m, r.order ?? 0), 0) + 1;
     const ref = await roomCol.add({ name, order, createdAt: Date.now(), updatedAt: Date.now() });
     toast(`Added room “${name}”`);
@@ -1190,7 +1192,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       if (!r) return;
       if (!name) { el.value = r.name; return; }
       if (name === r.name) return;
-      if (roomNameTaken(name, rid)) { toast(`There’s already a room called “${name}”.`); el.value = r.name; return; }
+      if (roomNameTaken(name, rid)) { toast(`There’s already a room with that name.`); el.value = r.name; return; }
       write(roomCol, rid, { name }); toast(`Renamed to “${name}”`);
       return;
     }
