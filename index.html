@@ -1230,7 +1230,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (del) {
       const row = del.closest("[data-rid]"), rid = row.dataset.rid, r = roomById.get(rid);
       const n = tasks.filter((t) => roomIdOf(t) === rid).length;
-      row.insertAdjacentHTML("afterend", `<div class="confirm rconfirm" data-rconfirm="${esc(rid)}"><span>Delete “${esc(r ? r.name : "")}”?${n ? ` Its ${n} job${n === 1 ? "" : "s"} move to “No room yet”.` : ""}</span><button class="btn danger" type="button" data-rdelyes="${esc(rid)}">Yes, delete</button><button class="btn" type="button" data-rdelno>Keep it</button></div>`);
+      row.insertAdjacentHTML("afterend", `<div class="confirm rconfirm" data-rconfirm="${esc(rid)}"><span>Delete “${esc(r ? r.name : "")}”?${n ? (n === 1 ? " Its 1 job moves to “No room yet”." : ` Its ${n} jobs move to “No room yet”.`) : ""}</span><button class="btn danger" type="button" data-rdelyes="${esc(rid)}">Yes, delete</button><button class="btn" type="button" data-rdelno>Keep it</button></div>`);
       del.disabled = true;
       return;
     }
