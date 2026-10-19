@@ -197,7 +197,8 @@ table.grid.admin { min-width: 1600px; }
 .grid.house tr.group td, .grid.admin tr.group td { position: static; }
 .grid.house tfoot td:nth-child(-n+3), .grid.admin tfoot td:nth-child(-n+3) { z-index: 2; }
 table.grid.subs { min-width: 900px; }
-table.grid.done { min-width: 1000px; }
+table.grid.done { min-width: 1240px; }
+.grid.done td:nth-child(10) { min-width: 150px; }
 .grid.done td:nth-child(3) { min-width: 300px; }
 .done-title { display: block; padding: 8px 10px; color: var(--muted); }
 .card.done-card .t { color: var(--muted); }
@@ -324,6 +325,70 @@ button.chip { border: 0; cursor: pointer; }
 .toast-undo:focus-visible { outline: 2px solid currentColor; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: var(--r); z-index: 30; font-size: 13px; max-width: calc(100% - 32px); }
 @media (prefers-reduced-motion: no-preference) { .panel { animation: slide .18s ease-out; } @keyframes slide { from { transform: translateX(24px); opacity: .6; } } }
+
+/* Budget: plan vs. reality */
+.grid td.pad { padding: 8px 10px; }
+.grid td.mono, .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.grid td.strong, .strong { font-weight: 600; }
+.neg { color: var(--p1); font-weight: 600; }
+.pos { color: var(--ok); }
+table.grid.budget { min-width: 980px; }
+.grid.budget td:nth-child(2) { min-width: 200px; }
+.grid.budget td:nth-child(4) { min-width: 120px; }
+input.cell.money.derived { color: var(--accent); cursor: default; }
+.chip.stage-none { background: var(--sunk); color: var(--muted); }
+.chip.stage-guess { background: var(--p2-soft); color: var(--p2); }
+.chip.stage-quote { background: var(--accent-soft); color: var(--accent); }
+.chip.stage-agreed { background: var(--ok-soft); color: var(--ok); }
+.bc-inputs { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 200px); gap: 12px; align-items: end; }
+.bc-inputs input { font-family: var(--f-mono); }
+.bc-status { font-family: var(--f-display); font-weight: 700; font-size: 21px; line-height: 1.2; }
+.bc-status.ok { color: var(--ok); }
+.bc-status.warn { color: var(--warn); }
+.bc-status.hot { color: var(--p1); }
+.bc-status small { display: block; font-family: var(--f-body); font-weight: 400; font-size: 13px; color: var(--muted); margin-top: 3px; }
+.bc-figs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--r); background: var(--bg); }
+.bc-line { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.bc-line b { color: var(--ink); font-weight: 600; }
+.bc-line .hot { color: var(--p1); font-weight: 600; }
+.sw.avail { width: 2px; border-radius: 0; background: var(--warn); }
+.rc-bar .rc-mark.avail { background: var(--warn); }
+@media (max-width: 900px) { .bc-figs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .bc-inputs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .bc-status { font-size: 18px; } }
+.money-wrap { display: flex; flex-direction: column; gap: 10px; }
+.money-wrap h3.mt { margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.planhead { display: flex; align-items: baseline; gap: 6px 10px; flex-wrap: wrap; }
+.planhead .pv { font-family: var(--f-display); font-weight: 700; font-size: 22px; font-variant-numeric: tabular-nums; }
+.qlist { display: flex; flex-direction: column; gap: 8px; }
+.qitem, .payitem { border: 1px solid var(--line); border-radius: 6px; background: var(--bg); padding: 8px; }
+.qitem { display: flex; flex-direction: column; gap: 6px; }
+.qitem.chosen { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.qitem input, .qitem select, .payitem input, .payitem select { width: 100%; min-width: 0; padding: 7px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+.qitem input[type="checkbox"] { width: 16px; height: 16px; padding: 0; accent-color: var(--accent); }
+.qrow { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .9fr) minmax(0, 1.1fr); gap: 6px; }
+.qrow2 { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 2fr); gap: 6px; }
+.qfoot { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 12px; color: var(--muted); }
+.qfoot b { color: var(--ink); font-family: var(--f-mono); font-weight: 500; }
+.qsigned { display: inline-flex; gap: 6px; align-items: center; color: var(--ink); cursor: pointer; }
+.payitem { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr) auto; gap: 6px; align-items: center; }
+.payitem .paynote { grid-column: 1 / -1; }
+.btn.small { padding: 4px 10px; font-size: 12px; }
+.btn.on { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); font-weight: 600; }
+.btn.add { align-self: flex-start; border-style: dashed; color: var(--accent); font-weight: 600; }
+.linkbtn.danger { color: var(--p1); }
+.paysum { font-size: 13px; color: var(--muted); }
+.paysum b { color: var(--ink); font-family: var(--f-mono); font-weight: 500; }
+.paysum .hot { color: var(--p1); font-weight: 600; }
+.paysum .okc { color: var(--ok); font-weight: 600; }
+@media (max-width: 420px) {
+  .qrow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .qrow [data-q="who"] { grid-column: 1 / -1; }
+  .qrow2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .payitem { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .payitem [data-paydel] { justify-self: end; }
+}
+/* iPhone zooms into fields with text under 16px; keep typing fields at 16px on phones */
+@media (max-width: 760px) { .panel input, .panel select, .panel textarea, .toolbar input, .toolbar select, .addbar input, .addbar select, .roomcard input, .roomcard textarea { font-size: 16px; } }
 </style>
 </head>
 <body>
@@ -346,13 +411,15 @@ button.chip { border: 0; cursor: pointer; }
 
   <nav class="tabs" role="tablist" aria-label="Lists">
     <button class="tab" role="tab" id="tab-house" data-tab="house"><span class="tl">In the house</span><span class="ts">House</span> <span class="n" id="n-house">0</span></button>
-    <button class="tab" role="tab" id="tab-admin" data-tab="admin">Paperwork <span class="n" id="n-admin">0</span></button>
+    <button class="tab" role="tab" id="tab-admin" data-tab="admin"><span class="tl">Paperwork</span><span class="ts">Papers</span> <span class="n" id="n-admin">0</span></button>
     <button class="tab" role="tab" id="tab-done" data-tab="done">Done <span class="n" id="n-done">0</span></button>
-    <button class="tab" role="tab" id="tab-subs" data-tab="subs">Subsidies <span class="n" id="n-subs">0</span></button>
+    <button class="tab" role="tab" id="tab-subs" data-tab="subs"><span class="tl">Subsidies</span><span class="ts">Subs</span> <span class="n" id="n-subs">0</span></button>
+    <button class="tab" role="tab" id="tab-budget" data-tab="budget">Budget</button>
   </nav>
 
   <div class="roomrow" id="roomrow" aria-label="Filter by room"></div>
   <section class="roomcard" id="roomCard" hidden aria-live="polite"></section>
+  <section class="roomcard" id="budgetCard" hidden></section>
 
   <form class="addbar" id="addForm" autocomplete="off">
     <input id="quickAdd" aria-label="New item">
@@ -429,11 +496,18 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const TOOLS = ["Ladder", "Scaffolding", "Drill", "Multitool", "Circular saw", "Tile cutter", "Paint & rollers", "Plasterboard", "Insulation material", "Skip / container", "Dust extractor", "Protective gear", "Kilian's workshop"];
   const SUB = { check: "To check", eligible: "Eligible", applied: "Applied", received: "Received", no: "Not eligible" };
   const SUB_ORDER = { check: 0, eligible: 1, applied: 2, received: 3, no: 4 };
+  const VAT = { incl: "incl. VAT", "6": "excl. VAT + 6%", "21": "excl. VAT + 21%" };
+  const PAYKIND = { deposit: "Deposit", invoice: "Invoice", final: "Final bill", other: "Other" };
+  const STAGE = { none: "No price yet", guess: "Guess", quote: "Quote", agreed: "Agreed" };
+  const DEFAULT_BUFFER = 10;
+  const TABS = ["house", "admin", "done", "subs", "budget"];
 
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const eur = (n, d) => { if (n == null || n === "" || isNaN(n)) return "—"; const x = Number(n); if (d == null) d = Number.isInteger(Math.round(x * 100) / 100) ? 0 : 2; return "€ " + x.toLocaleString("nl-BE", { minimumFractionDigits: d, maximumFractionDigits: d }); };
   const numIn = (n) => n == null || n === "" || isNaN(n) ? "" : Number(n).toLocaleString("nl-BE", { maximumFractionDigits: 2 });
+  // amounts in input fields: 1.452 or 1.000,50 (never 1.000,5)
+  const amtIn = (n) => n == null || n === "" || isNaN(n) ? "" : Number(n).toLocaleString("nl-BE", Number.isInteger(Number(n)) ? { maximumFractionDigits: 0 } : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   function parseNum(s) {
     s = String(s ?? "").replace(/[€\s ]/g, "");
     if (!s) return null;
@@ -460,10 +534,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     admin: { q: "", status: "open", pri: "", owner: "", cat: "", group: "", sortKey: "default", sortDir: 1 },
     subs: { q: "", sortKey: "default", sortDir: 1 },
     done: { q: "", kind: "", sortKey: "default", sortDir: 1 },
+    budget: { q: "", sortKey: "default", sortDir: 1 },
   };
   let st = JSON.parse(JSON.stringify(DEF));
-  try { const s = JSON.parse(localStorage.getItem("k17-view2") || "null"); if (s) for (const k of ["house", "admin", "subs", "done"]) st[k] = { ...DEF[k], ...(s[k] || {}) }, st.tab = ["house", "admin", "subs", "done"].includes(s.tab) ? s.tab : "house"; } catch (e) {}
-  if (["house", "admin", "subs", "done", "paperwork", "subsidies"].includes(location.hash.slice(1))) st.tab = { paperwork: "admin", subsidies: "subs" }[location.hash.slice(1)] || location.hash.slice(1);
+  try { const s = JSON.parse(localStorage.getItem("k17-view2") || "null"); if (s) for (const k of TABS) st[k] = { ...DEF[k], ...(s[k] || {}) }, st.tab = TABS.includes(s.tab) ? s.tab : "house"; } catch (e) {}
+  if ([...TABS, "paperwork", "subsidies"].includes(location.hash.slice(1))) st.tab = { paperwork: "admin", subsidies: "subs" }[location.hash.slice(1)] || location.hash.slice(1);
   const saveView = () => { try { localStorage.setItem("k17-view2", JSON.stringify(st)); } catch (e) {} };
   const V = () => st[st.tab];
 
@@ -474,6 +549,47 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const blockers = (t) => isDone(t) ? [] : deps(t).filter((d) => !isDone(d));
   const toolsOf = (t) => Array.isArray(t.tools) ? t.tools : [];
   const linkedTasks = (sid) => tasks.filter((t) => t.subsidyId === sid);
+
+  // ---------- money: planned price (guess or chosen quote), payments, expected final ----------
+  const hasNum = (v) => v != null && v !== "" && !isNaN(v);
+  const num = (v) => hasNum(v) ? Number(v) : 0;
+  const r2 = (n) => Math.round(n * 100) / 100;
+  const newId = () => Math.random().toString(36).slice(2, 10);
+  const quotesOf = (t) => Array.isArray(t.quotes) ? t.quotes : [];
+  const paysOf = (t) => Array.isArray(t.payments) ? t.payments : [];
+  const quoteTotal = (q) => !hasNum(q.amount) ? null : r2(Number(q.amount) * (q.vat && q.vat !== "incl" ? 1 + Number(q.vat) / 100 : 1));
+  const chosenQuote = (t) => quotesOf(t).find((q) => q.chosen) || null;
+  const estDerived = (t) => { const c = chosenQuote(t); return !!c && quoteTotal(c) != null; };
+  const actDerived = (t) => paysOf(t).length > 0;
+  function stageOf(t) { if (estDerived(t)) return chosenQuote(t).signed ? "agreed" : "quote"; return hasNum(t.estCost) ? "guess" : "none"; }
+  const plannedOf = (t) => num(t.estCost);
+  const spentOf = (t) => num(t.actualCost);
+  // finished: what it cost (or the plan if nothing was entered); open: the plan, or what's already paid if that's more
+  const expectedOf = (t) => isDone(t) ? (hasNum(t.actualCost) ? spentOf(t) : plannedOf(t)) : Math.max(plannedOf(t), spentOf(t));
+  const sumBy = (list, fn) => list.reduce((a, t) => a + fn(t), 0);
+  function varianceOf(t) { if (!hasNum(t.actualCost) || !hasNum(t.estCost)) return null; const d = r2(Number(t.actualCost) - Number(t.estCost)); return { d, pct: Number(t.estCost) ? d / Number(t.estCost) : null }; }
+  const fmtVar = (v) => !v ? "—" : v.d === 0 ? "As planned" : `${v.d > 0 ? "+" : "−"}${eur(Math.abs(v.d))}${v.pct != null ? ` (${v.d > 0 ? "+" : "−"}${Math.round(Math.abs(v.pct) * 100)}%)` : ""}`;
+  const varCls = (v) => !v || v.d === 0 ? "" : v.d > 0 ? "neg" : "pos";
+  const planMeta = () => roomById.get(WHOLE) || {};
+  function planNumbers() {
+    const m = planMeta(), total = hasNum(m.planTotal) ? Number(m.planTotal) : null, bufPct = hasNum(m.planBuffer) ? Number(m.planBuffer) : DEFAULT_BUFFER;
+    const buffer = total != null ? r2(total * bufPct / 100) : 0;
+    return { total, bufPct, buffer, avail: total != null ? r2(total - buffer) : null };
+  }
+  const subsTotal = () => subs.filter((s) => s.status === "eligible" || s.status === "applied").reduce((a, s) => a + subExp(s), 0) + subs.reduce((a, s) => a + num(s.received), 0);
+  // the local copy is updated straight away, so a click right after typing never works from stale numbers
+  function writeQuotes(t, quotes) {
+    const fields = { quotes }, c = quotes.find((q) => q.chosen);
+    if (c && quoteTotal(c) != null) fields.estCost = quoteTotal(c);
+    Object.assign(t, fields);
+    return patch(t.id, { ...fields });
+  }
+  function writePays(t, payments) {
+    const any = payments.some((p) => hasNum(p.amount));
+    const fields = { payments, actualCost: any ? r2(payments.reduce((a, p) => a + num(p.amount), 0)) : null };
+    Object.assign(t, fields);
+    return patch(t.id, { ...fields });
+  }
   const sortedRooms = () => rooms.filter((r) => r.id !== WHOLE).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || (a.name || "").localeCompare(b.name || ""));
   function roomIdOf(t) {
     if (t.roomId !== undefined) return t.roomId || "";
@@ -549,7 +665,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       qa.placeholder = "A subsidy to look into, e.g. “Mijn VerbouwPremie – roof insulation”";
       qs.hidden = true;
     }
-    $("#addForm").hidden = st.tab === "done" || !canWrite;
+    $("#addForm").hidden = st.tab === "done" || st.tab === "budget" || !canWrite;
     buildToolbar();
     render();
   }
@@ -561,10 +677,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function buildToolbar() {
     const v = V(), tb = $("#toolbar");
     const sel = (id, label, pairs, val) => `<select id="${id}" aria-label="${label}">${opts(pairs, val)}</select>`;
-    let html = `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
+    const listTab = st.tab === "house" || st.tab === "admin";
+    let html = st.tab === "budget" ? "" : `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
     if (st.tab === "done") html += sel("fkind", "List", [["", "Everything"], ["house", "In the house"], ["admin", "Paperwork"]], v.kind);
-    if (st.tab !== "subs" && st.tab !== "done") html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
-    if (st.tab !== "subs" && st.tab !== "done") {
+    if (listTab) html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
+    if (listTab) {
       html += sel("fstatus", "Status", [["open", "Open"], ["all", "All"], ...Object.entries(STATUS)], v.status);
       html += sel("fpri", "Priority", [["", "Any priority"], ...Object.entries(PRI)], v.pri);
       html += sel("fowner", "Who", [["", "Anyone"], ["none", "Unassigned"], ...OWNERS.filter(Boolean).map((o) => [o, o])], v.owner);
@@ -586,7 +703,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   let filtersOpen = false;
   function activeFilterCount() {
-    const v = V(); if (st.tab === "subs" || st.tab === "done") return 0;
+    const v = V(); if (st.tab !== "house" && st.tab !== "admin") return 0;
     return ["pri", "owner", "trade", "tool", "cat", "group"].filter((k) => v[k]).length + (v.status && v.status !== "open" ? 1 : 0);
   }
   function updateFilterButton() {
@@ -610,9 +727,10 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   document.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; st.tab = b.dataset.tab; saveView(); closePanel(); setupTab(); });
   document.querySelector(".tabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    const order = ["house", "admin", "done", "subs"], i = order.indexOf(st.tab);
-    st.tab = order[(i + (e.key === "ArrowRight" ? 1 : 3)) % 4]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
+    const i = TABS.indexOf(st.tab);
+    st.tab = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
   });
+  function gotoTab(tab) { closePanel(); st.tab = tab; saveView(); setupTab(); window.scrollTo({ top: document.querySelector(".tabs").offsetTop - 12, behavior: "smooth" }); }
 
 
   function renderRoomRow() {
@@ -690,7 +808,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const v = st.done, q = v.q.trim().toLowerCase();
     return tasks.filter((t) => isDone(t) && (!v.kind || kindOf(t) === v.kind) && (!q || [t.title, roomName(roomIdOf(t)), t.trade, t.category, t.notes, t.owner, t.doneBy].join(" ").toLowerCase().includes(q)));
   }
-  const DONE_GET = { title: (t) => (t.title || "").toLowerCase(), list: (t) => kindOf(t), where: (t) => kindOf(t) === "house" ? roomName(roomIdOf(t)) : t.category || "", doneAt: (t) => doneKey(t), who: (t) => t.doneBy || t.owner || "", actualCost: (t) => t.actualCost };
+  const DONE_GET = { title: (t) => (t.title || "").toLowerCase(), list: (t) => kindOf(t), where: (t) => kindOf(t) === "house" ? roomName(roomIdOf(t)) : t.category || "", doneAt: (t) => doneKey(t), who: (t) => t.doneBy || t.owner || "", actualCost: (t) => t.actualCost, estCost: (t) => t.estCost, diff: (t) => { const v = varianceOf(t); return v ? v.d : null; } };
   function sortDone(list) {
     const v = st.done, g = DONE_GET[v.sortKey];
     const def = (a, b) => cmpVal(doneKey(b), doneKey(a)) || (b.updatedAt || 0) - (a.updatedAt || 0);
@@ -708,9 +826,16 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       <td class="chipcell">${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : esc(whereOf(t))}</td>
       <td><input class="cell" type="date" data-f="doneAt" value="${esc(t.doneAt || "")}" aria-label="Done on"${ro}></td>
       <td class="chipcell">${esc(t.doneBy || t.owner || "—")}${t.hours ? ` · ${numIn(t.hours)} h` : ""}</td>
-      <td class="r"><input class="cell money" data-f="actualCost" inputmode="decimal" value="${numIn(t.actualCost)}" placeholder="—" aria-label="Spent"${ro}></td>
+      <td class="r">${moneyInput(t, "actualCost", "Spent", ro)}</td>
+      <td class="r pad mono">${eur(t.estCost)}</td>
+      <td class="r pad mono ${varCls(varianceOf(t))}">${fmtVar(varianceOf(t))}</td>
       <td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>
     </tr>`;
+  }
+  function moneyInput(t, f, label, ro) {
+    const der = f === "estCost" ? estDerived(t) : f === "actualCost" ? actDerived(t) : false;
+    const why = f === "estCost" ? "From the chosen quote. Open the job to change it." : "Total of the payments. Open the job to change them.";
+    return `<input class="cell money${der ? " derived" : ""}" data-f="${f}" inputmode="decimal" value="${amtIn(t[f])}" placeholder="—" aria-label="${label}"${der ? ` readonly title="${why}"` : ""}${ro}>`;
   }
   function doneCard(t) {
     return `<div class="card done-card" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
@@ -720,17 +845,19 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         ${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : `<span>${esc(whereOf(t))}</span>`}
         ${doneKey(t) ? `<span>Done ${esc(fmtDate(doneKey(t)))}</span>` : ""}
         ${t.doneBy || t.owner ? `<span>by ${esc(t.doneBy || t.owner)}</span>` : ""}
-        ${t.actualCost != null ? `<span class="money">${eur(t.actualCost)}</span>` : ""}
+        ${hasNum(t.actualCost) ? `<span class="money">${eur(t.actualCost)}</span>` : ""}
+        ${varianceOf(t) ? `<span class="money ${varCls(varianceOf(t))}">planned ${eur(t.estCost)} · ${fmtVar(varianceOf(t))}</span>` : ""}
       </div>
     </div>`;
   }
 
   // ---------- render pieces ----------
   const COLS = {
-    house: [["", "", "idx"], ["", "", "chk"], ["title", "Fix / job"], ["room", "Room"], ["trade", "Type of work"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["tools", "Tools & materials"], ["subsidy", "Subsidy"], ["estCost", "Estimate", "r"], ["actualCost", "Spent", "r"], ["blocked", "Waits on"], ["", ""]],
+    house: [["", "", "idx"], ["", "", "chk"], ["title", "Fix / job"], ["room", "Room"], ["trade", "Type of work"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["tools", "Tools & materials"], ["subsidy", "Subsidy"], ["estCost", "Planned", "r"], ["actualCost", "Spent", "r"], ["blocked", "Waits on"], ["", ""]],
     admin: [["", "", "idx"], ["", "", "chk"], ["title", "Paperwork"], ["category", "Category"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["due", "Due"], ["subsidy", "Subsidy"], ["actualCost", "Cost", "r"], ["blocked", "Waits on"], ["", ""]],
-    done: [["", "", "idx"], ["", "", "chk"], ["title", "Finished"], ["list", "List"], ["where", "Room / category"], ["doneAt", "Done on"], ["who", "By"], ["actualCost", "Spent", "r"], ["", ""]],
+    done: [["", "", "idx"], ["", "", "chk"], ["title", "Finished"], ["list", "List"], ["where", "Room / category"], ["doneAt", "Done on"], ["who", "By"], ["actualCost", "Spent", "r"], ["estCost", "Planned", "r"], ["diff", "Difference", "r"], ["", ""]],
     subs: [["", "", "idx"], ["name", "Subsidy"], ["status", "Status"], ["expected", "Expected", "r"], ["received", "Received", "r"], ["deadline", "Deadline"], ["linked", "Linked jobs"], ["", ""]],
+    budget: [["", "", "idx"], ["name", "Room or list"], ["open", "Jobs"], ["budget", "Budget", "r"], ["planned", "Planned", "r"], ["spent", "Spent", "r"], ["expected", "Expected final", "r"], ["diff", "Left / over", "r"], ["", ""]],
   };
   function renderHead() {
     const v = V();
@@ -756,12 +883,12 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       <td class="titlecell"><input class="cell cell-title" data-f="title" value="${esc(t.title)}" aria-label="Title"${ro}></td>`;
     const meta = `<td>${selCell("priority", Object.entries(PRI), t.priority || 3)}</td><td>${selCell("status", Object.entries(STATUS), t.status || "todo")}</td><td>${selCell("owner", OWNERS.map((o) => [o, o || "—"]), t.owner)}</td>`;
     const tail = `<td class="chipcell"><div class="chips">${depChips(t)}</div></td><td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>`;
-    const money = (f, label) => `<td class="r"><input class="cell money" data-f="${f}" inputmode="decimal" value="${numIn(t[f])}" placeholder="—" aria-label="${label}"${ro}></td>`;
+    const money = (f, label) => `<td class="r">${moneyInput(t, f, label, ro)}</td>`;
     if (kind === "house") return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
       <td>${selCell("roomId", [["", "—"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</td>
       <td>${selCell("trade", [["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</td>${meta}
       <td class="chipcell"><div class="chips">${toolChips(t)}</div></td>
-      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Estimate")}${money("actualCost", "Spent")}${tail}</tr>`;
+      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Planned")}${money("actualCost", "Spent")}${tail}</tr>`;
     return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
       <td>${selCell("category", [["", "—"], ...CATS.map((x) => [x, x])], t.category)}</td>${meta}
       <td><input class="cell" type="date" data-f="due" value="${esc(t.due || "")}" aria-label="Due date"${ro}></td>
@@ -770,7 +897,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function taskCard(t, kind) {
     const b = blockers(t);
     const due = t.due ? `<span${!isDone(t) && t.due < today() ? ' style="color:var(--p1);font-weight:600"' : ""}>Due ${esc(fmtDate(t.due))}</span>` : "";
-    const money = t.actualCost != null ? `<span class="money">${eur(t.actualCost)} spent</span>` : t.estCost != null ? `<span class="money">≈ ${eur(t.estCost)}</span>` : "";
+    const stg = stageOf(t);
+    const money = hasNum(t.actualCost) ? `<span class="money">${eur(t.actualCost)} spent${hasNum(t.estCost) ? ` of ${eur(t.estCost)}` : ""}</span>` : hasNum(t.estCost) ? `<span class="money">${stg === "guess" ? "≈ " : ""}${eur(t.estCost)}${stg === "quote" ? " quote" : stg === "agreed" ? " agreed" : ""}</span>` : "";
     return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
       <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Mark done"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
       <div class="t">${esc(t.title || "Untitled")}</div>
@@ -819,7 +947,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const overdue = openAdmin.filter((t) => t.due && t.due < today()).length;
     const urgentHouse = openHouse.filter((t) => (t.priority || 3) === 1).length;
     const roomCount = new Set(openHouse.map(roomIdOf).filter(Boolean)).size;
-    const est = sum(tasks, "estCost"), spent = sum(tasks, "actualCost");
+    const expAll = sumBy(tasks, expectedOf), spent = sum(tasks, "actualCost"), pn = planNumbers();
     const expd = subs.filter((s) => s.status === "eligible" || s.status === "applied").reduce((a, s) => a + subExp(s), 0);
     const rec = subs.reduce((a, s) => a + (Number(s.received) || 0), 0);
     const toCheck = subs.filter((s) => !s.status || s.status === "check").length;
@@ -827,20 +955,21 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     $("#stats").innerHTML = `
       <div class="stat"><div class="k">To fix in the house</div><div class="v">${openHouse.length}</div><div class="s">${roomCount} room${roomCount === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} urgent</span>` : ""}</div></div>
       <div class="stat"><div class="k">Paperwork open</div><div class="v">${openAdmin.length}</div><div class="s">${urgentAdmin ? `<span class="hot">${urgentAdmin} urgent</span>` : "None urgent"}${overdue ? ` · <span class="hot">${overdue} overdue</span>` : ""}</div></div>
-      <div class="stat"><div class="k">Spent</div><div class="v num">${eur(spent)}</div><div class="s">of <b>${eur(est)}</b> estimated</div></div>
+      <div class="stat"><div class="k">Expected cost</div><div class="v num">${eur(expAll)}</div><div class="s">${pn.total != null ? `of <b>${eur(pn.total)}</b> budget${expAll > pn.total ? ` · <span class="hot">${eur(expAll - pn.total)} over</span>` : ""}` : `<button class="linkbtn" type="button" data-gotab="budget">Set a budget</button>`} · <b>${eur(spent)}</b> spent</div></div>
       <div class="stat"><div class="k">Subsidies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> received${toCheck ? ` · ${toCheck} to check` : ""}</div></div>
       <div class="stat"><div class="k">Kilian’s own hours</div><div class="v num">${hrs.toLocaleString("nl-BE")} h</div><div class="s">personal work, outside his company</div></div>`;
     $("#n-house").textContent = openHouse.length; $("#n-admin").textContent = openAdmin.length; $("#n-subs").textContent = subs.length; $("#n-done").textContent = tasks.filter(isDone).length;
     $("#importHint").hidden = !(loadedT && loadedS && canWrite && !tasks.length && !subs.length);
   }
+  $("#stats").addEventListener("click", (e) => { const g = e.target.closest("[data-gotab]"); if (g) gotoTab(g.dataset.gotab); });
   function render() {
     if (editing) { pendingRender = true; return; }
     pendingRender = false;
-    renderStats(); renderRoomRow(); renderRoomCard(); refreshToolSelect(); fillQuickRoom(); renderHead(); migrateLegacyRooms();
+    renderStats(); renderRoomRow(); renderRoomCard(); renderBudgetCard(); refreshToolSelect(); fillQuickRoom(); renderHead(); migrateLegacyRooms();
     const grid = $("#grid"); grid.className = "grid " + st.tab;
     const body = $("#gbody"), cards = $("#cards"), foot = $("#gfoot"), ncol = COLS[st.tab].length;
-    const loaded = st.tab === "subs" ? loadedS : loadedT;
-    if (st.tab === "done") $("#addForm").hidden = true;
+    const loaded = st.tab === "subs" ? loadedS : st.tab === "budget" ? loadedT && loadedR && loadedS : loadedT;
+    if (st.tab === "done" || st.tab === "budget") $("#addForm").hidden = true;
     const emptyRow = (m) => { body.innerHTML = `<tr><td colspan="${ncol}"><div class="empty">${m}</div></td></tr>`; cards.innerHTML = `<div class="empty">${m}</div>`; foot.innerHTML = ""; };
     if (!loaded) { emptyRow("Loading the shared list…"); $("#count").textContent = ""; return; }
 
@@ -863,7 +992,16 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         cards.innerHTML = list.map(doneCard).join("");
       }
       const hrs = list.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
-      foot.innerHTML = `<tr><td></td><td></td><td>Total · ${list.length} finished${hrs ? ` · ${hrs.toLocaleString("nl-BE")} h by Kilian` : ""}</td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td></tr>`;
+      const withVar = list.filter(varianceOf), dsum = r2(sumBy(withVar, (t) => varianceOf(t).d)), psum = sumBy(withVar, plannedOf);
+      const tv = withVar.length ? { d: dsum, pct: psum ? dsum / psum : null } : null;
+      foot.innerHTML = `<tr><td></td><td></td><td>Total · ${list.length} finished${hrs ? ` · ${hrs.toLocaleString("nl-BE")} h by Kilian` : ""}</td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r ${varCls(tv)}">${fmtVar(tv)}</td><td></td></tr>`;
+    } else if (st.tab === "budget") {
+      const rows = sortBudget(budgetRows());
+      $("#count").textContent = "";
+      body.innerHTML = rows.map((r, i) => budgetRow(r, i + 1)).join("");
+      cards.innerHTML = rows.map(budgetCardRow).join("");
+      const T = (f) => sumBy(rows, (r) => num(r[f]));
+      foot.innerHTML = `<tr><td></td><td>Total</td><td>${T("open")} open</td><td class="r">${eur(T("budget"))}</td><td class="r">${eur(T("planned"))}</td><td class="r">${eur(T("spent"))}</td><td class="r">${eur(T("expected"))}</td><td></td><td></td></tr>`;
     } else if (st.tab === "subs") {
       const list = visibleSubs();
       $("#count").textContent = `${list.length} subsidies`;
@@ -889,7 +1027,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         let html = "", chtml = "", i = 0;
         for (const k of keys) {
           const items = list.filter((t) => groupKey(t) === k);
-          const gs = kind === "house" ? `${items.length} · ${eur(sum(items, "estCost"))} est. · ${eur(sum(items, "actualCost"))} spent` : `${items.length}`;
+          const gs = kind === "house" ? `${items.length} · ${eur(sum(items, "estCost"))} planned · ${eur(sum(items, "actualCost"))} spent` : `${items.length}`;
           html += `<tr class="group"><td colspan="${ncol}">${esc(k)}<span class="gsum">${gs}</span></td></tr>` + items.map((t) => taskRow(t, ++i, kind)).join("");
           chtml += `<div class="cgroup"><span>${esc(k)}</span><span>${items.length}</span></div>` + items.map((t) => taskCard(t, kind)).join("");
         }
@@ -905,8 +1043,109 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (panel && !$("#panel").hidden) refreshPanelLinks();
   }
 
+  // ---------- budget tab ----------
+  function budgetRows() {
+    const house = tasks.filter((t) => kindOf(t) === "house");
+    const legacy = [...new Set(house.map(roomIdOf).filter((id) => id.startsWith("legacy:")))];
+    const rows = [WHOLE, ...sortedRooms().map((r) => r.id), ...legacy].map((id) => ({ id, name: roomName(id), jobs: house.filter((t) => roomIdOf(t) === id), budget: (roomById.get(id) || {}).budget, room: !id.startsWith("legacy:") }));
+    const none = house.filter((t) => !roomIdOf(t));
+    if (none.length) rows.push({ id: "__none", name: "No room yet", jobs: none });
+    rows.push({ id: "__admin", name: "Paperwork & fees", jobs: tasks.filter((t) => kindOf(t) === "admin") });
+    return rows.map((r) => {
+      const budget = hasNum(r.budget) ? Number(r.budget) : null, expected = sumBy(r.jobs, expectedOf);
+      return { ...r, budget, planned: sumBy(r.jobs, plannedOf), spent: sumBy(r.jobs, spentOf), expected, diff: budget == null ? null : r2(budget - expected), open: r.jobs.filter((t) => !isDone(t)).length, done: r.jobs.filter(isDone).length };
+    });
+  }
+  function sortBudget(rows) {
+    const v = st.budget; if (v.sortKey === "default") return rows;
+    const g = v.sortKey === "name" ? (r) => r.name.toLowerCase() : (r) => r[v.sortKey];
+    return [...rows].sort((a, b) => cmpVal(g(a), g(b)) * v.sortDir);
+  }
+  const fmtDiff = (d) => d == null ? "—" : d < 0 ? `${eur(-d)} over` : `${eur(d)} left`;
+  const budgetLink = (r) => r.room ? `data-ropen="${esc(r.id)}"` : r.id === "__admin" ? `data-gotab="admin"` : `data-ropen="__none"`;
+  function budgetRow(r, i) {
+    const ro = canWrite ? "" : " disabled";
+    const bcell = r.room ? `<input class="cell money" data-rb="${esc(r.id)}" inputmode="decimal" value="${amtIn(r.budget)}" placeholder="—" aria-label="Budget for ${esc(r.name)}"${ro}>` : `<span style="display:block;padding:8px 10px;color:var(--muted)">—</span>`;
+    return `<tr data-bid="${esc(r.id)}">
+      <td class="idx">${i}</td>
+      <td class="pad strong">${esc(r.name)}</td>
+      <td class="pad">${r.open} open${r.done ? ` · ${r.done} done` : ""}</td>
+      <td class="r">${bcell}</td>
+      <td class="r pad mono">${eur(r.planned)}</td>
+      <td class="r pad mono">${eur(r.spent)}</td>
+      <td class="r pad mono strong">${eur(r.expected)}</td>
+      <td class="r pad mono ${r.diff == null ? "" : r.diff < 0 ? "neg" : "pos"}">${fmtDiff(r.diff)}</td>
+      <td><button class="open-btn" type="button" ${budgetLink(r)}>Open ›</button></td>
+    </tr>`;
+  }
+  function budgetCardRow(r) {
+    return `<div class="card nochk" ${budgetLink(r)} role="button" tabindex="0" aria-label="${esc(r.name)}: open">
+      <div class="t">${esc(r.name)}</div>
+      <div class="meta"><span>${r.open} open${r.done ? ` · ${r.done} done` : ""}</span>
+        <span class="money">Expected ${eur(r.expected)}${r.budget != null ? ` of ${eur(r.budget)}` : ""}</span>
+        ${r.diff != null ? `<span class="chip ${r.diff < 0 ? "block" : "clear"}">${fmtDiff(r.diff)}</span>` : ""}
+        ${r.spent ? `<span class="money">${eur(r.spent)} spent</span>` : ""}</div>
+    </div>`;
+  }
+  function renderBudgetCard() {
+    const card = $("#budgetCard");
+    if (st.tab !== "budget" || !loadedT || !loadedR) { card.hidden = true; return; }
+    card.hidden = false;
+    const m = planMeta(), pn = planNumbers();
+    if (!card.dataset.built) {
+      card.dataset.built = "1";
+      card.innerHTML = `
+        <div class="rc-head"><h2>Budget for the works</h2></div>
+        <div class="bc-inputs">
+          <div class="f"><label for="bTotal">Total budget (€)</label><input id="bTotal" inputmode="decimal" placeholder="e.g. 60.000"></div>
+          <div class="f"><label for="bBuf">Buffer for surprises (%)</label><input id="bBuf" inputmode="decimal" placeholder="${DEFAULT_BUFFER}"></div>
+        </div>
+        <div class="bc-status" id="bcStatus" aria-live="polite"></div>
+        <div class="rc-barwrap"><div class="rc-bar" id="bcBar" role="img"></div><div class="rc-legend" id="bcLegend"></div></div>
+        <div class="bc-figs" id="bcFigs"></div>
+        <div class="bc-line" id="bcStages"></div>
+        <div class="bc-line" id="bcAlloc"></div>
+        <p class="hint" style="margin:0">Expected final cost = what finished jobs actually cost, plus the planned price of open jobs (or what’s already paid, if that’s more). The buffer stays apart: “on track” means everything fits without touching it.</p>`;
+    }
+    for (const [sel, val] of [["#bTotal", amtIn(m.planTotal)], ["#bBuf", numIn(hasNum(m.planBuffer) ? m.planBuffer : DEFAULT_BUFFER)]]) { const el = $(sel); el.disabled = !canWrite; if (document.activeElement !== el) el.value = val; }
+    const expected = sumBy(tasks, expectedOf), spent = sumBy(tasks, spentOf), planned = sumBy(tasks, plannedOf), sub = subsTotal(), net = expected - sub;
+    const { total, buffer, avail, bufPct } = pn;
+    let cls = "", big, small;
+    if (total == null) { big = `${eur(expected)} expected so far`; small = "Fill in your total budget to see whether you’re on track."; }
+    else if (expected <= avail) { cls = "ok"; big = "On track"; small = `${eur(avail - expected)} left to plan, with the ${eur(buffer)} buffer still untouched.`; }
+    else if (expected <= total) { cls = "warn"; big = "Into the buffer"; small = `${eur(expected - avail)} of the ${eur(buffer)} buffer is already needed.`; }
+    else { cls = "hot"; big = `${eur(expected - total)} over budget`; small = "Even with the buffer. Look for jobs to drop, postpone or get cheaper quotes for."; }
+    const s = $("#bcStatus"); s.className = "bc-status " + cls; s.innerHTML = `${esc(big)}<small>${esc(small)}</small>`;
+    const max = Math.max(total || 0, expected, spent, 1), pct = (v) => Math.min(100, (v / max) * 100).toFixed(1) + "%";
+    $("#bcBar").innerHTML = `<span class="rc-est" style="width:${pct(expected)}"></span><span class="rc-spent" style="width:${pct(spent)}"></span>${total ? `<span class="rc-mark avail" style="left:${pct(avail)}"></span><span class="rc-mark" style="left:calc(${pct(total)} - 1px)"></span>` : ""}`;
+    $("#bcBar").setAttribute("aria-label", `Spent ${eur(spent)}, expected ${eur(expected)}${total ? `, budget ${eur(total)} of which ${eur(buffer)} buffer` : ""}`);
+    $("#bcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Expected <b>${eur(expected)}</b></span>${total ? `<span><i class="sw avail"></i>Without buffer <b>${eur(avail)}</b></span><span><i class="sw mark"></i>Total budget <b>${eur(total)}</b></span>` : ""}`;
+    $("#bcFigs").innerHTML = `
+      <div class="stat"><div class="k">Budget</div><div class="v num">${eur(total)}</div><div class="s">${total != null ? `incl. ${numIn(bufPct)}% buffer (${eur(buffer)})` : "not set yet"}</div></div>
+      <div class="stat"><div class="k">Expected final</div><div class="v num">${eur(expected)}</div><div class="s">planned prices add up to <b>${eur(planned)}</b></div></div>
+      <div class="stat"><div class="k">Spent so far</div><div class="v num">${eur(spent)}</div><div class="s"><b>${eur(Math.max(expected - spent, 0))}</b> still to pay</div></div>
+      <div class="stat"><div class="k">Subsidies</div><div class="v num">${sub ? "− " : ""}${eur(sub)}</div><div class="s">eligible, applied or received</div></div>
+      <div class="stat"><div class="k">Net cost to you</div><div class="v num">${eur(net)}</div><div class="s"><b>${eur(net / 2)}</b> each, split 50/50</div></div>`;
+    const open = tasks.filter((t) => !isDone(t)), by = (k) => open.filter((t) => stageOf(t) === k);
+    const stg = (k) => { const l = by(k); return l.length ? `<span class="chip stage-${k}">${STAGE[k]}: ${l.length}${k === "none" ? "" : " · " + eur(sumBy(l, plannedOf))}</span>` : ""; };
+    $("#bcStages").innerHTML = open.length ? `<span>How solid the plan is, for the ${open.length} open item${open.length === 1 ? "" : "s"}:</span>${stg("agreed")}${stg("quote")}${stg("guess")}${stg("none")}` : "";
+    const R = sumBy(budgetRows().filter((r) => r.room), (r) => num(r.budget));
+    $("#bcAlloc").innerHTML = total == null ? (R ? `<span>Room budgets add up to <b>${eur(R)}</b>.</span>` : "") :
+      R > avail ? `<span class="hot">Room budgets add up to ${eur(R)}, ${eur(R - avail)} more than the ${eur(avail)} available without the buffer.</span>` :
+      `<span>Room budgets: <b>${eur(R)}</b> given to rooms · <b>${eur(avail - R)}</b> not given to a room yet.</span>`;
+  }
+  $("#budgetCard").addEventListener("change", (e) => {
+    const el = e.target; if (el.id !== "bTotal" && el.id !== "bBuf") return;
+    let v = parseNum(el.value);
+    if (el.id === "bBuf" && v != null) v = Math.min(50, Math.max(0, v));
+    el.value = el.id === "bBuf" ? numIn(v == null ? DEFAULT_BUFFER : v) : amtIn(v);
+    const f = el.id === "bTotal" ? "planTotal" : "planBuffer";
+    if ((planMeta()[f] ?? null) !== v) writeRoomMeta(WHOLE, { [f]: v });
+  });
+  $("#budgetCard").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.matches("input")) e.target.blur(); });
+
   // ---------- room page ----------
-  const isRealRoom = (id) => id === WHOLE || (id && roomById.has(id));
+  const isRealRoom =(id) => id === WHOLE || (id && roomById.has(id));
   function writeRoomMeta(id, fields) {
     if (!roomCol || !canWrite) { toast("This list is read-only for you right now."); return; }
     if (id === WHOLE && !roomById.has(WHOLE)) { roomCol.set(WHOLE, { name: WHOLE_LABEL, builtin: true, order: 0, createdAt: Date.now(), updatedAt: Date.now(), ...fields }).catch(handleWriteErr); return; }
@@ -927,25 +1166,25 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
           <div class="rc-barwrap"><div class="rc-bar" id="rcBar" role="img"></div><div class="rc-legend" id="rcLegend"></div></div>
         </div>
         <div class="f"><label for="rcNotes">Room notes</label><textarea id="rcNotes" placeholder="Measurements, paint colours, materials, ideas, what’s behind the walls…"${ro}></textarea></div>`;
-      $("#rcNotes").value = meta.notes || ""; $("#rcBudget").value = numIn(meta.budget);
+      $("#rcNotes").value = meta.notes || ""; $("#rcBudget").value = amtIn(meta.budget);
     } else {
       if (document.activeElement !== $("#rcNotes") && !rcTimer) $("#rcNotes").value = meta.notes || "";
-      if (document.activeElement !== $("#rcBudget")) $("#rcBudget").value = numIn(meta.budget);
+      if (document.activeElement !== $("#rcBudget")) $("#rcBudget").value = amtIn(meta.budget);
     }
     $("#rcName").textContent = roomName(id);
     const jobs = tasks.filter((t) => kindOf(t) === "house" && roomIdOf(t) === id);
     const open = jobs.filter((t) => !isDone(t)), done = jobs.length - open.length;
     const urgent = open.filter((t) => (t.priority || 3) === 1).length, blocked = open.filter((t) => blockers(t).length).length;
-    const est = sum(jobs, "estCost"), spent = sum(jobs, "actualCost"), hrs = jobs.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
+    const est = sumBy(jobs, expectedOf), spent = sum(jobs, "actualCost"), hrs =jobs.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
     const showDone = done && st.house.status === "open";
     $("#rcStats").innerHTML = `<span><b>${open.length}</b> open</span>${urgent ? `<span class="hot">${urgent} urgent</span>` : ""}${blocked ? `<span>${blocked} waiting on something</span>` : ""}<span><b>${done}</b> done${showDone ? ` <button class="linkbtn small" type="button" id="rcShowDone">show</button>` : ""}</span>${hrs ? `<span>${hrs.toLocaleString("nl-BE")} h by Kilian</span>` : ""}`;
     const budget = meta.budget != null && meta.budget !== "" ? Number(meta.budget) : null;
     const max = Math.max(budget || 0, est, spent, 1);
     const pct = (v) => Math.min(100, (v / max) * 100).toFixed(1) + "%";
     $("#rcBar").innerHTML = `<span class="rc-est" style="width:${pct(est)}"></span><span class="rc-spent" style="width:${pct(spent)}"></span>${budget ? `<span class="rc-mark" style="left:${pct(budget)}"></span>` : ""}`;
-    $("#rcBar").setAttribute("aria-label", `Spent ${eur(spent)}, estimated ${eur(est)}${budget ? `, budget ${eur(budget)}` : ""}`);
+    $("#rcBar").setAttribute("aria-label", `Spent ${eur(spent)}, expected ${eur(est)}${budget ? `, budget ${eur(budget)}` : ""}`);
     const over = budget != null && est > budget ? est - budget : 0;
-    $("#rcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Estimated <b>${eur(est)}</b></span>${budget != null ? `<span><i class="sw mark"></i>Budget <b>${eur(budget)}</b></span>` : ""}${over ? `<span class="hot">Estimate is ${eur(over)} over budget</span>` : budget != null ? `<span>${eur(budget - Math.max(est, spent))} left</span>` : ""}`;
+    $("#rcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Expected <b>${eur(est)}</b></span>${budget != null ? `<span><i class="sw mark"></i>Budget <b>${eur(budget)}</b></span>` : ""}${over ? `<span class="hot">Expected cost is ${eur(over)} over budget</span>` : budget != null ? `<span>${eur(budget - est)} left</span>` : ""}`;
   }
   let rcTimer = null;
   $("#roomCard").addEventListener("input", (e) => {
@@ -956,7 +1195,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   });
   $("#roomCard").addEventListener("change", (e) => {
     const id = st.house.room;
-    if (e.target.id === "rcBudget") { const v = parseNum(e.target.value); e.target.value = numIn(v); if (((roomById.get(id) || {}).budget ?? null) !== v) writeRoomMeta(id, { budget: v }); }
+    if (e.target.id === "rcBudget") { const v = parseNum(e.target.value); e.target.value = amtIn(v); if (((roomById.get(id) || {}).budget ?? null) !== v) writeRoomMeta(id, { budget: v }); }
     if (e.target.id === "rcNotes" && rcTimer) { clearTimeout(rcTimer); rcTimer = null; const val = e.target.value; if ((roomById.get(id) || {}).notes !== val) writeRoomMeta(id, { notes: val }); }
   });
   $("#roomCard").addEventListener("click", (e) => {
@@ -1012,8 +1251,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       else toast(`Back on the to-do list: “${t.title}”`, () => patch(id, prev));
       return;
     }
+    if ((f === "estCost" && estDerived(t)) || (f === "actualCost" && actDerived(t))) { el.value = numIn(t[f]); return; }
     let v;
-    if (MONEY.includes(f)) { v = parseNum(el.value); el.value = numIn(v); }
+    if (MONEY.includes(f)) { v = parseNum(el.value); el.value = f === "hours" ? numIn(v) : amtIn(v); }
     else if (f === "priority") v = Number(el.value);
     else if (f === "title") { v = el.value.trim(); if (!v) { el.value = t.title; return; } }
     else v = el.value.trim();
@@ -1032,6 +1272,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   $("#gbody").addEventListener("change", (e) => {
     const el = e.target, tr = el.closest("tr"); if (!tr) return;
+    if (el.dataset.rb !== undefined) { const v = parseNum(el.value); el.value = amtIn(v); if (((roomById.get(el.dataset.rb) || {}).budget ?? null) !== v) writeRoomMeta(el.dataset.rb, { budget: v }); return; }
     if (el.dataset.f && tr.dataset.id) applyTaskField(tr.dataset.id, el.dataset.f, el);
     else if (el.dataset.s && tr.dataset.sid) applySubField(tr.dataset.sid, el.dataset.s, el);
     if (el.tagName === "SELECT" || el.type === "checkbox" || el.type === "date") el.blur();
@@ -1041,10 +1282,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (e.key === "Enter") {
       e.preventDefault();
       const td = e.target.closest("td"), tr = td.closest("tr"), idx = [...tr.children].indexOf(td);
-      let n = tr.nextElementSibling; while (n && !(n.dataset.id || n.dataset.sid)) n = n.nextElementSibling;
+      let n = tr.nextElementSibling; while (n && !(n.dataset.id || n.dataset.sid || n.dataset.bid !== undefined)) n = n.nextElementSibling;
       const target = n && n.children[idx] && n.children[idx].querySelector("input.cell");
       if (target) target.focus(); else e.target.blur();
     } else if (e.key === "Escape") {
+      if (e.target.dataset.rb !== undefined) { e.target.value = amtIn((roomById.get(e.target.dataset.rb) || {}).budget); e.target.blur(); return; }
       const tr = e.target.closest("tr"), rec = tr.dataset.id ? byId.get(tr.dataset.id) : subById.get(tr.dataset.sid), f = e.target.dataset.f || e.target.dataset.s;
       e.target.value = MONEY.includes(f) ? numIn(rec[f]) : (rec[f] || ""); e.target.blur();
     }
@@ -1052,15 +1294,21 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function clickOpen(e) {
     if (e.target.matches("input[type=checkbox]") && e.target.closest(".card")) { applyTaskField(e.target.dataset.id, "done", e.target); return; }
     const t = e.target.closest("[data-open]"); if (t) { openTask(t.dataset.open); return; }
-    const s = e.target.closest("[data-opensub]"); if (s) openSub(s.dataset.opensub);
+    const s = e.target.closest("[data-opensub]"); if (s) { openSub(s.dataset.opensub); return; }
+    const r = e.target.closest("[data-ropen]"); if (r) { openRoomPage(r.dataset.ropen); return; }
+    const g = e.target.closest("[data-gotab]"); if (g) gotoTab(g.dataset.gotab);
   }
   $("#gbody").addEventListener("click", clickOpen);
   $("#cards").addEventListener("click", clickOpen);
-  $("#cards").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".card")) { e.preventDefault(); e.target.dataset.open ? openTask(e.target.dataset.open) : openSub(e.target.dataset.opensub); } });
+  $("#cards").addEventListener("keydown", (e) => {
+    if ((e.key !== "Enter" && e.key !== " ") || !e.target.matches(".card")) return;
+    e.preventDefault(); const d = e.target.dataset;
+    if (d.open) openTask(d.open); else if (d.opensub) openSub(d.opensub); else if (d.ropen !== undefined) openRoomPage(d.ropen); else if (d.gotab) gotoTab(d.gotab);
+  });
 
   // ---------- quick add ----------
   function newTask(kind, title, extra = {}) {
-    return { kind, title, roomId: "", trade: "", category: "", priority: 3, status: "todo", owner: "", doneBy: "", hours: null, due: "", estCost: null, actualCost: null, tools: [], subsidyId: "", notes: "", dependsOn: [], createdAt: Date.now(), updatedAt: Date.now(), ...extra };
+    return { kind, title, roomId: "", trade: "", category: "", priority: 3, status: "todo", owner: "", doneBy: "", hours: null, due: "", estCost: null, actualCost: null, quotes: [], payments: [], tools: [], subsidyId: "", notes: "", dependsOn: [], createdAt: Date.now(), updatedAt: Date.now(), ...extra };
   }
   $("#quickSel").addEventListener("change", (e) => { if (e.target.value === "__new") { e.target.value = ""; openRooms(true); } });
   $("#addForm").addEventListener("submit", async (e) => {
@@ -1116,18 +1364,15 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         ${houseBits}
         ${kind === "house" ? `<div class="f"><label for="pSub">Subsidy</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select><p class="hint" style="margin:2px 0 0">Add new subsidies in the Subsidies tab, then link them here.</p></div>` : ""}
         <div class="f"><label for="pNotes">Notes</label><textarea id="pNotes" data-p="notes" placeholder="${kind === "house" ? "Measurements, what to buy, photos taken, contractor’s number…" : "Who to call, reference numbers, links…"}"${ro}>${esc(t.notes || "")}</textarea></div>
-        <div class="section">
-          <h3>${kind === "house" ? "Cost &amp; labour" : "Cost"}</h3>
+        <div class="section"><div class="money-wrap" id="pMoney"></div></div>
+        ${kind === "house" ? `<div class="section">
+          <h3>Labour</h3>
           <div class="row2">
-            <div class="f"><label for="pEst">Estimate (€)</label><input id="pEst" class="num" inputmode="decimal" data-p="estCost" value="${numIn(t.estCost)}"${ro}></div>
-            <div class="f"><label for="pAct">Spent (€)</label><input id="pAct" class="num" inputmode="decimal" data-p="actualCost" value="${numIn(t.actualCost)}"${ro}></div>
-          </div>
-          ${kind === "house" ? `<div class="row2">
             <div class="f"><label for="pBy">Work done by</label><select id="pBy" data-p="doneBy"${ro}>${opts(DONEBY.map((o) => [o, o || "—"]), t.doneBy)}</select></div>
             <div class="f"><label for="pHrs">Hours</label><input id="pHrs" class="num" inputmode="decimal" data-p="hours" value="${numIn(t.hours)}"${ro}></div>
           </div>
-          <p class="hint">Hours marked “Kilian (personal)” add up in the header, for the valuation in your partner agreement. Work through his company is invoiced instead.</p>` : ""}
-        </div>
+          <p class="hint">Hours marked “Kilian (personal)” add up in the header, for the valuation in your partner agreement. Work through his company is invoiced instead.</p>
+        </div>` : ""}
         <div class="section">
           <h3>Waits on</h3>
           <p class="hint">Tick what must be finished first. Paperwork and house jobs can depend on each other.</p>
@@ -1205,13 +1450,13 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (panel.type === "sub") {
       const s = subById.get(panel.id); if (!s) { closePanel(); return; }
       const lt = linkedTasks(s.id);
-      $("#sLinked").innerHTML = lt.length ? `<div class="chips">${lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}${t.estCost != null ? " · " + eur(t.estCost) : ""}</button>`).join("")}</div><p class="hint" style="margin:8px 0 0">Estimated cost of linked jobs: <b>${eur(sum(lt, "estCost"))}</b> · spent ${eur(sum(lt, "actualCost"))}</p>` : `<p class="hint" style="margin:0">No jobs linked yet. Pick this subsidy in a job’s Subsidy column.</p>`;
+      $("#sLinked").innerHTML = lt.length ? `<div class="chips">${lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}${t.estCost != null ? " · " + eur(t.estCost) : ""}</button>`).join("")}</div><p class="hint" style="margin:8px 0 0">Planned cost of linked jobs: <b>${eur(sum(lt, "estCost"))}</b> · spent ${eur(sum(lt, "actualCost"))}</p>` : `<p class="hint" style="margin:0">No jobs linked yet. Pick this subsidy in a job’s Subsidy column.</p>`;
       const url = (s.link || "").trim();
       $("#sLinkOut").innerHTML = /^https?:\/\//i.test(url) ? `<a class="linkout" href="${esc(url)}" target="_blank" rel="noopener">Open website ↗</a>` : "";
       return;
     }
     const t = byId.get(panel.id); if (!t) { closePanel(); return; }
-    renderTagBox(t);
+    renderTagBox(t); renderMoney(t);
     const pr = $("#pRoom");
     if (pr && document.activeElement !== pr) pr.innerHTML = opts([["", "No room yet"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t));
     const box = $("#pDeps"); if (!box) return;
@@ -1224,8 +1469,148 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const unlocks = tasks.filter((o) => (o.dependsOn || []).includes(t.id));
     $("#pUnlocks").innerHTML = unlocks.length ? `<span class="lbl">Finishing this unblocks</span><div class="chips">${unlocks.map((o) => `<button class="chip" type="button" data-open="${esc(o.id)}">${esc(o.title)}</button>`).join("")}</div>` : "";
   }
+  // quotes & payments inside the job panel; rebuilt on every change, keeping the field you're typing in
+  let pendingFocus = null;
+  function moneyKey(el) {
+    if (el.id) return "#" + el.id;
+    const q = el.closest("[data-qid]"), p = el.closest("[data-pid]");
+    if (el.dataset.q && q) return `[data-qid="${q.dataset.qid}"] [data-q="${el.dataset.q}"]`;
+    if (el.dataset.pay && p) return `[data-pid="${p.dataset.pid}"] [data-pay="${el.dataset.pay}"]`;
+    for (const a of ["qchoose", "qdel", "paydel"]) if (el.dataset[a]) return `[data-${a}="${el.dataset[a]}"]`;
+    return null;
+  }
+  // don't rebuild under a finger or mouse that's pressing a button in this block, or the click gets lost
+  let moneyHold = false, moneyLater = false;
+  document.addEventListener("pointerdown", (e) => { if (e.target.closest && e.target.closest("#pMoney")) moneyHold = true; }, true);
+  document.addEventListener("pointerup", () => {
+    if (!moneyHold) return;
+    setTimeout(() => { moneyHold = false; if (moneyLater) { moneyLater = false; const t = panel && byId.get(panel.id); if (t) renderMoney(t); } }, 0);
+  }, true);
+  document.addEventListener("pointercancel", () => { moneyHold = false; }, true);
+  function renderMoney(t) {
+    const box = $("#pMoney"); if (!box) return;
+    if (moneyHold) { moneyLater = true; return; }
+    const a = document.activeElement, inBox = a && box.contains(a);
+    const keep = inBox ? { sel: moneyKey(a), text: (a.tagName === "INPUT" && a.type !== "checkbox") || a.tagName === "TEXTAREA", value: a.value, s: (() => { try { return [a.selectionStart, a.selectionEnd]; } catch (e) { return null; } })() } : null;
+    const ro = canWrite ? "" : " disabled", qs = quotesOf(t), ps = paysOf(t), c = chosenQuote(t), stg = stageOf(t);
+    let html = `<h3>Planned price</h3>
+      <div class="planhead"><span class="pv">${hasNum(t.estCost) ? eur(t.estCost) : "—"}</span><span class="chip stage-${stg}">${STAGE[stg]}</span></div>`;
+    html += estDerived(t)
+      ? `<p class="hint" style="margin:0">From ${c.who ? `<b>${esc(c.who)}</b>’s` : "the chosen"} quote${c.signed ? ", signed" : ""}. Click “✓ Chosen” again to go back to your own guess.</p>`
+      : `<div class="f"><label for="pEst">${qs.length ? "Your own guess (€), until you choose a quote" : "Your own guess (€)"}</label><input id="pEst" class="num" inputmode="decimal" data-p="estCost" value="${amtIn(t.estCost)}" placeholder="e.g. 1.500"${ro}></div>`;
+    html += `<div class="f"><span class="lbl">Quotes${qs.length ? ` (${qs.length})` : ""}</span><div class="qlist">` + qs.map((q, i) => {
+      const tot = quoteTotal(q), n = i + 1;
+      return `<div class="qitem${q.chosen ? " chosen" : ""}" data-qid="${esc(q.id)}">
+        <div class="qrow"><input data-q="who" value="${esc(q.who || "")}" placeholder="Contractor or shop" aria-label="Quote ${n}: contractor or shop"${ro}>
+          <input data-q="amount" class="num" inputmode="decimal" value="${amtIn(q.amount)}" placeholder="Amount €" aria-label="Quote ${n}: amount in euro"${ro}>
+          <select data-q="vat" aria-label="Quote ${n}: VAT"${ro}>${opts(Object.entries(VAT), q.vat || "incl")}</select></div>
+        <div class="qrow2"><input type="date" data-q="date" value="${esc(q.date || "")}" aria-label="Quote ${n}: date"${ro}>
+          <input data-q="note" value="${esc(q.note || "")}" placeholder="What’s included, valid until…" aria-label="Quote ${n}: note"${ro}></div>
+        <div class="qfoot"><span>${tot == null ? "No amount yet" : q.vat && q.vat !== "incl" ? `Incl. VAT <b>${eur(tot)}</b>` : `<b>${eur(tot)}</b> incl. VAT`}</span>
+          ${canWrite ? `<button class="btn small${q.chosen ? " on" : ""}" type="button" data-qchoose="${esc(q.id)}" aria-pressed="${q.chosen ? "true" : "false"}">${q.chosen ? "✓ Chosen" : "Choose this one"}</button>` : q.chosen ? `<span class="chip stage-quote">Chosen</span>` : ""}
+          ${q.chosen ? `<label class="qsigned"><input type="checkbox" data-q="signed"${q.signed ? " checked" : ""}${ro}> Signed / agreed</label>` : ""}
+          ${canWrite ? `<button class="linkbtn small danger" type="button" data-qdel="${esc(q.id)}">Remove</button>` : ""}</div>
+      </div>`;
+    }).join("") + `</div>`;
+    const priced = qs.filter((q) => quoteTotal(q) != null).sort((x, y) => quoteTotal(x) - quoteTotal(y));
+    if (priced.length > 1) { const lo = priced[0], hi = priced[priced.length - 1]; html += `<p class="hint" style="margin:4px 0 0">Cheapest: <b>${esc(lo.who || "unnamed")}</b> at ${eur(quoteTotal(lo))}${quoteTotal(hi) > quoteTotal(lo) ? ` · ${eur(quoteTotal(hi) - quoteTotal(lo))} less than the most expensive` : ""}.</p>`; }
+    if (canWrite) html += `<button class="btn small add" type="button" id="pAddQuote">+ Add a quote</button>`;
+    html += `</div>`;
+    html += `<h3 class="mt">Payments</h3><div class="qlist">` + ps.map((p, i) => {
+      const n = i + 1;
+      return `<div class="payitem" data-pid="${esc(p.id)}">
+        <input type="date" data-pay="date" value="${esc(p.date || "")}" aria-label="Payment ${n}: date"${ro}>
+        <input data-pay="amount" class="num" inputmode="decimal" value="${amtIn(p.amount)}" placeholder="Amount €" aria-label="Payment ${n}: amount in euro"${ro}>
+        <select data-pay="kind" aria-label="Payment ${n}: type"${ro}>${opts(Object.entries(PAYKIND), p.kind || "invoice")}</select>
+        ${canWrite ? `<button class="btn icon danger" type="button" data-paydel="${esc(p.id)}" aria-label="Remove payment ${n}">✕</button>` : "<span></span>"}
+        <input class="paynote" data-pay="note" value="${esc(p.note || "")}" placeholder="Note, e.g. invoice number" aria-label="Payment ${n}: note"${ro}>
+      </div>`;
+    }).join("") + `</div>`;
+    if (!ps.length && hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Spent so far was entered as one amount: <b>${eur(t.actualCost)}</b>. Adding a payment keeps it as the first line.</p>`;
+    if (!ps.length && !hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Add each deposit, invoice or final bill when you pay it.</p>`;
+    if (canWrite) html += `<button class="btn small add" type="button" id="pAddPay">+ Add a payment</button>`;
+    if (ps.length || hasNum(t.actualCost)) {
+      const paid = spentOf(t), plan = hasNum(t.estCost) ? Number(t.estCost) : null;
+      let extra = "";
+      if (plan != null) {
+        const d = r2(paid - plan);
+        if (d > 0) extra = `<span class="hot">${eur(d)} more than planned${plan ? ` (+${Math.round(d / plan * 100)}%)` : ""}</span>`;
+        else if (isDone(t)) extra = d < 0 ? `<span class="okc">${eur(-d)} less than planned</span>` : "exactly as planned";
+        else extra = d < 0 ? `<b>${eur(-d)}</b> still to pay` : "fully paid";
+      }
+      html += `<p class="paysum" style="margin:0">Paid <b>${eur(paid)}</b>${plan != null ? ` of ${eur(plan)} planned` : ""}${extra ? " · " + extra : ""}</p>`;
+    }
+    box.innerHTML = html;
+    if (pendingFocus) { const el = box.querySelector(pendingFocus); pendingFocus = null; if (el) el.focus(); }
+    else if (keep && keep.sel) {
+      const el = box.querySelector(keep.sel);
+      if (el) { if (keep.text) el.value = keep.value; el.focus(); if (keep.s && keep.text) try { el.setSelectionRange(keep.s[0], keep.s[1]); } catch (e) {} }
+    }
+  }
+  function onQuoteField(el) {
+    const t = byId.get(panel && panel.id); if (!t) return;
+    const qid = el.closest("[data-qid]").dataset.qid, f = el.dataset.q;
+    const quotes = quotesOf(t).map((q) => ({ ...q })), q = quotes.find((x) => x.id === qid); if (!q) return;
+    const v = f === "amount" ? parseNum(el.value) : f === "signed" ? el.checked : el.value.trim();
+    if (f === "amount") el.value = amtIn(v);
+    if ((q[f] ?? "") === (v ?? "")) return;
+    q[f] = v;
+    if (f === "signed" && v) quotes.forEach((x) => { x.chosen = x.id === qid; if (x.id !== qid) x.signed = false; });
+    writeQuotes(t, quotes);
+  }
+  function onPayField(el) {
+    const t = byId.get(panel && panel.id); if (!t) return;
+    const pid = el.closest("[data-pid]").dataset.pid, f = el.dataset.pay;
+    const pays = paysOf(t).map((p) => ({ ...p })), p = pays.find((x) => x.id === pid); if (!p) return;
+    const v = f === "amount" ? parseNum(el.value) : el.value.trim();
+    if (f === "amount") el.value = amtIn(v);
+    if ((p[f] ?? "") === (v ?? "")) return;
+    p[f] = v;
+    writePays(t, pays);
+  }
+  function moneyClick(e) {
+    const t = byId.get(panel && panel.id); if (!t || !canWrite) return false;
+    if (e.target.id === "pAddQuote") {
+      const qs = quotesOf(t), q = { id: newId(), who: "", amount: null, vat: "incl", date: today(), note: "", chosen: !qs.some((x) => x.chosen) && !qs.length, signed: false };
+      pendingFocus = `[data-qid="${q.id}"] [data-q="who"]`;
+      writeQuotes(t, [...qs, q]); return true;
+    }
+    const ch = e.target.closest("[data-qchoose]");
+    if (ch) {
+      const id = ch.dataset.qchoose, was = (quotesOf(t).find((q) => q.id === id) || {}).chosen;
+      const quotes = quotesOf(t).map((q) => ({ ...q, chosen: !was && q.id === id, signed: !was && q.id === id ? !!q.signed : false }));
+      pendingFocus = `[data-qchoose="${id}"]`;
+      writeQuotes(t, quotes);
+      if (!was) { const q = quotes.find((x) => x.id === id); if (quoteTotal(q) == null) toast("Fill in this quote’s amount and it becomes the planned price."); }
+      return true;
+    }
+    const qd = e.target.closest("[data-qdel]");
+    if (qd) {
+      const prev = { quotes: quotesOf(t), estCost: t.estCost ?? null }, q = prev.quotes.find((x) => x.id === qd.dataset.qdel);
+      writeQuotes(t, prev.quotes.filter((x) => x.id !== qd.dataset.qdel));
+      toast(`Removed the quote${q && q.who ? " from " + q.who : ""}`, () => patch(t.id, prev)); return true;
+    }
+    if (e.target.id === "pAddPay") {
+      let pays = paysOf(t).map((p) => ({ ...p }));
+      if (!pays.length && hasNum(t.actualCost)) pays.push({ id: newId(), date: t.doneAt || today(), amount: Number(t.actualCost), kind: "other", note: "Entered earlier as one amount" });
+      const p = { id: newId(), date: today(), amount: null, kind: "invoice", note: "" };
+      pendingFocus = `[data-pid="${p.id}"] [data-pay="amount"]`;
+      writePays(t, [...pays, p]); return true;
+    }
+    const pd = e.target.closest("[data-paydel]");
+    if (pd) {
+      const prev = { payments: paysOf(t), actualCost: t.actualCost ?? null }, p = prev.payments.find((x) => x.id === pd.dataset.paydel);
+      writePays(t, prev.payments.filter((x) => x.id !== pd.dataset.paydel));
+      toast(`Removed the payment${p && hasNum(p.amount) ? " of " + eur(p.amount) : ""}`, () => patch(t.id, prev)); return true;
+    }
+    return false;
+  }
   function flushTimers() { for (const k in textTimers) { clearTimeout(textTimers[k].t); textTimers[k].fn(); } textTimers = {}; }
-  function closePanel() { flushTimers(); panel = null; $("#panel").hidden = true; $("#scrim").hidden = true; document.body.style.overflow = ""; $("#panel").innerHTML = ""; }
+  function closePanel() {
+    flushTimers();
+    const a = document.activeElement;
+    if (panel && a && a.closest && a.closest("#pMoney")) { if (a.dataset.q && a.dataset.q !== "signed") onQuoteField(a); else if (a.dataset.pay) onPayField(a); }
+    panel = null; $("#panel").hidden = true; $("#scrim").hidden = true; document.body.style.overflow = ""; $("#panel").innerHTML = ""; }
   function panelCommit(el) {
     if (!panel) return;
     const isSub = panel.type === "sub", f = isSub ? el.dataset.sp : el.dataset.p;
@@ -1255,6 +1640,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   });
   $("#panel").addEventListener("change", (e) => {
     const el = e.target;
+    if (el.dataset.q) { onQuoteField(el); return; }
+    if (el.dataset.pay) { onPayField(el); return; }
     if (el.closest("#pDeps")) {
       const t = byId.get(panel.id); if (!t) return;
       const set = new Set(t.dependsOn || []); el.checked ? set.add(el.value) : set.delete(el.value);
@@ -1275,10 +1662,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const key = el.dataset.p || el.dataset.sp; if (!key) return;
     if (textTimers[key]) { clearTimeout(textTimers[key].t); delete textTimers[key]; }
     panelCommit(el);
-    if (MONEY.includes(key)) el.value = numIn(parseNum(el.value));
+    if (MONEY.includes(key)) el.value = key === "hours" ? numIn(parseNum(el.value)) : amtIn(parseNum(el.value));
   });
   $("#panel").addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.dataset && e.target.dataset.rname) { e.preventDefault(); e.target.blur(); return; }
+    if (e.key === "Enter" && e.target.tagName === "INPUT" && (e.target.dataset.q || e.target.dataset.pay || e.target.id === "pEst")) { e.preventDefault(); e.target.blur(); return; }
     if (e.target.id === "pToolIn" && (e.key === "Enter" || e.key === ",")) { e.preventDefault(); if (e.target.value.trim()) { addTool(e.target.value); e.target.value = ""; } }
     else if (e.target.id === "pToolIn" && e.key === "Backspace" && !e.target.value) { const t = byId.get(panel.id); const cur = toolsOf(t); if (cur.length) patch(t.id, { tools: cur.slice(0, -1) }); }
   });
@@ -1291,6 +1679,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   $("#panel").addEventListener("click", async (e) => {
     const id = e.target.id;
     if (id === "pClose") return closePanel();
+    if (e.target.closest("#pMoney") && moneyClick(e)) return;
     if (e.target.closest("[data-rooms]")) { openRooms(); return; }
     const ro = e.target.closest("[data-ropen]"); if (ro) { openRoomPage(ro.dataset.ropen); return; }
     const mv = e.target.closest("[data-rmove]");
@@ -1356,18 +1745,23 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const n = (v) => v == null || v === "" ? "" : String(v).replace(".", ",");
     let head, rows;
     if (st.tab === "done") {
-      head = ["Finished", "List", "Room / category", "Done on", "Done by", "Who", "Hours", "Spent EUR", "Estimate EUR", "Notes"];
-      rows = sortDone(visibleDone()).map((t) => [t.title, kindOf(t) === "house" ? "In the house" : "Paperwork", whereOf(t), doneKey(t), t.doneBy, t.owner, n(t.hours), n(t.actualCost), n(t.estCost), t.notes]);
+      head = ["Finished", "List", "Room / category", "Done on", "Done by", "Who", "Hours", "Spent EUR", "Planned EUR", "Difference EUR", "Notes"];
+      rows = sortDone(visibleDone()).map((t) => [t.title, kindOf(t) === "house" ? "In the house" : "Paperwork", whereOf(t), doneKey(t), t.doneBy, t.owner, n(t.hours), n(t.actualCost), n(t.estCost), varianceOf(t) ? n(varianceOf(t).d) : "", t.notes]);
+    } else if (st.tab === "budget") {
+      head = ["Room or list", "Open jobs", "Done jobs", "Budget EUR", "Planned EUR", "Spent EUR", "Expected final EUR", "Left (+) / over (-) EUR"];
+      rows = sortBudget(budgetRows()).map((r) => [r.name, r.open, r.done, n(r.budget), n(r2(r.planned)), n(r2(r.spent)), n(r2(r.expected)), n(r.diff)]);
+      const pn = planNumbers();
+      rows.push([], ["Total budget", "", "", n(pn.total)], ["Buffer %", "", "", n(pn.bufPct)], ["Subsidies", "", "", n(r2(subsTotal()))]);
     } else if (st.tab === "subs") {
       head = ["Subsidy", "Status", "Expected EUR", "Received EUR", "Apply before", "Linked jobs", "Conditions", "Website", "Notes"];
       rows = visibleSubs().map((s) => [s.name, SUB[s.status] || "", n(s.expected), n(s.received), s.deadline, linkedTasks(s.id).map((t) => t.title).join(", "), s.conditions, s.link, s.notes]);
     } else {
       const kind = st.tab;
-      head = ["Item", "List", "Room", "Type of work", "Category", "Priority", "Status", "Who", "Done by", "Hours", "Due", "Estimate EUR", "Spent EUR", "Tools & materials", "Subsidy", "Waits on", "Notes"];
-      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", roomName(roomIdOf(t)), t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), n(t.actualCost), toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
+      head = ["Item", "List", "Room", "Type of work", "Category", "Priority", "Status", "Who", "Done by", "Hours", "Due", "Planned EUR", "Price based on", "Chosen quote from", "Spent EUR", "Payments", "Tools & materials", "Subsidy", "Waits on", "Notes"];
+      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", roomName(roomIdOf(t)), t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), STAGE[stageOf(t)], estDerived(t) ? chosenQuote(t).who || "" : "", n(t.actualCost), paysOf(t).length, toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
     }
     const csv = "﻿" + [head, ...rows].map((r) => r.map(q).join(";")).join("\r\n");
-    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies", done: "done" }[st.tab];
+    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies", done: "done", budget: "budget" }[st.tab];
     try { await downloadsNS.save({ filename: `kortrijkstraat-17-${name}-${today()}.csv`, data: csv }); toast("Saved. It opens in Excel or Numbers."); }
     catch (e) { if (e && e.code === "declined") return; toast(e && e.code === "rate_limited" ? "A save is already waiting for you." : "Export isn’t available here."); }
   }
