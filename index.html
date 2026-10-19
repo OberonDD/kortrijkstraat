@@ -113,6 +113,46 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 .rchip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .rchip[aria-pressed="true"] .c { color: var(--bg); opacity: .7; }
 .rchip:focus-visible { outline: 2px solid var(--accent); }
+.rchip.empty { color: var(--muted); }
+.roomcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.rc-head { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
+.rc-head h2 { font-family: var(--f-display); font-weight: 700; font-size: 24px; margin: 0; letter-spacing: -.01em; flex: 1 1 auto; }
+.rc-stats { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--muted); }
+.rc-stats b { color: var(--ink); font-weight: 600; }
+.rc-stats .hot, .rc-legend .hot { color: var(--p1); font-weight: 600; }
+.rc-money { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 12px 16px; align-items: end; }
+.rc-budget input { font-family: var(--f-mono); }
+.rc-barwrap { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.rc-bar { position: relative; height: 12px; border-radius: 6px; background: var(--sunk); overflow: hidden; }
+.rc-bar span { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 6px; }
+.rc-bar .rc-est { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.rc-bar .rc-spent { background: var(--accent); }
+.rc-bar .rc-mark { width: 2px; background: var(--ink); border-radius: 0; transform: translateX(-1px); }
+.rc-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rc-legend b { color: var(--ink); font-weight: 600; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.sw.spent { background: var(--accent); }
+.sw.est { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.sw.mark { width: 2px; border-radius: 0; background: var(--ink); }
+.roomcard textarea { min-height: 70px; }
+@media (max-width: 560px) { .rc-money { grid-template-columns: minmax(0, 1fr); } .rc-head h2 { font-size: 21px; } }
+.rchip.add { border-style: dashed; color: var(--accent); font-weight: 600; }
+.linkbtn.small { font-size: 12px; font-weight: 600; margin-top: 4px; align-self: flex-start; }
+.panel-h { font-family: var(--f-display); font-size: 20px; margin: 0; }
+.roomlist { display: flex; flex-direction: column; gap: 6px; }
+.roomrow-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); flex-wrap: wrap; }
+.roomrow-item.fixed { background: var(--sunk); }
+.roomrow-item .rname { font-weight: 600; flex: 1 1 auto; padding: 4px 2px; }
+.roomrow-item .rinput { flex: 1 1 160px; min-width: 0; padding: 7px 8px; border: 1px solid transparent; border-radius: 4px; background: transparent; font-weight: 600; }
+.roomrow-item .rinput:hover { border-color: var(--line); }
+.roomrow-item .rinput:focus { border-color: var(--accent); background: var(--surface); outline: none; }
+.roomrow-item .rcount { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.rbtns { display: inline-flex; gap: 4px; }
+.btn.icon { padding: 4px 9px; line-height: 1.2; }
+.btn.icon[disabled] { opacity: .35; cursor: default; }
+.rconfirm { padding: 4px 2px 8px; }
+.roomadd { display: flex; gap: 8px; flex-wrap: wrap; }
+.roomadd input { flex: 1 1 200px; min-width: 0; padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
 
 .addbar { display: flex; gap: 8px; flex-wrap: wrap; }
 .addbar input { flex: 1 1 260px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); font-size: 15px; }
@@ -303,6 +343,7 @@ button.chip { border: 0; cursor: pointer; }
   </nav>
 
   <div class="roomrow" id="roomrow" aria-label="Filter by room"></div>
+  <section class="roomcard" id="roomCard" hidden aria-live="polite"></section>
 
   <form class="addbar" id="addForm" autocomplete="off">
     <input id="quickAdd" aria-label="New item">
@@ -363,7 +404,7 @@ const firebaseConfig = {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { initializeFirestore, getFirestore, persistentLocalCache, collection, doc, onSnapshot, updateDoc, addDoc, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeFirestore, getFirestore, persistentLocalCache, collection, doc, onSnapshot, updateDoc, addDoc, deleteDoc, writeBatch, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 (() => {
   // ---------- vocab ----------
@@ -372,7 +413,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const STATUS_ORDER = { doing: 0, todo: 1, waiting: 2, done: 3 };
   const OWNERS = ["", "Oberon", "Kilian", "Both", "Contractor"];
   const DONEBY = ["", "DIY Oberon", "Kilian (personal)", "Kilian's company (invoiced)", "Contractor", "Both of us"];
-  const ROOMS = ["Whole house", "Front facade", "Hall & stairs", "Living room", "Kitchen", "Bathroom", "Toilet", "Bedroom front", "Bedroom back", "Attic", "Roof", "Basement", "Garden"];
+  const WHOLE = "whole";
+  const WHOLE_LABEL = "Whole house";
   const TRADES = ["Carpentry", "Electrics", "Plumbing", "Heating", "Insulation", "Windows & doors", "Roofing", "Masonry & facade", "Plastering", "Painting", "Flooring", "Tiling", "Demolition", "Cleaning & clearing", "Garden", "Safety", "Planning"];
   const CATS = ["Insurance & contracts", "Utilities", "Permits & city", "Notary & legal", "Bank & finance", "Subsidies", "Taxes & registration"];
   const TOOLS = ["Ladder", "Scaffolding", "Drill", "Multitool", "Circular saw", "Tile cutter", "Paint & rollers", "Plasterboard", "Insulation material", "Skip / container", "Dust extractor", "Protective gear", "Kilian's workshop"];
@@ -396,7 +438,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const opts = (pairs, v) => pairs.map(([a, b]) => `<option value="${esc(a)}"${String(a) === String(v ?? "") ? " selected" : ""}>${esc(b)}</option>`).join("");
 
   // ---------- state ----------
-  let tasks = [], subs = [];
+  let tasks = [], subs = [], rooms = [];
+  let roomById = new Map(), roomCol = null, loadedR = false;
   let byId = new Map(), subById = new Map();
   let col = null, subCol = null;
   let canWrite = true, loadedT = false, loadedS = false;
@@ -421,6 +464,22 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const blockers = (t) => isDone(t) ? [] : deps(t).filter((d) => !isDone(d));
   const toolsOf = (t) => Array.isArray(t.tools) ? t.tools : [];
   const linkedTasks = (sid) => tasks.filter((t) => t.subsidyId === sid);
+  const sortedRooms = () => rooms.filter((r) => r.id !== WHOLE).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || (a.name || "").localeCompare(b.name || ""));
+  function roomIdOf(t) {
+    if (t.roomId !== undefined) return t.roomId || "";
+    if (!t.room) return "";
+    if (t.room === WHOLE_LABEL) return WHOLE;
+    const r = rooms.find((x) => (x.name || "").toLowerCase() === String(t.room).toLowerCase());
+    return r ? r.id : "legacy:" + t.room;
+  }
+  function roomName(id) {
+    if (!id) return "";
+    if (id === WHOLE) return WHOLE_LABEL;
+    if (id.startsWith("legacy:")) return id.slice(7);
+    const r = roomById.get(id); return r ? r.name || "Unnamed room" : "";
+  }
+  const roomPairs = () => [[WHOLE, WHOLE_LABEL], ...sortedRooms().map((r) => [r.id, r.name || "Unnamed room"])];
+  const roomOrderKey = (id) => !id ? 1e6 : id === WHOLE ? -1 : (sortedRooms().findIndex((r) => r.id === id) + 1 || 1e5);
   function dependsTransitively(fromId, targetId, seen = new Set()) {
     if (fromId === targetId) return true;
     if (seen.has(fromId)) return false;
@@ -471,7 +530,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (st.tab === "house") {
       qa.placeholder = "Something to fix, e.g. “Loose stair tread”, then Enter";
       qs.hidden = false; qs.setAttribute("aria-label", "Room");
-      qs.innerHTML = opts([["", "Which room?"], ...roomList().map((r) => [r, r])], st.house.room);
+      fillQuickRoom();
     } else if (st.tab === "admin") {
       qa.placeholder = "Paperwork, e.g. “Ask bank for loan certificate”, then Enter";
       qs.hidden = false; qs.setAttribute("aria-label", "Category");
@@ -482,6 +541,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     }
     buildToolbar();
     render();
+  }
+  function fillQuickRoom() {
+    const qs = $("#quickSel"); if (st.tab !== "house" || document.activeElement === qs) return;
+    const cur = qs.value || (st.house.room && st.house.room !== "__none" ? st.house.room : "");
+    qs.innerHTML = opts([["", "Which room?"], ...roomPairs(), ...(canWrite ? [["__new", "+ New room…"]] : [])], roomById.has(cur) || cur === WHOLE ? cur : "");
   }
   function buildToolbar() {
     const v = V(), tb = $("#toolbar");
@@ -538,25 +602,28 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     st.tab = order[(i + (e.key === "ArrowRight" ? 1 : 2)) % 3]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
   });
 
-  function roomList() { const used = tasks.map((t) => t.room).filter(Boolean); return [...ROOMS, ...[...new Set(used)].filter((r) => !ROOMS.includes(r)).sort()]; }
+
   function renderRoomRow() {
     const row = $("#roomrow");
     if (st.tab !== "house") { row.hidden = true; return; }
     row.hidden = false;
     const house = tasks.filter((t) => kindOf(t) === "house" && !isDone(t));
-    const counts = {}; house.forEach((t) => { const r = t.room || ""; counts[r] = (counts[r] || 0) + 1; });
-    const rooms = roomList().filter((r) => counts[r] || r === st.house.room);
+    const counts = {}; house.forEach((t) => { const r = roomIdOf(t); counts[r] = (counts[r] || 0) + 1; });
+    if (loadedR && st.house.room && st.house.room !== "__none" && st.house.room !== WHOLE && !st.house.room.startsWith("legacy:") && !roomById.has(st.house.room)) { st.house.room = ""; saveView(); }
     const cur = st.house.room;
+    const chip = (id, label) => `<button class="rchip${counts[id] ? "" : " empty"}" type="button" data-room="${esc(id)}" aria-pressed="${cur === id ? "true" : "false"}">${esc(label)} <span class="c">${counts[id] || 0}</span></button>`;
+    const legacy = Object.keys(counts).filter((k) => k.startsWith("legacy:"));
     row.innerHTML = `<button class="rchip" type="button" data-room="" aria-pressed="${cur === "" ? "true" : "false"}">All rooms <span class="c">${house.length}</span></button>` +
-      rooms.map((r) => `<button class="rchip" type="button" data-room="${esc(r)}" aria-pressed="${cur === r ? "true" : "false"}">${esc(r)} <span class="c">${counts[r] || 0}</span></button>`).join("") +
-      (counts[""] ? `<button class="rchip" type="button" data-room="__none" aria-pressed="${cur === "__none" ? "true" : "false"}">No room yet <span class="c">${counts[""]}</span></button>` : "");
-    $("#roomlist").innerHTML = roomList().map((r) => `<option value="${esc(r)}">`).join("");
+      roomPairs().map(([id, label]) => chip(id, label)).join("") + legacy.map((id) => chip(id, roomName(id))).join("") +
+      (counts[""] ? `<button class="rchip" type="button" data-room="__none" aria-pressed="${cur === "__none" ? "true" : "false"}">No room yet <span class="c">${counts[""]}</span></button>` : "") +
+      (canWrite ? `<button class="rchip add" type="button" data-rooms="manage">+ Rooms</button>` : "");
     $("#toollist").innerHTML = [...new Set([...TOOLS, ...tasks.flatMap(toolsOf)])].map((t) => `<option value="${esc(t)}">`).join("");
   }
   $("#roomrow").addEventListener("click", (e) => {
+    if (e.target.closest("[data-rooms]")) { openRooms(); return; }
     const b = e.target.closest("[data-room]"); if (!b) return;
     st.house.room = b.dataset.room; saveView();
-    const qs = $("#quickSel"); if (st.tab === "house" && b.dataset.room !== "__none") qs.value = b.dataset.room;
+    const qs = $("#quickSel"); if (st.tab === "house" && b.dataset.room !== "__none" && !b.dataset.room.startsWith("legacy:")) qs.value = b.dataset.room;
     render();
   });
 
@@ -571,14 +638,14 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       if (v.owner === "none" && t.owner) return false;
       if (v.owner && v.owner !== "none" && t.owner !== v.owner) return false;
       if (kind === "house") {
-        if (v.room === "__none" && t.room) return false;
-        if (v.room && v.room !== "__none" && t.room !== v.room) return false;
+        if (v.room === "__none" && roomIdOf(t)) return false;
+        if (v.room && v.room !== "__none" && roomIdOf(t) !== v.room) return false;
         if (v.trade && t.trade !== v.trade) return false;
         if (v.tool && !toolsOf(t).includes(v.tool)) return false;
       } else if (v.cat && t.category !== v.cat) return false;
       if (q) {
         const s = subById.get(t.subsidyId);
-        if (![t.title, t.room, t.trade, t.category, t.notes, t.owner, toolsOf(t).join(" "), s && s.name].join(" ").toLowerCase().includes(q)) return false;
+        if (![t.title, roomName(roomIdOf(t)), t.trade, t.category, t.notes, t.owner, toolsOf(t).join(" "), s && s.name].join(" ").toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -586,7 +653,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const cmpVal = (a, b) => (a == null || a === "") && (b == null || b === "") ? 0 : (a == null || a === "") ? 1 : (b == null || b === "") ? -1 : a < b ? -1 : a > b ? 1 : 0;
   const defTask = (a, b) => (isDone(a) - isDone(b)) || (blockers(a).length > 0) - (blockers(b).length > 0) || (a.priority || 3) - (b.priority || 3) || cmpVal(a.due, b.due) || (a.createdAt || 0) - (b.createdAt || 0);
   const TASK_GET = {
-    title: (t) => (t.title || "").toLowerCase(), room: (t) => { const i = ROOMS.indexOf(t.room); return t.room ? (i < 0 ? 50 : i) : null; },
+    title: (t) => (t.title || "").toLowerCase(), room: (t) => { const id = roomIdOf(t); return id ? roomOrderKey(id) : null; },
     trade: (t) => t.trade || "", category: (t) => t.category || "", priority: (t) => t.priority || 3, status: (t) => STATUS_ORDER[t.status] ?? 1,
     owner: (t) => t.owner || "", due: (t) => t.due || "", estCost: (t) => t.estCost, actualCost: (t) => t.actualCost,
     tools: (t) => toolsOf(t).length || null, subsidy: (t) => (subById.get(t.subsidyId) || {}).name || "", blocked: (t) => blockers(t).length ? 0 : 1,
@@ -637,7 +704,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const tail = `<td class="chipcell"><div class="chips">${depChips(t)}</div></td><td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>`;
     const money = (f, label) => `<td class="r"><input class="cell money" data-f="${f}" inputmode="decimal" value="${numIn(t[f])}" placeholder="—" aria-label="${label}"${ro}></td>`;
     if (kind === "house") return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
-      <td><input class="cell" data-f="room" list="roomlist" value="${esc(t.room || "")}" placeholder="—" aria-label="Room"${ro}></td>
+      <td>${selCell("roomId", [["", "—"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</td>
       <td>${selCell("trade", [["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</td>${meta}
       <td class="chipcell"><div class="chips">${toolChips(t)}</div></td>
       <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Estimate")}${money("actualCost", "Spent")}${tail}</tr>`;
@@ -654,7 +721,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Mark done"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
       <div class="t">${esc(t.title || "Untitled")}</div>
       <div class="meta">
-        ${kind === "house" && t.room ? `<span class="chip room">${esc(t.room)}</span>` : ""}
+        ${kind === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : ""}
         <span class="chip p${t.priority || 3}">P${t.priority || 3}</span>
         ${t.status && t.status !== "todo" ? `<span class="chip st-${t.status}">${esc(STATUS[t.status])}</span>` : ""}
         ${t.owner ? `<span class="chip">${esc(t.owner)}</span>` : ""}
@@ -697,14 +764,14 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const urgentAdmin = openAdmin.filter((t) => (t.priority || 3) === 1).length;
     const overdue = openAdmin.filter((t) => t.due && t.due < today()).length;
     const urgentHouse = openHouse.filter((t) => (t.priority || 3) === 1).length;
-    const rooms = new Set(openHouse.map((t) => t.room).filter(Boolean)).size;
+    const roomCount = new Set(openHouse.map(roomIdOf).filter(Boolean)).size;
     const est = sum(tasks, "estCost"), spent = sum(tasks, "actualCost");
     const expd = subs.filter((s) => s.status === "eligible" || s.status === "applied").reduce((a, s) => a + subExp(s), 0);
     const rec = subs.reduce((a, s) => a + (Number(s.received) || 0), 0);
     const toCheck = subs.filter((s) => !s.status || s.status === "check").length;
     const hrs = tasks.filter((t) => t.doneBy === "Kilian (personal)").reduce((s, t) => s + (Number(t.hours) || 0), 0);
     $("#stats").innerHTML = `
-      <div class="stat"><div class="k">To fix in the house</div><div class="v">${openHouse.length}</div><div class="s">${rooms} room${rooms === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} urgent</span>` : ""}</div></div>
+      <div class="stat"><div class="k">To fix in the house</div><div class="v">${openHouse.length}</div><div class="s">${roomCount} room${roomCount === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} urgent</span>` : ""}</div></div>
       <div class="stat"><div class="k">Paperwork open</div><div class="v">${openAdmin.length}</div><div class="s">${urgentAdmin ? `<span class="hot">${urgentAdmin} urgent</span>` : "None urgent"}${overdue ? ` · <span class="hot">${overdue} overdue</span>` : ""}</div></div>
       <div class="stat"><div class="k">Spent</div><div class="v num">${eur(spent)}</div><div class="s">of <b>${eur(est)}</b> estimated</div></div>
       <div class="stat"><div class="k">Subsidies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> received${toCheck ? ` · ${toCheck} to check` : ""}</div></div>
@@ -715,7 +782,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function render() {
     if (editing) { pendingRender = true; return; }
     pendingRender = false;
-    renderStats(); renderRoomRow(); refreshToolSelect(); renderHead();
+    renderStats(); renderRoomRow(); renderRoomCard(); refreshToolSelect(); fillQuickRoom(); renderHead(); migrateLegacyRooms();
     const grid = $("#grid"); grid.className = "grid " + st.tab;
     const body = $("#gbody"), cards = $("#cards"), foot = $("#gfoot"), ncol = COLS[st.tab].length;
     const loaded = st.tab === "subs" ? loadedS : loadedT;
@@ -739,9 +806,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
           kind === "house" ? "<strong>Nothing to fix yet</strong>Type a job above, pick the room, and press Enter." : "<strong>No paperwork yet</strong>Type an item above and press Enter.";
         return emptyRow(m);
       }
-      const groupKey = v.group === "room" ? (t) => t.room || "No room yet" : v.group === "trade" ? (t) => t.trade || "No type of work" : v.group === "cat" ? (t) => t.category || "No category" : null;
+      const groupKey = v.group === "room" ? (t) => roomName(roomIdOf(t)) || "No room yet" : v.group === "trade" ? (t) => t.trade || "No type of work" : v.group === "cat" ? (t) => t.category || "No category" : null;
       if (groupKey) {
-        const order = v.group === "room" ? roomList() : v.group === "trade" ? TRADES : CATS;
+        const order = v.group === "room" ? roomPairs().map((p) => p[1]) : v.group === "trade" ? TRADES : CATS;
         const keys = [...new Set(list.map(groupKey))].sort((a, b) => { const ia = order.indexOf(a), ib = order.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
         let html = "", chtml = "", i = 0;
         for (const k of keys) {
@@ -760,6 +827,94 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         : `<tr><td></td><td></td><td>Total · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`;
     }
     if (panel && !$("#panel").hidden) refreshPanelLinks();
+  }
+
+  // ---------- room page ----------
+  const isRealRoom = (id) => id === WHOLE || (id && roomById.has(id));
+  function writeRoomMeta(id, fields) {
+    if (!roomCol || !canWrite) { toast("This list is read-only for you right now."); return; }
+    if (id === WHOLE && !roomById.has(WHOLE)) { roomCol.set(WHOLE, { name: WHOLE_LABEL, builtin: true, order: 0, createdAt: Date.now(), updatedAt: Date.now(), ...fields }).catch(handleWriteErr); return; }
+    write(roomCol, id, fields);
+  }
+  function renderRoomCard() {
+    const card = $("#roomCard"), id = st.house.room;
+    if (st.tab !== "house" || !loadedR || !isRealRoom(id)) { card.hidden = true; card.dataset.room = ""; card.innerHTML = ""; return; }
+    card.hidden = false;
+    const meta = roomById.get(id) || {}, ro = canWrite ? "" : " disabled";
+    if (card.dataset.room !== id) {
+      card.dataset.room = id;
+      card.innerHTML = `
+        <div class="rc-head"><h2 id="rcName"></h2>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Rename or manage rooms</button>` : ""}<button class="linkbtn small" type="button" id="rcAll">Back to all rooms</button></div>
+        <div class="rc-stats" id="rcStats"></div>
+        <div class="rc-money">
+          <div class="f rc-budget"><label for="rcBudget">Budget for this room (€)</label><input id="rcBudget" class="num" inputmode="decimal" placeholder="—"${ro}></div>
+          <div class="rc-barwrap"><div class="rc-bar" id="rcBar" role="img"></div><div class="rc-legend" id="rcLegend"></div></div>
+        </div>
+        <div class="f"><label for="rcNotes">Room notes</label><textarea id="rcNotes" placeholder="Measurements, paint colours, materials, ideas, what’s behind the walls…"${ro}></textarea></div>`;
+      $("#rcNotes").value = meta.notes || ""; $("#rcBudget").value = numIn(meta.budget);
+    } else {
+      if (document.activeElement !== $("#rcNotes") && !rcTimer) $("#rcNotes").value = meta.notes || "";
+      if (document.activeElement !== $("#rcBudget")) $("#rcBudget").value = numIn(meta.budget);
+    }
+    $("#rcName").textContent = roomName(id);
+    const jobs = tasks.filter((t) => kindOf(t) === "house" && roomIdOf(t) === id);
+    const open = jobs.filter((t) => !isDone(t)), done = jobs.length - open.length;
+    const urgent = open.filter((t) => (t.priority || 3) === 1).length, blocked = open.filter((t) => blockers(t).length).length;
+    const est = sum(jobs, "estCost"), spent = sum(jobs, "actualCost"), hrs = jobs.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
+    const showDone = done && st.house.status === "open";
+    $("#rcStats").innerHTML = `<span><b>${open.length}</b> open</span>${urgent ? `<span class="hot">${urgent} urgent</span>` : ""}${blocked ? `<span>${blocked} waiting on something</span>` : ""}<span><b>${done}</b> done${showDone ? ` <button class="linkbtn small" type="button" id="rcShowDone">show</button>` : ""}</span>${hrs ? `<span>${hrs.toLocaleString("nl-BE")} h by Kilian</span>` : ""}`;
+    const budget = meta.budget != null && meta.budget !== "" ? Number(meta.budget) : null;
+    const max = Math.max(budget || 0, est, spent, 1);
+    const pct = (v) => Math.min(100, (v / max) * 100).toFixed(1) + "%";
+    $("#rcBar").innerHTML = `<span class="rc-est" style="width:${pct(est)}"></span><span class="rc-spent" style="width:${pct(spent)}"></span>${budget ? `<span class="rc-mark" style="left:${pct(budget)}"></span>` : ""}`;
+    $("#rcBar").setAttribute("aria-label", `Spent ${eur(spent)}, estimated ${eur(est)}${budget ? `, budget ${eur(budget)}` : ""}`);
+    const over = budget != null && est > budget ? est - budget : 0;
+    $("#rcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Estimated <b>${eur(est)}</b></span>${budget != null ? `<span><i class="sw mark"></i>Budget <b>${eur(budget)}</b></span>` : ""}${over ? `<span class="hot">Estimate is ${eur(over)} over budget</span>` : budget != null ? `<span>${eur(budget - Math.max(est, spent))} left</span>` : ""}`;
+  }
+  let rcTimer = null;
+  $("#roomCard").addEventListener("input", (e) => {
+    if (e.target.id !== "rcNotes") return;
+    const id = st.house.room, val = e.target.value;
+    clearTimeout(rcTimer);
+    rcTimer = setTimeout(() => { rcTimer = null; if ((roomById.get(id) || {}).notes !== val) writeRoomMeta(id, { notes: val }); }, 700);
+  });
+  $("#roomCard").addEventListener("change", (e) => {
+    const id = st.house.room;
+    if (e.target.id === "rcBudget") { const v = parseNum(e.target.value); e.target.value = numIn(v); if (((roomById.get(id) || {}).budget ?? null) !== v) writeRoomMeta(id, { budget: v }); }
+    if (e.target.id === "rcNotes" && rcTimer) { clearTimeout(rcTimer); rcTimer = null; const val = e.target.value; if ((roomById.get(id) || {}).notes !== val) writeRoomMeta(id, { notes: val }); }
+  });
+  $("#roomCard").addEventListener("click", (e) => {
+    if (e.target.closest("[data-rooms]")) { openRooms(); return; }
+    if (e.target.id === "rcAll") { st.house.room = ""; saveView(); render(); return; }
+    if (e.target.id === "rcShowDone") { st.house.status = "all"; saveView(); buildToolbar(); render(); }
+  });
+  function openRoomPage(id) { closePanel(); st.tab = "house"; st.house.room = id; saveView(); setupTab(); window.scrollTo({ top: $("#roomrow").offsetTop - 12, behavior: "smooth" }); }
+
+  // ---------- one-time move from free-text rooms to shared room list ----------
+  let migrating = false;
+  async function migrateLegacyRooms() {
+    if (migrating || !canWrite || !loadedT || !loadedR || !col || !roomCol) return;
+    const todo = tasks.filter((t) => t.room !== undefined);
+    if (!todo.length) return;
+    migrating = true;
+    try {
+      const made = new Map();
+      for (const t of todo) {
+        let id = "";
+        const name = String(t.room || "").trim();
+        if (t.roomId !== undefined) id = t.roomId;
+        else if (!name) id = "";
+        else if (name === WHOLE_LABEL) id = WHOLE;
+        else {
+          const ex = rooms.find((r) => (r.name || "").toLowerCase() === name.toLowerCase());
+          if (ex) id = ex.id;
+          else if (made.has(name.toLowerCase())) id = made.get(name.toLowerCase());
+          else { const ref = await roomCol.add({ name, order: rooms.length + made.size + 1, createdAt: Date.now(), updatedAt: Date.now() }); id = ref.id; made.set(name.toLowerCase(), id); }
+        }
+        await patch(t.id, { roomId: id, room: deleteField() });
+      }
+    } catch (e) { handleWriteErr(e); }
+    finally { migrating = false; }
   }
 
   // ---------- grid & card events ----------
@@ -828,8 +983,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
 
   // ---------- quick add ----------
   function newTask(kind, title, extra = {}) {
-    return { kind, title, room: "", trade: "", category: "", priority: 3, status: "todo", owner: "", doneBy: "", hours: null, due: "", estCost: null, actualCost: null, tools: [], subsidyId: "", notes: "", dependsOn: [], createdAt: Date.now(), updatedAt: Date.now(), ...extra };
+    return { kind, title, roomId: "", trade: "", category: "", priority: 3, status: "todo", owner: "", doneBy: "", hours: null, due: "", estCost: null, actualCost: null, tools: [], subsidyId: "", notes: "", dependsOn: [], createdAt: Date.now(), updatedAt: Date.now(), ...extra };
   }
+  $("#quickSel").addEventListener("change", (e) => { if (e.target.value === "__new") { e.target.value = ""; openRooms(true); } });
   $("#addForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const title = $("#quickAdd").value.trim(), sel = $("#quickSel").value;
@@ -842,9 +998,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       } else if (st.tab === "admin") {
         col.add(newTask("admin", title, { category: sel, priority: st.admin.pri ? Number(st.admin.pri) : 3, owner: st.admin.owner && st.admin.owner !== "none" ? st.admin.owner : "" }));
       } else {
-        col.add(newTask("house", title, { room: sel, trade: st.house.trade, priority: st.house.pri ? Number(st.house.pri) : 3, owner: st.house.owner && st.house.owner !== "none" ? st.house.owner : "" }));
+        col.add(newTask("house", title, { roomId: sel === "__new" ? "" : sel, trade: st.house.trade, priority: st.house.pri ? Number(st.house.pri) : 3, owner: st.house.owner && st.house.owner !== "none" ? st.house.owner : "" }));
       }
-      toast(`Added “${title}”${st.tab === "house" && sel ? " to " + sel : ""}`);
+      toast(`Added “${title}”${st.tab === "house" && roomName(sel) ? " to " + roomName(sel) : ""}`);
     } catch (err) { $("#quickAdd").value = title; handleWriteErr(err); }
   });
 
@@ -861,7 +1017,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const ro = canWrite ? "" : " disabled", kind = kindOf(t);
     const houseBits = kind === "house" ? `
         <div class="row2">
-          <div class="f"><label for="pRoom">Room</label><input id="pRoom" data-p="room" list="roomlist" value="${esc(t.room || "")}" placeholder="e.g. Attic"${ro}></div>
+          <div class="f"><label for="pRoom">Room</label><select id="pRoom" data-p="roomId"${ro}>${opts([["", "No room yet"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</select>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Add or rename rooms</button>` : ""}</div>
           <div class="f"><label for="pTrade">Type of work</label><select id="pTrade" data-p="trade"${ro}>${opts([["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</select></div>
         </div>
         <div class="f"><span class="lbl">Tools &amp; materials</span><div class="tagbox" id="pTools"></div></div>` : `
@@ -904,6 +1060,41 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Delete</button></div></div>` : ""}
       </div>`);
   }
+  function openRooms(focusNew) {
+    flushTimers(); panel = { type: "rooms", id: "rooms" };
+    showPanel(head() + `<div class="panel-body">
+        <div class="f"><span class="lbl">Rooms</span><h2 class="panel-h">Rooms in the house</h2></div>
+        <p class="hint" style="margin:0">“${WHOLE_LABEL}” is always there for general jobs. Add your own rooms below; renaming a room updates every job in it.</p>
+        <div class="roomlist" id="roomsList"></div>
+        ${canWrite ? `<form class="roomadd" id="roomAdd" autocomplete="off"><input id="newRoom" placeholder="New room, e.g. Bathroom upstairs" aria-label="New room name" maxlength="60"><button class="btn primary" type="submit">Add room</button></form>` : ""}
+      </div>`);
+    if (focusNew && $("#newRoom")) $("#newRoom").focus();
+  }
+  function renderRoomsList(force) {
+    const box = $("#roomsList"); if (!box) return;
+    if (!force && document.activeElement && box.contains(document.activeElement) && document.activeElement.tagName === "INPUT") return;
+    const counts = {}; tasks.forEach((t) => { const r = roomIdOf(t); if (r) counts[r] = (counts[r] || 0) + 1; });
+    const list = sortedRooms(), ro = canWrite ? "" : " disabled";
+    box.innerHTML = `<div class="roomrow-item fixed"><span class="rname">${WHOLE_LABEL}</span><span class="rcount">${counts[WHOLE] || 0} jobs · always there</span><span class="rbtns"><button class="btn icon" type="button" data-ropen="${WHOLE}" aria-label="Open ${WHOLE_LABEL}">Open</button></span></div>` +
+      (list.length ? list.map((r, i) => `<div class="roomrow-item" data-rid="${esc(r.id)}">
+        <input class="rinput" data-rname="${esc(r.id)}" value="${esc(r.name || "")}" aria-label="Room name" maxlength="60"${ro}>
+        <span class="rcount">${counts[r.id] || 0} job${counts[r.id] === 1 ? "" : "s"}</span>
+        <span class="rbtns"><button class="btn icon" type="button" data-ropen="${esc(r.id)}" aria-label="Open ${esc(r.name)}">Open</button></span>
+        ${canWrite ? `<span class="rbtns"><button class="btn icon" type="button" data-rmove="up" ${i === 0 ? "disabled" : ""} aria-label="Move ${esc(r.name)} up">↑</button><button class="btn icon" type="button" data-rmove="down" ${i === list.length - 1 ? "disabled" : ""} aria-label="Move ${esc(r.name)} down">↓</button><button class="btn icon danger" type="button" data-rdel aria-label="Delete ${esc(r.name)}">✕</button></span>` : ""}
+      </div>`).join("") : `<p class="hint" style="margin:6px 0 0">No rooms yet. Add the first one below.</p>`);
+  }
+  function roomNameTaken(name, exceptId) {
+    const n = name.trim().toLowerCase();
+    return n === WHOLE_LABEL.toLowerCase() || rooms.some((r) => r.id !== exceptId && r.id !== WHOLE && (r.name || "").trim().toLowerCase() === n);
+  }
+  async function addRoom(name) {
+    name = name.trim(); if (!name) return null;
+    if (roomNameTaken(name)) { toast(`There’s already a room called “${name}”.`); return null; }
+    const order = rooms.reduce((m, r) => Math.max(m, r.order ?? 0), 0) + 1;
+    const ref = await roomCol.add({ name, order, createdAt: Date.now(), updatedAt: Date.now() });
+    toast(`Added room “${name}”`);
+    return ref;
+  }
   function openSub(id) {
     const s = subById.get(id); if (!s) return;
     flushTimers(); panel = { type: "sub", id };
@@ -933,6 +1124,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   function refreshPanelLinks() {
     if (!panel) return;
+    if (panel.type === "rooms") { renderRoomsList(); return; }
     if (panel.type === "sub") {
       const s = subById.get(panel.id); if (!s) { closePanel(); return; }
       const lt = linkedTasks(s.id);
@@ -943,12 +1135,14 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     }
     const t = byId.get(panel.id); if (!t) { closePanel(); return; }
     renderTagBox(t);
+    const pr = $("#pRoom");
+    if (pr && document.activeElement !== pr) pr.innerHTML = opts([["", "No room yet"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t));
     const box = $("#pDeps"); if (!box) return;
     const others = tasks.filter((o) => o.id !== t.id).sort((a, b) => isDone(a) - isDone(b) || (a.title || "").localeCompare(b.title || ""));
     const mine = new Set(t.dependsOn || []);
     box.innerHTML = others.length ? others.map((o) => {
       const cyc = !mine.has(o.id) && dependsTransitively(o.id, t.id);
-      return `<label class="${cyc ? "dis" : ""}"><input type="checkbox" value="${esc(o.id)}"${mine.has(o.id) ? " checked" : ""}${cyc || !canWrite ? " disabled" : ""}><span>${esc(o.title)}${isDone(o) ? " · done" : ""}${cyc ? " · already waits on this" : ""}</span><span class="k">${kindOf(o) === "admin" ? "Paperwork" : esc(o.room || "House")}</span></label>`;
+      return `<label class="${cyc ? "dis" : ""}"><input type="checkbox" value="${esc(o.id)}"${mine.has(o.id) ? " checked" : ""}${cyc || !canWrite ? " disabled" : ""}><span>${esc(o.title)}${isDone(o) ? " · done" : ""}${cyc ? " · already waits on this" : ""}</span><span class="k">${kindOf(o) === "admin" ? "Paperwork" : esc(roomName(roomIdOf(o)) || "House")}</span></label>`;
     }).join("") : `<label class="dis"><span>Add more items to link them.</span></label>`;
     const unlocks = tasks.filter((o) => (o.dependsOn || []).includes(t.id));
     $("#pUnlocks").innerHTML = unlocks.length ? `<span class="lbl">Finishing this unblocks</span><div class="chips">${unlocks.map((o) => `<button class="chip" type="button" data-open="${esc(o.id)}">${esc(o.title)}</button>`).join("")}</div>` : "";
@@ -977,6 +1171,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   $("#panel").addEventListener("input", (e) => {
     const el = e.target, key = el.dataset.p || el.dataset.sp; if (!key || el.tagName === "SELECT" || el.type === "date") return;
+    if (!panel || panel.type === "rooms") return;
     const p = panel; if (textTimers[key]) clearTimeout(textTimers[key].t);
     const fn = () => { if (panel === p) panelCommit(el); delete textTimers[key]; };
     textTimers[key] = { t: setTimeout(fn, 700), fn };
@@ -990,18 +1185,63 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       patch(t.id, { dependsOn: [...set] }); return;
     }
     if (el.id === "pToolIn") { if (el.value.trim()) { addTool(el.value); el.value = ""; } return; }
+    if (el.dataset.rname) {
+      const rid = el.dataset.rname, r = roomById.get(rid), name = el.value.trim();
+      if (!r) return;
+      if (!name) { el.value = r.name; return; }
+      if (name === r.name) return;
+      if (roomNameTaken(name, rid)) { toast(`There’s already a room called “${name}”.`); el.value = r.name; return; }
+      write(roomCol, rid, { name }); toast(`Renamed to “${name}”`);
+      return;
+    }
+    if (el.id === "newRoom") return;
     const key = el.dataset.p || el.dataset.sp; if (!key) return;
     if (textTimers[key]) { clearTimeout(textTimers[key].t); delete textTimers[key]; }
     panelCommit(el);
     if (MONEY.includes(key)) el.value = numIn(parseNum(el.value));
   });
   $("#panel").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.dataset && e.target.dataset.rname) { e.preventDefault(); e.target.blur(); return; }
     if (e.target.id === "pToolIn" && (e.key === "Enter" || e.key === ",")) { e.preventDefault(); if (e.target.value.trim()) { addTool(e.target.value); e.target.value = ""; } }
     else if (e.target.id === "pToolIn" && e.key === "Backspace" && !e.target.value) { const t = byId.get(panel.id); const cur = toolsOf(t); if (cur.length) patch(t.id, { tools: cur.slice(0, -1) }); }
+  });
+  $("#panel").addEventListener("submit", async (e) => {
+    if (e.target.id !== "roomAdd") return;
+    e.preventDefault();
+    const inp = $("#newRoom"), name = inp.value;
+    try { const ref = await addRoom(name); if (ref) { inp.value = ""; renderRoomsList(true); inp.focus(); } } catch (err) { handleWriteErr(err); }
   });
   $("#panel").addEventListener("click", async (e) => {
     const id = e.target.id;
     if (id === "pClose") return closePanel();
+    if (e.target.closest("[data-rooms]")) { openRooms(); return; }
+    const ro = e.target.closest("[data-ropen]"); if (ro) { openRoomPage(ro.dataset.ropen); return; }
+    const mv = e.target.closest("[data-rmove]");
+    if (mv) {
+      const rid = mv.closest("[data-rid]").dataset.rid, list = sortedRooms(), i = list.findIndex((r) => r.id === rid), j = mv.dataset.rmove === "up" ? i - 1 : i + 1;
+      if (j < 0 || j >= list.length) return;
+      list.forEach((r, k) => { r._o = k + 1; }); [list[i]._o, list[j]._o] = [list[j]._o, list[i]._o];
+      list.forEach((r) => { if (r.order !== r._o) write(roomCol, r.id, { order: r._o }); });
+      return;
+    }
+    const del = e.target.closest("[data-rdel]");
+    if (del) {
+      const row = del.closest("[data-rid]"), rid = row.dataset.rid, r = roomById.get(rid);
+      const n = tasks.filter((t) => roomIdOf(t) === rid).length;
+      row.insertAdjacentHTML("afterend", `<div class="confirm rconfirm" data-rconfirm="${esc(rid)}"><span>Delete “${esc(r ? r.name : "")}”?${n ? ` Its ${n} job${n === 1 ? "" : "s"} move to “No room yet”.` : ""}</span><button class="btn danger" type="button" data-rdelyes="${esc(rid)}">Yes, delete</button><button class="btn" type="button" data-rdelno>Keep it</button></div>`);
+      del.disabled = true;
+      return;
+    }
+    if (e.target.closest("[data-rdelno]")) { renderRoomsList(true); return; }
+    const yes = e.target.closest("[data-rdelyes]");
+    if (yes) {
+      const rid = yes.dataset.rdelyes, r = roomById.get(rid);
+      for (const t of tasks) if (roomIdOf(t) === rid) patch(t.id, { roomId: "" });
+      roomCol.doc(rid).delete().catch(handleWriteErr);
+      if (st.house.room === rid) { st.house.room = ""; saveView(); }
+      toast(`Deleted room “${r ? r.name : ""}”`);
+      return;
+    }
     const rm = e.target.closest("[data-rmtool]");
     if (rm) { const t = byId.get(panel.id); patch(t.id, { tools: toolsOf(t).filter((x) => x !== rm.dataset.rmtool) }); return; }
     const op = e.target.closest("[data-open]"); if (op) { openTask(op.dataset.open); return; }
@@ -1044,7 +1284,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     } else {
       const kind = st.tab;
       head = ["Item", "List", "Room", "Type of work", "Category", "Priority", "Status", "Who", "Done by", "Hours", "Due", "Estimate EUR", "Spent EUR", "Tools & materials", "Subsidy", "Waits on", "Notes"];
-      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", t.room, t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), n(t.actualCost), toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
+      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", roomName(roomIdOf(t)), t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), n(t.actualCost), toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
     }
     const csv = "﻿" + [head, ...rows].map((r) => r.map(q).join(";")).join("\r\n");
     const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies" }[st.tab];
@@ -1085,6 +1325,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     return {
       path: name,
       doc: (id) => ({ update: (f) => updateDoc(doc(fs, name, id), f), delete: () => deleteDoc(doc(fs, name, id)) }),
+      set: (id, data) => setDoc(doc(fs, name, id), data, { merge: true }),
       add: (data) => addDoc(ref, data).catch(handleWriteErr),
       onSnapshot: (next, err) => onSnapshot(ref, { includeMetadataChanges: true }, (snap) => next({
         fromCache: snap.metadata.fromCache,
@@ -1132,8 +1373,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     showApp(true);
     $("#acct").hidden = false; $("#acctEmail").textContent = u.email || "";
     canWrite = true; $("#addForm").hidden = false; $("#banner").hidden = true;
-    col = wrapCol("tasks"); subCol = wrapCol("subsidies");
-    tasks = []; subs = []; byId = new Map(); subById = new Map(); loadedT = loadedS = false;
+    col = wrapCol("tasks"); subCol = wrapCol("subsidies"); roomCol = wrapCol("rooms");
+    tasks = []; subs = []; rooms = []; byId = new Map(); subById = new Map(); roomById = new Map(); loadedT = loadedS = loadedR = false;
     setSync("Connecting…"); render();
     const onErr = (err) => {
       if (err && err.code === "permission-denied") return showDenied(u.email);
@@ -1148,13 +1389,17 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       subs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
       subById = new Map(subs.map((s) => [s.id, s])); loadedS = true; render();
     }, onErr));
+    unsubs.push(roomCol.onSnapshot((snap) => {
+      rooms = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      roomById = new Map(rooms.map((r) => [r.id, r])); loadedR = true; render();
+    }, onErr));
   });
 
   // backup & import
   $("#backupBtn").addEventListener("click", () => {
     const strip = (r) => { const { id, ...rest } = r; return rest; };
     const out = { format: "kortrijkstraat-17-backup", version: 1, exportedAt: new Date().toISOString(),
-      tasks: Object.fromEntries(tasks.map((t) => [t.id, strip(t)])), subsidies: Object.fromEntries(subs.map((s) => [s.id, strip(s)])) };
+      tasks: Object.fromEntries(tasks.map((t) => [t.id, strip(t)])), subsidies: Object.fromEntries(subs.map((s) => [s.id, strip(s)])), rooms: Object.fromEntries(rooms.map((r) => [r.id, strip(r)])) };
     downloadsNS.save({ filename: `kortrijkstraat-17-backup-${today()}.json`, data: JSON.stringify(out, null, 1) });
   });
   const pickFile = () => { if (!canWrite) { toast("Sign in first."); return; } $("#importIn").value = ""; $("#importIn").click(); };
@@ -1165,6 +1410,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const entries = [
       ...Object.entries(data.tasks || {}).map(([id, b]) => ["tasks", id, b]),
       ...Object.entries(data.subsidies || {}).map(([id, b]) => ["subsidies", id, b]),
+      ...Object.entries(data.rooms || {}).map(([id, b]) => ["rooms", id, b]),
     ];
     try {
       for (let i = 0; i < entries.length; i += 400) {
@@ -1180,7 +1426,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     let data;
     try { data = JSON.parse(await file.text()); } catch (err) { toast("That file isn’t a backup of this list."); return; }
     if (!data || data.format !== "kortrijkstraat-17-backup") { toast("That file isn’t a backup of this list."); return; }
-    const n = Object.keys(data.tasks || {}).length + Object.keys(data.subsidies || {}).length;
+    const n = Object.keys(data.tasks || {}).length + Object.keys(data.subsidies || {}).length + Object.keys(data.rooms || {}).length;
     if (!tasks.length && !subs.length) return runImport(data);
     pendingImport = data;
     const c = $("#importConfirm");
