@@ -197,6 +197,10 @@ table.grid.admin { min-width: 1600px; }
 .grid.house tr.group td, .grid.admin tr.group td { position: static; }
 .grid.house tfoot td:nth-child(-n+3), .grid.admin tfoot td:nth-child(-n+3) { z-index: 2; }
 table.grid.subs { min-width: 900px; }
+table.grid.done { min-width: 1000px; }
+.grid.done td:nth-child(3) { min-width: 300px; }
+.done-title { display: block; padding: 8px 10px; color: var(--muted); }
+.card.done-card .t { color: var(--muted); }
 .grid th, .grid td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 0; vertical-align: middle; text-align: left; }
 .grid th:last-child, .grid td:last-child { border-right: 0; }
 .grid thead th { position: sticky; top: 0; z-index: 2; background: var(--sunk); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
@@ -266,7 +270,7 @@ button.chip { border: 0; cursor: pointer; }
   header.top { align-items: flex-start; }
   .topright { align-items: flex-start; }
   .tabs { gap: 0; }
-  .tab { font-size: 14px; padding: 9px 6px 8px; gap: 5px; flex: 1 1 auto; justify-content: center; }
+  .tab { font-size: 13px; padding: 9px 4px 8px; gap: 4px; flex: 1 1 auto; justify-content: center; }
   .tab .n { padding: 0 6px; font-size: 11px; }
   .toolbar:not(.open) #exportBtn { display: none; }
   .stat { padding: 8px 12px; }
@@ -340,6 +344,7 @@ button.chip { border: 0; cursor: pointer; }
   <nav class="tabs" role="tablist" aria-label="Lists">
     <button class="tab" role="tab" id="tab-house" data-tab="house">In the house <span class="n" id="n-house">0</span></button>
     <button class="tab" role="tab" id="tab-admin" data-tab="admin">Paperwork <span class="n" id="n-admin">0</span></button>
+    <button class="tab" role="tab" id="tab-done" data-tab="done">Done <span class="n" id="n-done">0</span></button>
     <button class="tab" role="tab" id="tab-subs" data-tab="subs">Subsidies <span class="n" id="n-subs">0</span></button>
   </nav>
 
@@ -451,10 +456,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     house: { q: "", status: "open", pri: "", owner: "", trade: "", tool: "", room: "", group: "", sortKey: "default", sortDir: 1 },
     admin: { q: "", status: "open", pri: "", owner: "", cat: "", group: "", sortKey: "default", sortDir: 1 },
     subs: { q: "", sortKey: "default", sortDir: 1 },
+    done: { q: "", kind: "", sortKey: "default", sortDir: 1 },
   };
   let st = JSON.parse(JSON.stringify(DEF));
-  try { const s = JSON.parse(localStorage.getItem("k17-view2") || "null"); if (s) for (const k of ["house", "admin", "subs"]) st[k] = { ...DEF[k], ...(s[k] || {}) }, st.tab = ["house", "admin", "subs"].includes(s.tab) ? s.tab : "house"; } catch (e) {}
-  if (["house", "admin", "subs", "paperwork", "subsidies"].includes(location.hash.slice(1))) st.tab = { paperwork: "admin", subsidies: "subs" }[location.hash.slice(1)] || location.hash.slice(1);
+  try { const s = JSON.parse(localStorage.getItem("k17-view2") || "null"); if (s) for (const k of ["house", "admin", "subs", "done"]) st[k] = { ...DEF[k], ...(s[k] || {}) }, st.tab = ["house", "admin", "subs", "done"].includes(s.tab) ? s.tab : "house"; } catch (e) {}
+  if (["house", "admin", "subs", "done", "paperwork", "subsidies"].includes(location.hash.slice(1))) st.tab = { paperwork: "admin", subsidies: "subs" }[location.hash.slice(1)] || location.hash.slice(1);
   const saveView = () => { try { localStorage.setItem("k17-view2", JSON.stringify(st)); } catch (e) {} };
   const V = () => st[st.tab];
 
@@ -540,6 +546,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       qa.placeholder = "A subsidy to look into, e.g. “Mijn VerbouwPremie – roof insulation”";
       qs.hidden = true;
     }
+    $("#addForm").hidden = st.tab === "done" || !canWrite;
     buildToolbar();
     render();
   }
@@ -552,8 +559,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const v = V(), tb = $("#toolbar");
     const sel = (id, label, pairs, val) => `<select id="${id}" aria-label="${label}">${opts(pairs, val)}</select>`;
     let html = `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
-    if (st.tab !== "subs") html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
-    if (st.tab !== "subs") {
+    if (st.tab === "done") html += sel("fkind", "List", [["", "Everything"], ["house", "In the house"], ["admin", "Paperwork"]], v.kind);
+    if (st.tab !== "subs" && st.tab !== "done") html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
+    if (st.tab !== "subs" && st.tab !== "done") {
       html += sel("fstatus", "Status", [["open", "Open"], ["all", "All"], ...Object.entries(STATUS)], v.status);
       html += sel("fpri", "Priority", [["", "Any priority"], ...Object.entries(PRI)], v.pri);
       html += sel("fowner", "Who", [["", "Anyone"], ["none", "Unassigned"], ...OWNERS.filter(Boolean).map((o) => [o, o])], v.owner);
@@ -575,7 +583,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   let filtersOpen = false;
   function activeFilterCount() {
-    const v = V(); if (st.tab === "subs") return 0;
+    const v = V(); if (st.tab === "subs" || st.tab === "done") return 0;
     return ["pri", "owner", "trade", "tool", "cat", "group"].filter((k) => v[k]).length + (v.status && v.status !== "open" ? 1 : 0);
   }
   function updateFilterButton() {
@@ -589,7 +597,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const used = [...new Set(tasks.flatMap(toolsOf))].sort();
     el.innerHTML = opts([["", "Any tools"], ...used.map((t) => [t, "Needs: " + t])], st.house.tool);
   }
-  const FILTER_KEYS = { fq: "q", fstatus: "status", fpri: "pri", fowner: "owner", ftrade: "trade", ftool: "tool", fgroup: "group", fcat: "cat" };
+  const FILTER_KEYS = { fq: "q", fstatus: "status", fpri: "pri", fowner: "owner", ftrade: "trade", ftool: "tool", fgroup: "group", fcat: "cat", fkind: "kind" };
   $("#toolbar").addEventListener("input", (e) => { const k = FILTER_KEYS[e.target.id]; if (k === "q") { V().q = e.target.value; saveView(); render(); } });
   $("#toolbar").addEventListener("change", (e) => { const k = FILTER_KEYS[e.target.id]; if (k && k !== "q") { V()[k] = e.target.value; saveView(); render(); updateFilterButton(); } });
   $("#toolbar").addEventListener("click", (e) => {
@@ -599,8 +607,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   document.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (!b) return; st.tab = b.dataset.tab; saveView(); closePanel(); setupTab(); });
   document.querySelector(".tabs").addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    const order = ["house", "admin", "subs"], i = order.indexOf(st.tab);
-    st.tab = order[(i + (e.key === "ArrowRight" ? 1 : 2)) % 3]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
+    const order = ["house", "admin", "done", "subs"], i = order.indexOf(st.tab);
+    st.tab = order[(i + (e.key === "ArrowRight" ? 1 : 3)) % 4]; saveView(); setupTab(); $("#tab-" + st.tab).focus();
   });
 
 
@@ -673,10 +681,52 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     return list.sort((a, b) => { if (!g) return def(a, b); const r = cmpVal(g(a), g(b)); return r === 0 ? def(a, b) : r * v.sortDir; });
   }
 
+  // ---------- done list ----------
+  const doneKey = (t) => t.doneAt || (t.updatedAt ? new Date(t.updatedAt).toISOString().slice(0, 10) : "");
+  function visibleDone() {
+    const v = st.done, q = v.q.trim().toLowerCase();
+    return tasks.filter((t) => isDone(t) && (!v.kind || kindOf(t) === v.kind) && (!q || [t.title, roomName(roomIdOf(t)), t.trade, t.category, t.notes, t.owner, t.doneBy].join(" ").toLowerCase().includes(q)));
+  }
+  const DONE_GET = { title: (t) => (t.title || "").toLowerCase(), list: (t) => kindOf(t), where: (t) => kindOf(t) === "house" ? roomName(roomIdOf(t)) : t.category || "", doneAt: (t) => doneKey(t), who: (t) => t.doneBy || t.owner || "", actualCost: (t) => t.actualCost };
+  function sortDone(list) {
+    const v = st.done, g = DONE_GET[v.sortKey];
+    const def = (a, b) => cmpVal(doneKey(b), doneKey(a)) || (b.updatedAt || 0) - (a.updatedAt || 0);
+    return [...list].sort((a, b) => { if (!g) return def(a, b); const r = cmpVal(g(a), g(b)); return r === 0 ? def(a, b) : r * v.sortDir; });
+  }
+  const monthLabel = (d) => { if (!d) return "Date unknown"; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { month: "long", year: "numeric" }); };
+  const whereOf = (t) => kindOf(t) === "house" ? (roomName(roomIdOf(t)) || "No room") : (t.category || "Paperwork");
+  function doneRow(t, i) {
+    const ro = canWrite ? "" : " disabled";
+    return `<tr data-id="${esc(t.id)}" class="done-row">
+      <td class="idx">${i}</td>
+      <td class="chk"><input type="checkbox" data-f="done" aria-label="Done (untick to reopen)" checked${ro}></td>
+      <td class="titlecell"><span class="done-title">${esc(t.title)}</span></td>
+      <td class="chipcell"><span class="chip ${kindOf(t) === "house" ? "" : "st-waiting"}">${kindOf(t) === "house" ? "In the house" : "Paperwork"}</span></td>
+      <td class="chipcell">${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : esc(whereOf(t))}</td>
+      <td><input class="cell" type="date" data-f="doneAt" value="${esc(t.doneAt || "")}" aria-label="Done on"${ro}></td>
+      <td class="chipcell">${esc(t.doneBy || t.owner || "—")}${t.hours ? ` · ${numIn(t.hours)} h` : ""}</td>
+      <td class="r"><input class="cell money" data-f="actualCost" inputmode="decimal" value="${numIn(t.actualCost)}" placeholder="—" aria-label="Spent"${ro}></td>
+      <td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>
+    </tr>`;
+  }
+  function doneCard(t) {
+    return `<div class="card done-card" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
+      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Done (untick to reopen)" checked${canWrite ? "" : " disabled"}>
+      <div class="t">${esc(t.title || "Untitled")}</div>
+      <div class="meta">
+        ${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : `<span>${esc(whereOf(t))}</span>`}
+        ${doneKey(t) ? `<span>Done ${esc(fmtDate(doneKey(t)))}</span>` : ""}
+        ${t.doneBy || t.owner ? `<span>by ${esc(t.doneBy || t.owner)}</span>` : ""}
+        ${t.actualCost != null ? `<span class="money">${eur(t.actualCost)}</span>` : ""}
+      </div>
+    </div>`;
+  }
+
   // ---------- render pieces ----------
   const COLS = {
     house: [["", "", "idx"], ["", "", "chk"], ["title", "Fix / job"], ["room", "Room"], ["trade", "Type of work"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["tools", "Tools & materials"], ["subsidy", "Subsidy"], ["estCost", "Estimate", "r"], ["actualCost", "Spent", "r"], ["blocked", "Waits on"], ["", ""]],
     admin: [["", "", "idx"], ["", "", "chk"], ["title", "Paperwork"], ["category", "Category"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["due", "Due"], ["subsidy", "Subsidy"], ["actualCost", "Cost", "r"], ["blocked", "Waits on"], ["", ""]],
+    done: [["", "", "idx"], ["", "", "chk"], ["title", "Finished"], ["list", "List"], ["where", "Room / category"], ["doneAt", "Done on"], ["who", "By"], ["actualCost", "Spent", "r"], ["", ""]],
     subs: [["", "", "idx"], ["name", "Subsidy"], ["status", "Status"], ["expected", "Expected", "r"], ["received", "Received", "r"], ["deadline", "Deadline"], ["linked", "Linked jobs"], ["", ""]],
   };
   function renderHead() {
@@ -777,7 +827,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       <div class="stat"><div class="k">Spent</div><div class="v num">${eur(spent)}</div><div class="s">of <b>${eur(est)}</b> estimated</div></div>
       <div class="stat"><div class="k">Subsidies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> received${toCheck ? ` · ${toCheck} to check` : ""}</div></div>
       <div class="stat"><div class="k">Kilian’s own hours</div><div class="v num">${hrs.toLocaleString("nl-BE")} h</div><div class="s">personal work, outside his company</div></div>`;
-    $("#n-house").textContent = openHouse.length; $("#n-admin").textContent = openAdmin.length; $("#n-subs").textContent = subs.length;
+    $("#n-house").textContent = openHouse.length; $("#n-admin").textContent = openAdmin.length; $("#n-subs").textContent = subs.length; $("#n-done").textContent = tasks.filter(isDone).length;
     $("#importHint").hidden = !(loadedT && loadedS && canWrite && !tasks.length && !subs.length);
   }
   function render() {
@@ -787,10 +837,31 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const grid = $("#grid"); grid.className = "grid " + st.tab;
     const body = $("#gbody"), cards = $("#cards"), foot = $("#gfoot"), ncol = COLS[st.tab].length;
     const loaded = st.tab === "subs" ? loadedS : loadedT;
+    if (st.tab === "done") $("#addForm").hidden = true;
     const emptyRow = (m) => { body.innerHTML = `<tr><td colspan="${ncol}"><div class="empty">${m}</div></td></tr>`; cards.innerHTML = `<div class="empty">${m}</div>`; foot.innerHTML = ""; };
     if (!loaded) { emptyRow("Loading the shared list…"); $("#count").textContent = ""; return; }
 
-    if (st.tab === "subs") {
+    if (st.tab === "done") {
+      const list = sortDone(visibleDone()), allDone = tasks.filter(isDone).length;
+      $("#count").textContent = `${list.length} of ${allDone}`;
+      if (!list.length) return emptyRow(allDone ? "<strong>Nothing matches</strong>Clear the search or pick “Everything”." : "<strong>Nothing finished yet</strong>Tick a job or a piece of paperwork and it lands here.");
+      const grouped = st.done.sortKey === "default";
+      if (grouped) {
+        let html = "", chtml = "", i = 0;
+        const months = [...new Set(list.map((t) => monthLabel(doneKey(t))))];
+        for (const m of months) {
+          const items = list.filter((t) => monthLabel(doneKey(t)) === m);
+          html += `<tr class="group"><td colspan="${ncol}">${esc(m)}<span class="gsum">${items.length} · ${eur(sum(items, "actualCost"))} spent</span></td></tr>` + items.map((t) => doneRow(t, ++i)).join("");
+          chtml += `<div class="cgroup"><span>${esc(m)}</span><span>${items.length}</span></div>` + items.map(doneCard).join("");
+        }
+        body.innerHTML = html; cards.innerHTML = chtml;
+      } else {
+        body.innerHTML = list.map((t, i) => doneRow(t, i + 1)).join("");
+        cards.innerHTML = list.map(doneCard).join("");
+      }
+      const hrs = list.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
+      foot.innerHTML = `<tr><td></td><td></td><td>Total · ${list.length} finished${hrs ? ` · ${hrs.toLocaleString("nl-BE")} h by Kilian` : ""}</td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td></tr>`;
+    } else if (st.tab === "subs") {
       const list = visibleSubs();
       $("#count").textContent = `${list.length} subsidies`;
       if (!list.length) return emptyRow(subs.length ? "<strong>Nothing matches</strong>Clear the search." : "<strong>No subsidies yet</strong>Add one above, then link house jobs to it from their Subsidy column.");
@@ -935,6 +1006,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       const prev = { status: t.status || "todo", doneAt: t.doneAt || "" };
       patch(id, { status: el.checked ? "done" : "todo", doneAt: el.checked ? today() : "" });
       if (el.checked) toast(`Done: “${t.title}”`, () => patch(id, prev));
+      else toast(`Back on the to-do list: “${t.title}”`, () => patch(id, prev));
       return;
     }
     let v;
@@ -1280,7 +1352,10 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const q = (v) => { const s = String(v ?? ""); return /[;"\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
     const n = (v) => v == null || v === "" ? "" : String(v).replace(".", ",");
     let head, rows;
-    if (st.tab === "subs") {
+    if (st.tab === "done") {
+      head = ["Finished", "List", "Room / category", "Done on", "Done by", "Who", "Hours", "Spent EUR", "Estimate EUR", "Notes"];
+      rows = sortDone(visibleDone()).map((t) => [t.title, kindOf(t) === "house" ? "In the house" : "Paperwork", whereOf(t), doneKey(t), t.doneBy, t.owner, n(t.hours), n(t.actualCost), n(t.estCost), t.notes]);
+    } else if (st.tab === "subs") {
       head = ["Subsidy", "Status", "Expected EUR", "Received EUR", "Apply before", "Linked jobs", "Conditions", "Website", "Notes"];
       rows = visibleSubs().map((s) => [s.name, SUB[s.status] || "", n(s.expected), n(s.received), s.deadline, linkedTasks(s.id).map((t) => t.title).join(", "), s.conditions, s.link, s.notes]);
     } else {
@@ -1289,7 +1364,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", roomName(roomIdOf(t)), t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), n(t.actualCost), toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
     }
     const csv = "﻿" + [head, ...rows].map((r) => r.map(q).join(";")).join("\r\n");
-    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies" }[st.tab];
+    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies", done: "done" }[st.tab];
     try { await downloadsNS.save({ filename: `kortrijkstraat-17-${name}-${today()}.csv`, data: csv }); toast("Saved. It opens in Excel or Numbers."); }
     catch (e) { if (e && e.code === "declined") return; toast(e && e.code === "rate_limited" ? "A save is already waiting for you." : "Export isn’t available here."); }
   }
