@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl-BE">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#eceef1">
-<title>Kortrijkstraat 17 Works</title>
+<title>Kortrijkstraat 17 · Werken</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -80,6 +80,7 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 .brand h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 4.5vw, 40px); line-height: 1; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
 .brand h1 span { color: var(--accent); }
 .brand p { margin: 6px 0 0; color: var(--muted); }
+.sprol { display: inline-block; font-family: var(--f-display); font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 0 9px; font-size: 12px; letter-spacing: .02em; vertical-align: 1px; }
 .sync { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .sync i { width: 8px; height: 8px; border-radius: 50%; background: var(--p4); display: inline-block; }
 .sync.live i { background: var(--ok); }
@@ -272,7 +273,7 @@ button.chip { border: 0; cursor: pointer; }
   header.top { align-items: flex-start; }
   .topright { align-items: flex-start; }
   .tabs { gap: 0; }
-  .tab { font-size: 13px; padding: 9px 4px 8px; gap: 4px; flex: 1 1 auto; justify-content: center; }
+  .tab { font-size: 13px; padding: 9px 2px 8px; gap: 3px; flex: 1 1 auto; justify-content: center; }
   .tab .n { padding: 0 6px; font-size: 11px; }
   .toolbar:not(.open) #exportBtn { display: none; }
   .stat { padding: 8px 12px; }
@@ -397,34 +398,34 @@ input.cell.money.derived { color: var(--accent); cursor: default; }
   <header class="top">
     <div class="brand">
       <h1>Kortrijkstraat <span>17</span></h1>
-      <p>Borgerhout · shared works list for Oberon &amp; Kilian</p>
+      <p>Borgerhout · de werkenlijst van Oberon &amp; Kilian · <span class="sprol" title="Sprol">Sprol</span></p>
     </div>
     <div class="topright">
-      <div class="sync" id="sync"><i></i><span>Connecting…</span></div>
-      <div class="acct" id="acct" hidden><span id="acctEmail"></span><span>·</span><button class="linkbtn" type="button" id="signOutBtn">Sign out</button></div>
+      <div class="sync" id="sync"><i></i><span>Verbinden…</span></div>
+      <div class="acct" id="acct" hidden><span id="acctEmail"></span><span>·</span><button class="linkbtn" type="button" id="signOutBtn">Afmelden</button></div>
     </div>
   </header>
 
-  <section class="stats" id="stats" aria-label="Totals"></section>
+  <section class="stats" id="stats" aria-label="Totalen"></section>
   <div class="banner" id="banner" hidden></div>
-  <div class="banner" id="importHint" hidden>The list is empty. Moving over from the Claude version? <button class="linkbtn" type="button" id="importHintBtn">Import kortrijkstraat-17-data.json</button></div>
+  <div class="banner" id="importHint" hidden>De lijst is leeg. Kom je van de Claude-versie? <button class="linkbtn" type="button" id="importHintBtn">Importeer kortrijkstraat-17-data.json</button></div>
 
-  <nav class="tabs" role="tablist" aria-label="Lists">
-    <button class="tab" role="tab" id="tab-house" data-tab="house"><span class="tl">In the house</span><span class="ts">House</span> <span class="n" id="n-house">0</span></button>
-    <button class="tab" role="tab" id="tab-admin" data-tab="admin"><span class="tl">Paperwork</span><span class="ts">Papers</span> <span class="n" id="n-admin">0</span></button>
-    <button class="tab" role="tab" id="tab-done" data-tab="done">Done <span class="n" id="n-done">0</span></button>
-    <button class="tab" role="tab" id="tab-subs" data-tab="subs"><span class="tl">Subsidies</span><span class="ts">Subs</span> <span class="n" id="n-subs">0</span></button>
+  <nav class="tabs" role="tablist" aria-label="Lijsten">
+    <button class="tab" role="tab" id="tab-house" data-tab="house"><span class="tl">In huis</span><span class="ts">Huis</span> <span class="n" id="n-house">0</span></button>
+    <button class="tab" role="tab" id="tab-admin" data-tab="admin"><span class="tl">Papierwerk</span><span class="ts">Papier</span> <span class="n" id="n-admin">0</span></button>
+    <button class="tab" role="tab" id="tab-done" data-tab="done">Gedaan <span class="n" id="n-done">0</span></button>
+    <button class="tab" role="tab" id="tab-subs" data-tab="subs">Premies <span class="n" id="n-subs">0</span></button>
     <button class="tab" role="tab" id="tab-budget" data-tab="budget">Budget</button>
   </nav>
 
-  <div class="roomrow" id="roomrow" aria-label="Filter by room"></div>
+  <div class="roomrow" id="roomrow" aria-label="Filter op kamer"></div>
   <section class="roomcard" id="roomCard" hidden aria-live="polite"></section>
   <section class="roomcard" id="budgetCard" hidden></section>
 
   <form class="addbar" id="addForm" autocomplete="off">
-    <input id="quickAdd" aria-label="New item">
-    <select id="quickSel" aria-label="Room or category"></select>
-    <button class="btn primary" type="submit">Add</button>
+    <input id="quickAdd" aria-label="Nieuw item">
+    <select id="quickSel" aria-label="Kamer of categorie"></select>
+    <button class="btn primary" type="submit">Toevoegen</button>
   </form>
 
   <div class="toolbar" id="toolbar"></div>
@@ -439,9 +440,9 @@ input.cell.money.derived { color: var(--accent); cursor: default; }
   <div class="cards" id="cards"></div>
 
   <footer class="foot">
-    <button class="linkbtn" type="button" id="backupBtn">Download a backup</button>
+    <button class="linkbtn" type="button" id="backupBtn">Back-up downloaden</button>
     <span>·</span>
-    <button class="linkbtn" type="button" id="importBtn">Import a backup</button>
+    <button class="linkbtn" type="button" id="importBtn">Back-up importeren</button>
     <input type="file" id="importIn" accept=".json,application/json" hidden>
     <span id="importConfirm" class="confirm" hidden></span>
   </footer>
@@ -450,9 +451,9 @@ input.cell.money.derived { color: var(--accent); cursor: default; }
 <div class="gate" id="gate" hidden>
   <div class="gate-card">
     <h1>Kortrijkstraat <span>17</span></h1>
-    <p id="gateMsg">Sign in with your Google account to open the shared works list.</p>
-    <button class="btn primary" type="button" id="gateBtn">Sign in with Google</button>
-    <button class="btn" type="button" id="gateOut" hidden>Use another Google account</button>
+    <p id="gateMsg">Meld je aan met je Google-account om de gedeelde werkenlijst te openen.</p>
+    <button class="btn primary" type="button" id="gateBtn">Aanmelden met Google</button>
+    <button class="btn" type="button" id="gateOut" hidden>Ander Google-account gebruiken</button>
     <p class="gate-err" id="gateErr"></p>
   </div>
 </div>
@@ -484,21 +485,28 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
 
 (() => {
   // ---------- vocab ----------
-  const PRI = { 1: "P1 · Urgent", 2: "P2 · High", 3: "P3 · Normal", 4: "P4 · Someday" };
-  const STATUS = { todo: "To do", doing: "In progress", waiting: "Waiting", done: "Done" };
+  const PRI = { 1: "P1 · Dringend", 2: "P2 · Hoog", 3: "P3 · Normaal", 4: "P4 · Ooit" };
+  const STATUS = { todo: "Te doen", doing: "Bezig", waiting: "Wacht", done: "Gedaan" };
   const STATUS_ORDER = { doing: 0, todo: 1, waiting: 2, done: 3 };
   const OWNERS = ["", "Oberon", "Kilian", "Both", "Contractor"];
   const DONEBY = ["", "DIY Oberon", "Kilian (personal)", "Kilian's company (invoiced)", "Contractor", "Both of us"];
   const WHOLE = "whole";
-  const WHOLE_LABEL = "Whole house";
+  const WHOLE_LABEL = "Heel het huis";
   const TRADES = ["Carpentry", "Electrics", "Plumbing", "Heating", "Insulation", "Windows & doors", "Roofing", "Masonry & facade", "Plastering", "Painting", "Flooring", "Tiling", "Demolition", "Cleaning & clearing", "Garden", "Safety", "Planning"];
   const CATS = ["Insurance & contracts", "Utilities", "Permits & city", "Notary & legal", "Bank & finance", "Subsidies", "Taxes & registration"];
-  const TOOLS = ["Ladder", "Scaffolding", "Drill", "Multitool", "Circular saw", "Tile cutter", "Paint & rollers", "Plasterboard", "Insulation material", "Skip / container", "Dust extractor", "Protective gear", "Kilian's workshop"];
-  const SUB = { check: "To check", eligible: "Eligible", applied: "Applied", received: "Received", no: "Not eligible" };
+  // stored values stay as they are (older items keep working); this is what you see
+  const TRADE_NL = { Carpentry: "Schrijnwerk", Electrics: "Elektriciteit", Plumbing: "Sanitair", Heating: "Verwarming", Insulation: "Isolatie", "Windows & doors": "Ramen & deuren", Roofing: "Dakwerken", "Masonry & facade": "Metselwerk & gevel", Plastering: "Pleisterwerk", Painting: "Schilderwerk", Flooring: "Vloeren", Tiling: "Tegelwerk", Demolition: "Afbraak", "Cleaning & clearing": "Opkuisen & leegmaken", Garden: "Tuin", Safety: "Veiligheid", Planning: "Planning" };
+  const CAT_NL = { "Insurance & contracts": "Verzekeringen & contracten", Utilities: "Energie & water", "Permits & city": "Vergunningen & stad", "Notary & legal": "Notaris & juridisch", "Bank & finance": "Bank & lening", Subsidies: "Premies", "Taxes & registration": "Belastingen & registratie" };
+  const OWNER_NL = { Both: "Samen", Contractor: "Aannemer" };
+  const DONEBY_NL = { "DIY Oberon": "Oberon zelf", "Kilian (personal)": "Kilian (privé)", "Kilian's company (invoiced)": "Firma van Kilian (gefactureerd)", Contractor: "Aannemer", "Both of us": "Samen" };
+  const lbl = (map, v) => v ? (map[v] || v) : "";
+  const trL = (v) => lbl(TRADE_NL, v), catL = (v) => lbl(CAT_NL, v), ownL = (v) => lbl(OWNER_NL, v), byL = (v) => lbl(DONEBY_NL, v);
+  const TOOLS = ["Ladder", "Stelling", "Boormachine", "Multitool", "Cirkelzaag", "Tegelsnijder", "Verf & rollen", "Gipsplaten", "Isolatiemateriaal", "Container", "Bouwstofzuiger", "Beschermingsmateriaal", "Atelier van Kilian"];
+  const SUB = { check: "Na te kijken", eligible: "Komt in aanmerking", applied: "Aangevraagd", received: "Ontvangen", no: "Komt niet in aanmerking" };
   const SUB_ORDER = { check: 0, eligible: 1, applied: 2, received: 3, no: 4 };
-  const VAT = { incl: "incl. VAT", "6": "excl. VAT + 6%", "21": "excl. VAT + 21%" };
-  const PAYKIND = { deposit: "Deposit", invoice: "Invoice", final: "Final bill", other: "Other" };
-  const STAGE = { none: "No price yet", guess: "Guess", quote: "Quote", agreed: "Agreed" };
+  const VAT = { incl: "incl. btw", "6": "excl. btw + 6%", "21": "excl. btw + 21%" };
+  const PAYKIND = { deposit: "Voorschot", invoice: "Factuur", final: "Eindfactuur", other: "Andere" };
+  const STAGE = { none: "Nog geen prijs", guess: "Schatting", quote: "Offerte", agreed: "Akkoord" };
   const DEFAULT_BUFFER = 10;
   const TABS = ["house", "admin", "done", "subs", "budget"];
 
@@ -516,7 +524,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const n = parseFloat(s);
     return isNaN(n) ? null : Math.round(n * 100) / 100;
   }
-  const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: x.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined }); };
+  const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("nl-BE", { day: "numeric", month: "short", year: x.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined }); };
   const today = () => new Date().toISOString().slice(0, 10);
   const opts = (pairs, v) => pairs.map(([a, b]) => `<option value="${esc(a)}"${String(a) === String(v ?? "") ? " selected" : ""}>${esc(b)}</option>`).join("");
 
@@ -568,7 +576,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const expectedOf = (t) => isDone(t) ? (hasNum(t.actualCost) ? spentOf(t) : plannedOf(t)) : Math.max(plannedOf(t), spentOf(t));
   const sumBy = (list, fn) => list.reduce((a, t) => a + fn(t), 0);
   function varianceOf(t) { if (!hasNum(t.actualCost) || !hasNum(t.estCost)) return null; const d = r2(Number(t.actualCost) - Number(t.estCost)); return { d, pct: Number(t.estCost) ? d / Number(t.estCost) : null }; }
-  const fmtVar = (v) => !v ? "—" : v.d === 0 ? "As planned" : `${v.d > 0 ? "+" : "−"}${eur(Math.abs(v.d))}${v.pct != null ? ` (${v.d > 0 ? "+" : "−"}${Math.round(Math.abs(v.pct) * 100)}%)` : ""}`;
+  const fmtVar = (v) => !v ? "—" : v.d === 0 ? "Zoals gepland" : `${v.d > 0 ? "+" : "−"}${eur(Math.abs(v.d))}${v.pct != null ? ` (${v.d > 0 ? "+" : "−"}${Math.round(Math.abs(v.pct) * 100)}%)` : ""}`;
   const varCls = (v) => !v || v.d === 0 ? "" : v.d > 0 ? "neg" : "pos";
   const planMeta = () => roomById.get(WHOLE) || {};
   function planNumbers() {
@@ -594,7 +602,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function roomIdOf(t) {
     if (t.roomId !== undefined) return t.roomId || "";
     if (!t.room) return "";
-    if (t.room === WHOLE_LABEL) return WHOLE;
+    if (t.room === WHOLE_LABEL || t.room === "Whole house") return WHOLE;
     const r = rooms.find((x) => (x.name || "").toLowerCase() === String(t.room).toLowerCase());
     return r ? r.id : "legacy:" + t.room;
   }
@@ -602,9 +610,9 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (!id) return "";
     if (id === WHOLE) return WHOLE_LABEL;
     if (id.startsWith("legacy:")) return id.slice(7);
-    const r = roomById.get(id); return r ? r.name || "Unnamed room" : "";
+    const r = roomById.get(id); return r ? r.name || "Kamer zonder naam" : "";
   }
-  const roomPairs = () => [[WHOLE, WHOLE_LABEL], ...sortedRooms().map((r) => [r.id, r.name || "Unnamed room"])];
+  const roomPairs = () => [[WHOLE, WHOLE_LABEL], ...sortedRooms().map((r) => [r.id, r.name || "Kamer zonder naam"])];
   const roomOrderKey = (id) => !id ? 1e6 : id === WHOLE ? -1 : (sortedRooms().findIndex((r) => r.id === id) + 1 || 1e5);
   function dependsTransitively(fromId, targetId, seen = new Set()) {
     if (fromId === targetId) return true;
@@ -617,7 +625,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function toast(msg, undo) {
     const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer);
     if (undo) {
-      const b = document.createElement("button"); b.type = "button"; b.className = "toast-undo"; b.textContent = "Undo";
+      const b = document.createElement("button"); b.type = "button"; b.className = "toast-undo"; b.textContent = "Ongedaan maken";
       b.addEventListener("click", () => { undo(); el.hidden = true; clearTimeout(toastTimer); });
       el.append(" ", b);
     }
@@ -625,7 +633,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
 
   function write(colRef, id, fields) {
-    if (!colRef || !canWrite) { toast("This list is read-only for you right now."); return Promise.resolve(); }
+    if (!colRef || !canWrite) { toast("Je kan deze lijst nu niet aanpassen."); return Promise.resolve(); }
     fields.updatedAt = Date.now();
     const p = colRef.doc(id).update(fields).catch(handleWriteErr);
     markSaved();
@@ -635,34 +643,34 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const patchSub = (id, f) => write(subCol, id, f);
   function handleWriteErr(e) {
     const code = e && e.code;
-    if (code === "permission-denied") toast("Your account isn’t allowed to change this list.");
-    else if (code === "resource-exhausted") toast("Too many changes at once. Wait a moment and try again.");
-    else if (code === "not-found") toast("That change didn’t save. Someone deleted this item.");
-    else toast("That change didn’t save. Check your connection and try again.");
+    if (code === "permission-denied") toast("Je account mag deze lijst niet aanpassen.");
+    else if (code === "resource-exhausted") toast("Te veel wijzigingen tegelijk. Wacht even en probeer opnieuw.");
+    else if (code === "not-found") toast("Die wijziging is niet bewaard: iemand heeft dit item verwijderd.");
+    else toast("Die wijziging is niet bewaard. Controleer je verbinding en probeer opnieuw.");
   }
   function setReadOnly() {
     canWrite = false;
     const b = $("#banner");
-    b.textContent = "You can see this list but not change it.";
+    b.textContent = "Je kan deze lijst bekijken, maar niet aanpassen.";
     b.hidden = false; $("#addForm").hidden = true;
     render();
   }
-  function markSaved() { const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saved"; }
+  function markSaved() { const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Bewaard"; }
 
   // ---------- tabs, add bar, toolbar ----------
   function setupTab() {
     document.querySelectorAll(".tab").forEach((b) => { b.setAttribute("aria-selected", b.dataset.tab === st.tab ? "true" : "false"); b.tabIndex = b.dataset.tab === st.tab ? 0 : -1; });
     const qa = $("#quickAdd"), qs = $("#quickSel");
     if (st.tab === "house") {
-      qa.placeholder = "Something to fix, e.g. “Loose stair tread”, then Enter";
-      qs.hidden = false; qs.setAttribute("aria-label", "Room");
+      qa.placeholder = "Iets te doen, bv. “Losse traptrede”, dan Enter";
+      qs.hidden = false; qs.setAttribute("aria-label", "Kamer");
       fillQuickRoom();
     } else if (st.tab === "admin") {
-      qa.placeholder = "Paperwork, e.g. “Ask bank for loan certificate”, then Enter";
-      qs.hidden = false; qs.setAttribute("aria-label", "Category");
-      qs.innerHTML = opts([["", "Category"], ...CATS.map((c) => [c, c])], st.admin.cat);
+      qa.placeholder = "Papierwerk, bv. “Leningsattest vragen aan de bank”, dan Enter";
+      qs.hidden = false; qs.setAttribute("aria-label", "Categorie");
+      qs.innerHTML = opts([["", "Categorie"], ...CATS.map((c) => [c, catL(c)])], st.admin.cat);
     } else {
-      qa.placeholder = "A subsidy to look into, e.g. “Mijn VerbouwPremie – roof insulation”";
+      qa.placeholder = "Een premie om na te kijken, bv. “Mijn VerbouwPremie – dakisolatie”";
       qs.hidden = true;
     }
     $("#addForm").hidden = st.tab === "done" || st.tab === "budget" || !canWrite;
@@ -672,30 +680,30 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function fillQuickRoom() {
     const qs = $("#quickSel"); if (st.tab !== "house" || document.activeElement === qs) return;
     const cur = qs.value || (st.house.room && st.house.room !== "__none" ? st.house.room : "");
-    qs.innerHTML = opts([["", "Which room?"], ...roomPairs(), ...(canWrite ? [["__new", "+ New room…"]] : [])], roomById.has(cur) || cur === WHOLE ? cur : "");
+    qs.innerHTML = opts([["", "Welke kamer?"], ...roomPairs(), ...(canWrite ? [["__new", "+ Nieuwe kamer…"]] : [])], roomById.has(cur) || cur === WHOLE ? cur : "");
   }
   function buildToolbar() {
     const v = V(), tb = $("#toolbar");
     const sel = (id, label, pairs, val) => `<select id="${id}" aria-label="${label}">${opts(pairs, val)}</select>`;
     const listTab = st.tab === "house" || st.tab === "admin";
-    let html = st.tab === "budget" ? "" : `<input class="search" id="fq" type="search" placeholder="Search" aria-label="Search" value="${esc(v.q)}">`;
-    if (st.tab === "done") html += sel("fkind", "List", [["", "Everything"], ["house", "In the house"], ["admin", "Paperwork"]], v.kind);
+    let html = st.tab === "budget" ? "" : `<input class="search" id="fq" type="search" placeholder="Zoeken" aria-label="Zoeken" value="${esc(v.q)}">`;
+    if (st.tab === "done") html += sel("fkind", "Lijst", [["", "Alles"], ["house", "In huis"], ["admin", "Papierwerk"]], v.kind);
     if (listTab) html += `<button class="btn ftoggle" id="ftoggle" type="button" aria-expanded="${filtersOpen}"></button>`;
     if (listTab) {
-      html += sel("fstatus", "Status", [["open", "Open"], ["all", "All"], ...Object.entries(STATUS)], v.status);
-      html += sel("fpri", "Priority", [["", "Any priority"], ...Object.entries(PRI)], v.pri);
-      html += sel("fowner", "Who", [["", "Anyone"], ["none", "Unassigned"], ...OWNERS.filter(Boolean).map((o) => [o, o])], v.owner);
+      html += sel("fstatus", "Status", [["open", "Open"], ["all", "Alles"], ...Object.entries(STATUS)], v.status);
+      html += sel("fpri", "Prioriteit", [["", "Elke prioriteit"], ...Object.entries(PRI)], v.pri);
+      html += sel("fowner", "Wie", [["", "Iedereen"], ["none", "Niemand toegewezen"], ...OWNERS.filter(Boolean).map((o) => [o, ownL(o)])], v.owner);
     }
     if (st.tab === "house") {
-      html += sel("ftrade", "Type of work", [["", "Any type of work"], ...TRADES.map((t) => [t, t])], v.trade);
-      html += `<select id="ftool" aria-label="Tools"></select>`;
-      html += sel("fgroup", "Group", [["", "No grouping"], ["room", "Group by room"], ["trade", "Group by type of work"]], v.group);
+      html += sel("ftrade", "Soort werk", [["", "Elk soort werk"], ...TRADES.map((t) => [t, trL(t)])], v.trade);
+      html += `<select id="ftool" aria-label="Gereedschap"></select>`;
+      html += sel("fgroup", "Groeperen", [["", "Niet groeperen"], ["room", "Per kamer"], ["trade", "Per soort werk"]], v.group);
     }
     if (st.tab === "admin") {
-      html += sel("fcat", "Category", [["", "All categories"], ...CATS.map((c) => [c, c])], v.cat);
-      html += sel("fgroup", "Group", [["", "No grouping"], ["cat", "Group by category"]], v.group);
+      html += sel("fcat", "Categorie", [["", "Alle categorieën"], ...CATS.map((c) => [c, catL(c)])], v.cat);
+      html += sel("fgroup", "Groeperen", [["", "Niet groeperen"], ["cat", "Per categorie"]], v.group);
     }
-    html += `<span class="spacer"></span><span class="count" id="count"></span><button class="btn" id="exportBtn" type="button"${downloadsNS ? "" : " hidden"}>Export to Excel (.csv)</button>`;
+    html += `<span class="spacer"></span><span class="count" id="count"></span><button class="btn" id="exportBtn" type="button"${downloadsNS ? "" : " hidden"}>Exporteren naar Excel (.csv)</button>`;
     tb.innerHTML = html;
     tb.classList.toggle("open", filtersOpen);
     refreshToolSelect();
@@ -709,13 +717,13 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function updateFilterButton() {
     const b = $("#ftoggle"); if (!b) return;
     const n = activeFilterCount();
-    b.textContent = (filtersOpen ? "Hide filters" : "Filters") + (n ? ` (${n})` : "");
+    b.textContent = (filtersOpen ? "Filters verbergen" : "Filters") + (n ? ` (${n})` : "");
     b.setAttribute("aria-expanded", filtersOpen ? "true" : "false");
   }
   function refreshToolSelect() {
     const el = $("#ftool"); if (!el || document.activeElement === el) return;
     const used = [...new Set(tasks.flatMap(toolsOf))].sort();
-    el.innerHTML = opts([["", "Any tools"], ...used.map((t) => [t, "Needs: " + t])], st.house.tool);
+    el.innerHTML = opts([["", "Alle gereedschap"], ...used.map((t) => [t, "Nodig: " + t])], st.house.tool);
   }
   const FILTER_KEYS = { fq: "q", fstatus: "status", fpri: "pri", fowner: "owner", ftrade: "trade", ftool: "tool", fgroup: "group", fcat: "cat", fkind: "kind" };
   $("#toolbar").addEventListener("input", (e) => { const k = FILTER_KEYS[e.target.id]; if (k === "q") { V().q = e.target.value; saveView(); render(); } });
@@ -743,10 +751,10 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const cur = st.house.room;
     const chip = (id, label) => `<button class="rchip${counts[id] ? "" : " zero"}" type="button" data-room="${esc(id)}" aria-pressed="${cur === id ? "true" : "false"}">${esc(label)} <span class="c">${counts[id] || 0}</span></button>`;
     const legacy = Object.keys(counts).filter((k) => k.startsWith("legacy:"));
-    row.innerHTML = `<button class="rchip" type="button" data-room="" aria-pressed="${cur === "" ? "true" : "false"}">All rooms <span class="c">${house.length}</span></button>` +
+    row.innerHTML = `<button class="rchip" type="button" data-room="" aria-pressed="${cur === "" ? "true" : "false"}">Alle kamers <span class="c">${house.length}</span></button>` +
       roomPairs().map(([id, label]) => chip(id, label)).join("") + legacy.map((id) => chip(id, roomName(id))).join("") +
-      (counts[""] ? `<button class="rchip" type="button" data-room="__none" aria-pressed="${cur === "__none" ? "true" : "false"}">No room yet <span class="c">${counts[""]}</span></button>` : "") +
-      (canWrite ? `<button class="rchip add" type="button" data-rooms="manage">+ Rooms</button>` : "");
+      (counts[""] ? `<button class="rchip" type="button" data-room="__none" aria-pressed="${cur === "__none" ? "true" : "false"}">Nog geen kamer <span class="c">${counts[""]}</span></button>` : "") +
+      (canWrite ? `<button class="rchip add" type="button" data-rooms="manage">+ Kamers</button>` : "");
     $("#toollist").innerHTML = [...new Set([...TOOLS, ...tasks.flatMap(toolsOf)])].map((t) => `<option value="${esc(t)}">`).join("");
   }
   $("#roomrow").addEventListener("click", (e) => {
@@ -775,7 +783,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       } else if (v.cat && t.category !== v.cat) return false;
       if (q) {
         const s = subById.get(t.subsidyId);
-        if (![t.title, roomName(roomIdOf(t)), t.trade, t.category, t.notes, t.owner, toolsOf(t).join(" "), s && s.name].join(" ").toLowerCase().includes(q)) return false;
+        if (![t.title, roomName(roomIdOf(t)), trL(t.trade), catL(t.category), t.notes, ownL(t.owner), toolsOf(t).join(" "), s && s.name].join(" ").toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -784,8 +792,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const defTask = (a, b) => (isDone(a) - isDone(b)) || (blockers(a).length > 0) - (blockers(b).length > 0) || (a.priority || 3) - (b.priority || 3) || cmpVal(a.due, b.due) || (a.createdAt || 0) - (b.createdAt || 0);
   const TASK_GET = {
     title: (t) => (t.title || "").toLowerCase(), room: (t) => { const id = roomIdOf(t); return id ? roomOrderKey(id) : null; },
-    trade: (t) => t.trade || "", category: (t) => t.category || "", priority: (t) => t.priority || 3, status: (t) => STATUS_ORDER[t.status] ?? 1,
-    owner: (t) => t.owner || "", due: (t) => t.due || "", estCost: (t) => t.estCost, actualCost: (t) => t.actualCost,
+    trade: (t) => trL(t.trade), category: (t) => catL(t.category), priority: (t) => t.priority || 3, status: (t) => STATUS_ORDER[t.status] ?? 1,
+    owner: (t) => ownL(t.owner), due: (t) => t.due || "", estCost: (t) => t.estCost, actualCost: (t) => t.actualCost,
     tools: (t) => toolsOf(t).length || null, subsidy: (t) => (subById.get(t.subsidyId) || {}).name || "", blocked: (t) => blockers(t).length ? 0 : 1,
   };
   function sortTasks(list, v) {
@@ -806,27 +814,27 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   const doneKey = (t) => t.doneAt || (t.updatedAt ? new Date(t.updatedAt).toISOString().slice(0, 10) : "");
   function visibleDone() {
     const v = st.done, q = v.q.trim().toLowerCase();
-    return tasks.filter((t) => isDone(t) && (!v.kind || kindOf(t) === v.kind) && (!q || [t.title, roomName(roomIdOf(t)), t.trade, t.category, t.notes, t.owner, t.doneBy].join(" ").toLowerCase().includes(q)));
+    return tasks.filter((t) => isDone(t) && (!v.kind || kindOf(t) === v.kind) && (!q || [t.title, roomName(roomIdOf(t)), trL(t.trade), catL(t.category), t.notes, ownL(t.owner), byL(t.doneBy)].join(" ").toLowerCase().includes(q)));
   }
-  const DONE_GET = { title: (t) => (t.title || "").toLowerCase(), list: (t) => kindOf(t), where: (t) => kindOf(t) === "house" ? roomName(roomIdOf(t)) : t.category || "", doneAt: (t) => doneKey(t), who: (t) => t.doneBy || t.owner || "", actualCost: (t) => t.actualCost, estCost: (t) => t.estCost, diff: (t) => { const v = varianceOf(t); return v ? v.d : null; } };
+  const DONE_GET = { title: (t) => (t.title || "").toLowerCase(), list: (t) => kindOf(t), where: (t) => kindOf(t) === "house" ? roomName(roomIdOf(t)) : catL(t.category), doneAt: (t) => doneKey(t), who: (t) => byL(t.doneBy) || ownL(t.owner), actualCost: (t) => t.actualCost, estCost: (t) => t.estCost, diff: (t) => { const v = varianceOf(t); return v ? v.d : null; } };
   function sortDone(list) {
     const v = st.done, g = DONE_GET[v.sortKey];
     const def = (a, b) => cmpVal(doneKey(b), doneKey(a)) || (b.updatedAt || 0) - (a.updatedAt || 0);
     return [...list].sort((a, b) => { if (!g) return def(a, b); const r = cmpVal(g(a), g(b)); return r === 0 ? def(a, b) : r * v.sortDir; });
   }
-  const monthLabel = (d) => { if (!d) return "Date unknown"; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { month: "long", year: "numeric" }); };
-  const whereOf = (t) => kindOf(t) === "house" ? (roomName(roomIdOf(t)) || "No room") : (t.category || "Paperwork");
+  const monthLabel = (d) => { if (!d) return "Datum onbekend"; const x = new Date(d + "T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("nl-BE", { month: "long", year: "numeric" }); };
+  const whereOf = (t) => kindOf(t) === "house" ? (roomName(roomIdOf(t)) || "Geen kamer") : (catL(t.category) || "Papierwerk");
   function doneRow(t, i) {
     const ro = canWrite ? "" : " disabled";
     return `<tr data-id="${esc(t.id)}" class="done-row">
       <td class="idx">${i}</td>
-      <td class="chk"><input type="checkbox" data-f="done" aria-label="Done (untick to reopen)" checked${ro}></td>
+      <td class="chk"><input type="checkbox" data-f="done" aria-label="Gedaan (vinkje weg om te heropenen)" checked${ro}></td>
       <td class="titlecell"><span class="done-title">${esc(t.title)}</span></td>
-      <td class="chipcell"><span class="chip ${kindOf(t) === "house" ? "" : "st-waiting"}">${kindOf(t) === "house" ? "In the house" : "Paperwork"}</span></td>
+      <td class="chipcell"><span class="chip ${kindOf(t) === "house" ? "" : "st-waiting"}">${kindOf(t) === "house" ? "In huis" : "Papierwerk"}</span></td>
       <td class="chipcell">${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : esc(whereOf(t))}</td>
-      <td><input class="cell" type="date" data-f="doneAt" value="${esc(t.doneAt || "")}" aria-label="Done on"${ro}></td>
-      <td class="chipcell">${esc(t.doneBy || t.owner || "—")}${t.hours ? ` · ${numIn(t.hours)} h` : ""}</td>
-      <td class="r">${moneyInput(t, "actualCost", "Spent", ro)}</td>
+      <td><input class="cell" type="date" data-f="doneAt" value="${esc(t.doneAt || "")}" aria-label="Gedaan op"${ro}></td>
+      <td class="chipcell">${esc(byL(t.doneBy) || ownL(t.owner) || "—")}${t.hours ? ` · ${numIn(t.hours)} u` : ""}</td>
+      <td class="r">${moneyInput(t, "actualCost", "Uitgegeven", ro)}</td>
       <td class="r pad mono">${eur(t.estCost)}</td>
       <td class="r pad mono ${varCls(varianceOf(t))}">${fmtVar(varianceOf(t))}</td>
       <td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>
@@ -834,84 +842,85 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   function moneyInput(t, f, label, ro) {
     const der = f === "estCost" ? estDerived(t) : f === "actualCost" ? actDerived(t) : false;
-    const why = f === "estCost" ? "From the chosen quote. Open the job to change it." : "Total of the payments. Open the job to change them.";
+    const why = f === "estCost" ? "Komt uit de gekozen offerte. Open de klus om het te wijzigen." : "Totaal van de betalingen. Open de klus om ze te wijzigen.";
     return `<input class="cell money${der ? " derived" : ""}" data-f="${f}" inputmode="decimal" value="${amtIn(t[f])}" placeholder="—" aria-label="${label}"${der ? ` readonly title="${why}"` : ""}${ro}>`;
   }
   function doneCard(t) {
-    return `<div class="card done-card" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
-      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Done (untick to reopen)" checked${canWrite ? "" : " disabled"}>
-      <div class="t">${esc(t.title || "Untitled")}</div>
+    return `<div class="card done-card" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Zonder titel")}: details openen">
+      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Gedaan (vinkje weg om te heropenen)" checked${canWrite ? "" : " disabled"}>
+      <div class="t">${esc(t.title || "Zonder titel")}</div>
       <div class="meta">
         ${kindOf(t) === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : `<span>${esc(whereOf(t))}</span>`}
-        ${doneKey(t) ? `<span>Done ${esc(fmtDate(doneKey(t)))}</span>` : ""}
-        ${t.doneBy || t.owner ? `<span>by ${esc(t.doneBy || t.owner)}</span>` : ""}
+        ${doneKey(t) ? `<span>Gedaan ${esc(fmtDate(doneKey(t)))}</span>` : ""}
+        ${t.doneBy || t.owner ? `<span>door ${esc(byL(t.doneBy) || ownL(t.owner))}</span>` : ""}
         ${hasNum(t.actualCost) ? `<span class="money">${eur(t.actualCost)}</span>` : ""}
-        ${varianceOf(t) ? `<span class="money ${varCls(varianceOf(t))}">planned ${eur(t.estCost)} · ${fmtVar(varianceOf(t))}</span>` : ""}
+        ${varianceOf(t) ? `<span class="money ${varCls(varianceOf(t))}">gepland ${eur(t.estCost)} · ${fmtVar(varianceOf(t))}</span>` : ""}
       </div>
     </div>`;
   }
 
   // ---------- render pieces ----------
   const COLS = {
-    house: [["", "", "idx"], ["", "", "chk"], ["title", "Fix / job"], ["room", "Room"], ["trade", "Type of work"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["tools", "Tools & materials"], ["subsidy", "Subsidy"], ["estCost", "Planned", "r"], ["actualCost", "Spent", "r"], ["blocked", "Waits on"], ["", ""]],
-    admin: [["", "", "idx"], ["", "", "chk"], ["title", "Paperwork"], ["category", "Category"], ["priority", "Priority"], ["status", "Status"], ["owner", "Who"], ["due", "Due"], ["subsidy", "Subsidy"], ["actualCost", "Cost", "r"], ["blocked", "Waits on"], ["", ""]],
-    done: [["", "", "idx"], ["", "", "chk"], ["title", "Finished"], ["list", "List"], ["where", "Room / category"], ["doneAt", "Done on"], ["who", "By"], ["actualCost", "Spent", "r"], ["estCost", "Planned", "r"], ["diff", "Difference", "r"], ["", ""]],
-    subs: [["", "", "idx"], ["name", "Subsidy"], ["status", "Status"], ["expected", "Expected", "r"], ["received", "Received", "r"], ["deadline", "Deadline"], ["linked", "Linked jobs"], ["", ""]],
-    budget: [["", "", "idx"], ["name", "Room or list"], ["open", "Jobs"], ["budget", "Budget", "r"], ["planned", "Planned", "r"], ["spent", "Spent", "r"], ["expected", "Expected final", "r"], ["diff", "Left / over", "r"], ["", ""]],
+    house: [["", "", "idx"], ["", "", "chk"], ["title", "Klus"], ["room", "Kamer"], ["trade", "Soort werk"], ["priority", "Prioriteit"], ["status", "Status"], ["owner", "Wie"], ["tools", "Gereedschap & materiaal"], ["subsidy", "Premie"], ["estCost", "Gepland", "r"], ["actualCost", "Uitgegeven", "r"], ["blocked", "Wacht op"], ["", ""]],
+    admin: [["", "", "idx"], ["", "", "chk"], ["title", "Papierwerk"], ["category", "Categorie"], ["priority", "Prioriteit"], ["status", "Status"], ["owner", "Wie"], ["due", "Tegen"], ["subsidy", "Premie"], ["actualCost", "Kost", "r"], ["blocked", "Wacht op"], ["", ""]],
+    done: [["", "", "idx"], ["", "", "chk"], ["title", "Afgewerkt"], ["list", "Lijst"], ["where", "Kamer / categorie"], ["doneAt", "Gedaan op"], ["who", "Door"], ["actualCost", "Uitgegeven", "r"], ["estCost", "Gepland", "r"], ["diff", "Verschil", "r"], ["", ""]],
+    subs: [["", "", "idx"], ["name", "Premie"], ["status", "Status"], ["expected", "Verwacht", "r"], ["received", "Ontvangen", "r"], ["deadline", "Aanvragen voor"], ["linked", "Gekoppelde klussen"], ["", ""]],
+    budget: [["", "", "idx"], ["name", "Kamer of lijst"], ["open", "Klussen"], ["budget", "Budget", "r"], ["planned", "Gepland", "r"], ["spent", "Uitgegeven", "r"], ["expected", "Verwacht eindbedrag", "r"], ["diff", "Over / te veel", "r"], ["", ""]],
   };
   function renderHead() {
     const v = V();
     $("#ghead").innerHTML = `<tr>${COLS[st.tab].map(([k, label, cls]) => {
-      if (!label) return `<th${cls === "chk" ? ' aria-label="Done"' : ""}></th>`;
+      if (!label) return `<th${cls === "chk" ? ' aria-label="Gedaan"' : ""}></th>`;
       const on = v.sortKey === k;
       return `<th class="${cls || ""}${on ? " sorted" : ""}" aria-sort="${on ? (v.sortDir === 1 ? "ascending" : "descending") : "none"}"><button type="button" data-sort="${k}">${esc(label)} <span class="arr">${on ? (v.sortDir === 1 ? "▲" : "▼") : "▲▼"}</span></button></th>`;
     }).join("")}</tr>`;
   }
-  const selCell = (f, pairs, val) => `<select class="cell" data-f="${f}" aria-label="${f}"${canWrite ? "" : " disabled"}>${opts(pairs, val)}</select>`;
-  const subPairs = () => [["", "—"], ...subs.map((s) => [s.id, s.name || "Untitled subsidy"])];
+  const FIELD_NL = { priority: "Prioriteit", status: "Status", owner: "Wie", roomId: "Kamer", trade: "Soort werk", category: "Categorie", subsidyId: "Premie" };
+  const selCell = (f, pairs, val) => `<select class="cell" data-f="${f}" aria-label="${FIELD_NL[f] || f}"${canWrite ? "" : " disabled"}>${opts(pairs, val)}</select>`;
+  const subPairs = () => [["", "—"], ...subs.map((s) => [s.id, s.name || "Premie zonder naam"])];
   function subChip(t) { const s = subById.get(t.subsidyId); return s ? `<span class="chip sub-${esc(s.status || "check")}" title="${esc(SUB[s.status] || "")}">${esc(s.name)}</span>` : ""; }
   function depChips(t) {
     const b = blockers(t);
-    if (b.length) return b.map((d) => `<span class="chip block" title="Waits on: ${esc(d.title)}">${esc(d.title)}</span>`).join("");
-    if (!isDone(t) && deps(t).length) return `<span class="chip clear">Ready</span>`;
+    if (b.length) return b.map((d) => `<span class="chip block" title="Wacht op: ${esc(d.title)}">${esc(d.title)}</span>`).join("");
+    if (!isDone(t) && deps(t).length) return `<span class="chip clear">Klaar om te starten</span>`;
     return "";
   }
   const toolChips = (t) => toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}</span>`).join("");
   function taskRow(t, i, kind) {
     const ro = canWrite ? "" : " disabled";
-    const common = `<td class="idx">${i}</td><td class="chk"><input type="checkbox" data-f="done" aria-label="Mark done"${isDone(t) ? " checked" : ""}${ro}></td>
-      <td class="titlecell"><input class="cell cell-title" data-f="title" value="${esc(t.title)}" aria-label="Title"${ro}></td>`;
-    const meta = `<td>${selCell("priority", Object.entries(PRI), t.priority || 3)}</td><td>${selCell("status", Object.entries(STATUS), t.status || "todo")}</td><td>${selCell("owner", OWNERS.map((o) => [o, o || "—"]), t.owner)}</td>`;
+    const common = `<td class="idx">${i}</td><td class="chk"><input type="checkbox" data-f="done" aria-label="Afvinken als gedaan"${isDone(t) ? " checked" : ""}${ro}></td>
+      <td class="titlecell"><input class="cell cell-title" data-f="title" value="${esc(t.title)}" aria-label="Titel"${ro}></td>`;
+    const meta = `<td>${selCell("priority", Object.entries(PRI), t.priority || 3)}</td><td>${selCell("status", Object.entries(STATUS), t.status || "todo")}</td><td>${selCell("owner", OWNERS.map((o) => [o, ownL(o) || "—"]), t.owner)}</td>`;
     const tail = `<td class="chipcell"><div class="chips">${depChips(t)}</div></td><td><button class="open-btn" type="button" data-open="${esc(t.id)}">Details ›</button></td>`;
     const money = (f, label) => `<td class="r">${moneyInput(t, f, label, ro)}</td>`;
     if (kind === "house") return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
       <td>${selCell("roomId", [["", "—"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</td>
-      <td>${selCell("trade", [["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</td>${meta}
+      <td>${selCell("trade", [["", "—"], ...TRADES.map((x) => [x, trL(x)])], t.trade)}</td>${meta}
       <td class="chipcell"><div class="chips">${toolChips(t)}</div></td>
-      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Planned")}${money("actualCost", "Spent")}${tail}</tr>`;
+      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("estCost", "Gepland")}${money("actualCost", "Uitgegeven")}${tail}</tr>`;
     return `<tr data-id="${esc(t.id)}" class="pri-${t.priority || 3}${isDone(t) ? " done" : ""}">${common}
-      <td>${selCell("category", [["", "—"], ...CATS.map((x) => [x, x])], t.category)}</td>${meta}
-      <td><input class="cell" type="date" data-f="due" value="${esc(t.due || "")}" aria-label="Due date"${ro}></td>
-      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("actualCost", "Cost")}${tail}</tr>`;
+      <td>${selCell("category", [["", "—"], ...CATS.map((x) => [x, catL(x)])], t.category)}</td>${meta}
+      <td><input class="cell" type="date" data-f="due" value="${esc(t.due || "")}" aria-label="Tegen datum"${ro}></td>
+      <td>${selCell("subsidyId", subPairs(), t.subsidyId)}</td>${money("actualCost", "Kost")}${tail}</tr>`;
   }
   function taskCard(t, kind) {
     const b = blockers(t);
-    const due = t.due ? `<span${!isDone(t) && t.due < today() ? ' style="color:var(--p1);font-weight:600"' : ""}>Due ${esc(fmtDate(t.due))}</span>` : "";
+    const due = t.due ? `<span${!isDone(t) && t.due < today() ? ' style="color:var(--p1);font-weight:600"' : ""}>Tegen ${esc(fmtDate(t.due))}</span>` : "";
     const stg = stageOf(t);
-    const money = hasNum(t.actualCost) ? `<span class="money">${eur(t.actualCost)} spent${hasNum(t.estCost) ? ` of ${eur(t.estCost)}` : ""}</span>` : hasNum(t.estCost) ? `<span class="money">${stg === "guess" ? "≈ " : ""}${eur(t.estCost)}${stg === "quote" ? " quote" : stg === "agreed" ? " agreed" : ""}</span>` : "";
-    return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Untitled")}: open details">
-      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Mark done"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
-      <div class="t">${esc(t.title || "Untitled")}</div>
+    const money = hasNum(t.actualCost) ? `<span class="money">${eur(t.actualCost)} uitgegeven${hasNum(t.estCost) ? ` van ${eur(t.estCost)}` : ""}</span>` : hasNum(t.estCost) ? `<span class="money">${stg === "guess" ? "≈ " : ""}${eur(t.estCost)}${stg === "quote" ? " offerte" : stg === "agreed" ? " akkoord" : ""}</span>` : "";
+    return `<div class="card${isDone(t) ? " done" : ""}" data-open="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(t.title || "Zonder titel")}: details openen">
+      <input type="checkbox" data-f="done" data-id="${esc(t.id)}" aria-label="Afvinken als gedaan"${isDone(t) ? " checked" : ""}${canWrite ? "" : " disabled"}>
+      <div class="t">${esc(t.title || "Zonder titel")}</div>
       <div class="meta">
         ${kind === "house" && roomIdOf(t) ? `<span class="chip room">${esc(roomName(roomIdOf(t)))}</span>` : ""}
         <span class="chip p${t.priority || 3}">P${t.priority || 3}</span>
         ${t.status && t.status !== "todo" ? `<span class="chip st-${t.status}">${esc(STATUS[t.status])}</span>` : ""}
-        ${t.owner ? `<span class="chip">${esc(t.owner)}</span>` : ""}
-        ${kind === "house" && t.trade ? `<span>${esc(t.trade)}</span>` : ""}
-        ${kind === "admin" && t.category ? `<span>${esc(t.category)}</span>` : ""}
+        ${t.owner ? `<span class="chip">${esc(ownL(t.owner))}</span>` : ""}
+        ${kind === "house" && t.trade ? `<span>${esc(trL(t.trade))}</span>` : ""}
+        ${kind === "admin" && t.category ? `<span>${esc(catL(t.category))}</span>` : ""}
         ${subChip(t)}
-        ${toolsOf(t).length ? `<span>Tools: ${toolsOf(t).map(esc).join(", ")}</span>` : ""}
-        ${b.length ? `<span class="chip block">Waits on ${b.length === 1 ? esc(b[0].title) : b.length + " items"}</span>` : ""}
+        ${toolsOf(t).length ? `<span>Gereedschap: ${toolsOf(t).map(esc).join(", ")}</span>` : ""}
+        ${b.length ? `<span class="chip block">Wacht op ${b.length === 1 ? esc(b[0].title) : b.length + " items"}</span>` : ""}
         ${due} ${money}
       </div>
     </div>`;
@@ -921,22 +930,22 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const lt = linkedTasks(s.id);
     return `<tr data-sid="${esc(s.id)}">
       <td class="idx">${i}</td>
-      <td class="titlecell"><input class="cell cell-title" data-s="name" value="${esc(s.name)}" aria-label="Subsidy"${ro}></td>
+      <td class="titlecell"><input class="cell cell-title" data-s="name" value="${esc(s.name)}" aria-label="Premie"${ro}></td>
       <td><select class="cell" data-s="status" aria-label="Status"${ro}>${opts(Object.entries(SUB), s.status || "check")}</select></td>
-      <td class="r"><input class="cell money" data-s="expected" inputmode="decimal" value="${numIn(s.expected)}" placeholder="—" aria-label="Expected"${ro}></td>
-      <td class="r"><input class="cell money" data-s="received" inputmode="decimal" value="${numIn(s.received)}" placeholder="—" aria-label="Received"${ro}></td>
-      <td><input class="cell" type="date" data-s="deadline" value="${esc(s.deadline || "")}" aria-label="Deadline"${ro}></td>
-      <td class="chipcell"><div class="chips">${lt.length ? lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}</button>`).join("") : '<span class="count">Link jobs from their Subsidy column</span>'}</div></td>
+      <td class="r"><input class="cell money" data-s="expected" inputmode="decimal" value="${numIn(s.expected)}" placeholder="—" aria-label="Verwacht"${ro}></td>
+      <td class="r"><input class="cell money" data-s="received" inputmode="decimal" value="${numIn(s.received)}" placeholder="—" aria-label="Ontvangen"${ro}></td>
+      <td><input class="cell" type="date" data-s="deadline" value="${esc(s.deadline || "")}" aria-label="Aanvragen voor"${ro}></td>
+      <td class="chipcell"><div class="chips">${lt.length ? lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}</button>`).join("") : '<span class="count">Koppel klussen via hun kolom Premie</span>'}</div></td>
       <td><button class="open-btn" type="button" data-opensub="${esc(s.id)}">Details ›</button></td>
     </tr>`;
   }
   function subCard(s) {
     const lt = linkedTasks(s.id);
-    return `<div class="card nochk" data-opensub="${esc(s.id)}" role="button" tabindex="0" aria-label="${esc(s.name || "Untitled subsidy")}: open details">
-      <div class="t">${esc(s.name || "Untitled subsidy")}</div>
-      <div class="meta"><span class="chip sub-${esc(s.status || "check")}">${esc(SUB[s.status] || "To check")}</span>
-        ${s.expected != null ? `<span class="money">≈ ${eur(s.expected)}</span>` : ""}${s.received != null ? `<span class="money">${eur(s.received)} received</span>` : ""}
-        ${s.deadline ? `<span>Deadline ${esc(fmtDate(s.deadline))}</span>` : ""}<span>${lt.length} linked job${lt.length === 1 ? "" : "s"}</span></div>
+    return `<div class="card nochk" data-opensub="${esc(s.id)}" role="button" tabindex="0" aria-label="${esc(s.name || "Premie zonder naam")}: details openen">
+      <div class="t">${esc(s.name || "Premie zonder naam")}</div>
+      <div class="meta"><span class="chip sub-${esc(s.status || "check")}">${esc(SUB[s.status] || "Na te kijken")}</span>
+        ${s.expected != null ? `<span class="money">≈ ${eur(s.expected)}</span>` : ""}${s.received != null ? `<span class="money">${eur(s.received)} ontvangen</span>` : ""}
+        ${s.deadline ? `<span>Aanvragen voor ${esc(fmtDate(s.deadline))}</span>` : ""}<span>${lt.length} gekoppelde klus${lt.length === 1 ? "" : "sen"}</span></div>
     </div>`;
   }
   const sum = (list, f) => list.reduce((s, t) => s + (Number(t[f]) || 0), 0);
@@ -953,11 +962,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const toCheck = subs.filter((s) => !s.status || s.status === "check").length;
     const hrs = tasks.filter((t) => t.doneBy === "Kilian (personal)").reduce((s, t) => s + (Number(t.hours) || 0), 0);
     $("#stats").innerHTML = `
-      <div class="stat"><div class="k">To fix in the house</div><div class="v">${openHouse.length}</div><div class="s">${roomCount} room${roomCount === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} urgent</span>` : ""}</div></div>
-      <div class="stat"><div class="k">Paperwork open</div><div class="v">${openAdmin.length}</div><div class="s">${urgentAdmin ? `<span class="hot">${urgentAdmin} urgent</span>` : "None urgent"}${overdue ? ` · <span class="hot">${overdue} overdue</span>` : ""}</div></div>
-      <div class="stat"><div class="k">Expected cost</div><div class="v num">${eur(expAll)}</div><div class="s">${pn.total != null ? `of <b>${eur(pn.total)}</b> budget${expAll > pn.total ? ` · <span class="hot">${eur(expAll - pn.total)} over</span>` : ""}` : `<button class="linkbtn" type="button" data-gotab="budget">Set a budget</button>`} · <b>${eur(spent)}</b> spent</div></div>
-      <div class="stat"><div class="k">Subsidies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> received${toCheck ? ` · ${toCheck} to check` : ""}</div></div>
-      <div class="stat"><div class="k">Kilian’s own hours</div><div class="v num">${hrs.toLocaleString("nl-BE")} h</div><div class="s">personal work, outside his company</div></div>`;
+      <div class="stat"><div class="k">Te doen in huis</div><div class="v">${openHouse.length}</div><div class="s">${roomCount} kamer${roomCount === 1 ? "" : "s"}${urgentHouse ? ` · <span class="hot">${urgentHouse} dringend</span>` : ""}</div></div>
+      <div class="stat"><div class="k">Papierwerk open</div><div class="v">${openAdmin.length}</div><div class="s">${urgentAdmin ? `<span class="hot">${urgentAdmin} dringend</span>` : "Niets dringend"}${overdue ? ` · <span class="hot">${overdue} te laat</span>` : ""}</div></div>
+      <div class="stat"><div class="k">Verwachte kost</div><div class="v num">${eur(expAll)}</div><div class="s">${pn.total != null ? `van <b>${eur(pn.total)}</b> budget${expAll > pn.total ? ` · <span class="hot">${eur(expAll - pn.total)} te veel</span>` : ""}` : `<button class="linkbtn" type="button" data-gotab="budget">Budget instellen</button>`} · <b>${eur(spent)}</b> uitgegeven</div></div>
+      <div class="stat"><div class="k">Premies</div><div class="v num">${eur(expd + rec)}</div><div class="s"><b>${eur(rec)}</b> ontvangen${toCheck ? ` · ${toCheck} na te kijken` : ""}</div></div>
+      <div class="stat"><div class="k">Uren van Kilian zelf</div><div class="v num">${hrs.toLocaleString("nl-BE")} u</div><div class="s">privéwerk, buiten zijn firma</div></div>`;
     $("#n-house").textContent = openHouse.length; $("#n-admin").textContent = openAdmin.length; $("#n-subs").textContent = subs.length; $("#n-done").textContent = tasks.filter(isDone).length;
     $("#importHint").hidden = !(loadedT && loadedS && canWrite && !tasks.length && !subs.length);
   }
@@ -971,19 +980,19 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const loaded = st.tab === "subs" ? loadedS : st.tab === "budget" ? loadedT && loadedR && loadedS : loadedT;
     if (st.tab === "done" || st.tab === "budget") $("#addForm").hidden = true;
     const emptyRow = (m) => { body.innerHTML = `<tr><td colspan="${ncol}"><div class="empty">${m}</div></td></tr>`; cards.innerHTML = `<div class="empty">${m}</div>`; foot.innerHTML = ""; };
-    if (!loaded) { emptyRow("Loading the shared list…"); $("#count").textContent = ""; return; }
+    if (!loaded) { emptyRow("De gedeelde lijst wordt geladen…"); $("#count").textContent = ""; return; }
 
     if (st.tab === "done") {
       const list = sortDone(visibleDone()), allDone = tasks.filter(isDone).length;
-      $("#count").textContent = `${list.length} of ${allDone}`;
-      if (!list.length) return emptyRow(allDone ? "<strong>Nothing matches</strong>Clear the search or pick “Everything”." : "<strong>Nothing finished yet</strong>Tick a job or a piece of paperwork and it lands here.");
+      $("#count").textContent = `${list.length} van ${allDone}`;
+      if (!list.length) return emptyRow(allDone ? "<strong>Niets gevonden</strong>Maak de zoekopdracht leeg of kies “Alles”." : "<strong>Nog niets afgewerkt</strong>Vink een klus of een stuk papierwerk af en het komt hier terecht.");
       const grouped = st.done.sortKey === "default";
       if (grouped) {
         let html = "", chtml = "", i = 0;
         const months = [...new Set(list.map((t) => monthLabel(doneKey(t))))];
         for (const m of months) {
           const items = list.filter((t) => monthLabel(doneKey(t)) === m);
-          html += `<tr class="group"><td colspan="${ncol}">${esc(m)}<span class="gsum">${items.length} · ${eur(sum(items, "actualCost"))} spent</span></td></tr>` + items.map((t) => doneRow(t, ++i)).join("");
+          html += `<tr class="group"><td colspan="${ncol}">${esc(m)}<span class="gsum">${items.length} · ${eur(sum(items, "actualCost"))} uitgegeven</span></td></tr>` + items.map((t) => doneRow(t, ++i)).join("");
           chtml += `<div class="cgroup"><span>${esc(m)}</span><span>${items.length}</span></div>` + items.map(doneCard).join("");
         }
         body.innerHTML = html; cards.innerHTML = chtml;
@@ -994,40 +1003,40 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       const hrs = list.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
       const withVar = list.filter(varianceOf), dsum = r2(sumBy(withVar, (t) => varianceOf(t).d)), psum = sumBy(withVar, plannedOf);
       const tv = withVar.length ? { d: dsum, pct: psum ? dsum / psum : null } : null;
-      foot.innerHTML = `<tr><td></td><td></td><td>Total · ${list.length} finished${hrs ? ` · ${hrs.toLocaleString("nl-BE")} h by Kilian` : ""}</td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r ${varCls(tv)}">${fmtVar(tv)}</td><td></td></tr>`;
+      foot.innerHTML = `<tr><td></td><td></td><td>Totaal · ${list.length} afgewerkt${hrs ? ` · ${hrs.toLocaleString("nl-BE")} u door Kilian` : ""}</td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r ${varCls(tv)}">${fmtVar(tv)}</td><td></td></tr>`;
     } else if (st.tab === "budget") {
       const rows = sortBudget(budgetRows());
       $("#count").textContent = "";
       body.innerHTML = rows.map((r, i) => budgetRow(r, i + 1)).join("");
       cards.innerHTML = rows.map(budgetCardRow).join("");
       const T = (f) => sumBy(rows, (r) => num(r[f]));
-      foot.innerHTML = `<tr><td></td><td>Total</td><td>${T("open")} open</td><td class="r">${eur(T("budget"))}</td><td class="r">${eur(T("planned"))}</td><td class="r">${eur(T("spent"))}</td><td class="r">${eur(T("expected"))}</td><td></td><td></td></tr>`;
+      foot.innerHTML = `<tr><td></td><td>Totaal</td><td>${T("open")} open</td><td class="r">${eur(T("budget"))}</td><td class="r">${eur(T("planned"))}</td><td class="r">${eur(T("spent"))}</td><td class="r">${eur(T("expected"))}</td><td></td><td></td></tr>`;
     } else if (st.tab === "subs") {
       const list = visibleSubs();
-      $("#count").textContent = `${list.length} subsidies`;
-      if (!list.length) return emptyRow(subs.length ? "<strong>Nothing matches</strong>Clear the search." : "<strong>No subsidies yet</strong>Add one above, then link house jobs to it from their Subsidy column.");
+      $("#count").textContent = `${list.length} premie${list.length === 1 ? "" : "s"}`;
+      if (!list.length) return emptyRow(subs.length ? "<strong>Niets gevonden</strong>Maak de zoekopdracht leeg." : "<strong>Nog geen premies</strong>Voeg er hierboven een toe en koppel er dan klussen aan via hun kolom Premie.");
       body.innerHTML = list.map((s, i) => subRow(s, i + 1)).join("");
       cards.innerHTML = list.map(subCard).join("");
-      foot.innerHTML = `<tr><td></td><td>Total</td><td></td><td class="r">${eur(list.reduce((a, s) => a + subExp(s), 0))}</td><td class="r">${eur(sum(list, "received"))}</td><td></td><td></td><td></td></tr>`;
+      foot.innerHTML = `<tr><td></td><td>Totaal</td><td></td><td class="r">${eur(list.reduce((a, s) => a + subExp(s), 0))}</td><td class="r">${eur(sum(list, "received"))}</td><td></td><td></td><td></td></tr>`;
     } else {
       const kind = st.tab, v = st[kind];
       const all = tasks.filter((t) => kindOf(t) === kind);
       const list = sortTasks(visibleTasks(kind), v);
-      $("#count").textContent = `${list.length} of ${all.length}`;
+      $("#count").textContent = `${list.length} van ${all.length}`;
       if (!list.length) {
         const inRoom = kind === "house" && isRealRoom(v.room) && !visibleTasks(kind).length && !tasks.some((t) => kindOf(t) === "house" && roomIdOf(t) === v.room && !isDone(t));
-        const m = inRoom ? `<strong>No open jobs in ${esc(roomName(v.room))}</strong>Type one above and press Enter; it goes straight into this room.` : all.length ? "<strong>Nothing matches these filters</strong>Pick “All rooms”, clear the search, or set Status to “All”." :
-          kind === "house" ? "<strong>Nothing to fix yet</strong>Type a job above, pick the room, and press Enter." : "<strong>No paperwork yet</strong>Type an item above and press Enter.";
+        const m = inRoom ? `<strong>Geen open klussen in ${esc(roomName(v.room))}</strong>Typ er hierboven een en druk op Enter; ze komt meteen in deze kamer.` : all.length ? "<strong>Niets voldoet aan deze filters</strong>Kies “Alle kamers”, maak de zoekopdracht leeg of zet Status op “Alles”." :
+          kind === "house" ? "<strong>Nog niets te doen</strong>Typ hierboven een klus, kies de kamer en druk op Enter." : "<strong>Nog geen papierwerk</strong>Typ hierboven iets en druk op Enter.";
         return emptyRow(m);
       }
-      const groupKey = v.group === "room" ? (t) => roomName(roomIdOf(t)) || "No room yet" : v.group === "trade" ? (t) => t.trade || "No type of work" : v.group === "cat" ? (t) => t.category || "No category" : null;
+      const groupKey = v.group === "room" ? (t) => roomName(roomIdOf(t)) || "Nog geen kamer" : v.group === "trade" ? (t) => trL(t.trade) || "Geen soort werk" : v.group === "cat" ? (t) => catL(t.category) || "Geen categorie" : null;
       if (groupKey) {
-        const order = v.group === "room" ? roomPairs().map((p) => p[1]) : v.group === "trade" ? TRADES : CATS;
+        const order = v.group === "room" ? roomPairs().map((p) => p[1]) : v.group === "trade" ? TRADES.map(trL) : CATS.map(catL);
         const keys = [...new Set(list.map(groupKey))].sort((a, b) => { const ia = order.indexOf(a), ib = order.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
         let html = "", chtml = "", i = 0;
         for (const k of keys) {
           const items = list.filter((t) => groupKey(t) === k);
-          const gs = kind === "house" ? `${items.length} · ${eur(sum(items, "estCost"))} planned · ${eur(sum(items, "actualCost"))} spent` : `${items.length}`;
+          const gs = kind === "house" ? `${items.length} · ${eur(sum(items, "estCost"))} gepland · ${eur(sum(items, "actualCost"))} uitgegeven` : `${items.length}`;
           html += `<tr class="group"><td colspan="${ncol}">${esc(k)}<span class="gsum">${gs}</span></td></tr>` + items.map((t) => taskRow(t, ++i, kind)).join("");
           chtml += `<div class="cgroup"><span>${esc(k)}</span><span>${items.length}</span></div>` + items.map((t) => taskCard(t, kind)).join("");
         }
@@ -1037,8 +1046,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         cards.innerHTML = list.map((t) => taskCard(t, kind)).join("");
       }
       foot.innerHTML = kind === "house"
-        ? `<tr><td></td><td></td><td>Total · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`
-        : `<tr><td></td><td></td><td>Total · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`;
+        ? `<tr><td></td><td></td><td>Totaal · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "estCost"))}</td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`
+        : `<tr><td></td><td></td><td>Totaal · ${list.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="r">${eur(sum(list, "actualCost"))}</td><td></td><td></td></tr>`;
     }
     if (panel && !$("#panel").hidden) refreshPanelLinks();
   }
@@ -1049,8 +1058,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const legacy = [...new Set(house.map(roomIdOf).filter((id) => id.startsWith("legacy:")))];
     const rows = [WHOLE, ...sortedRooms().map((r) => r.id), ...legacy].map((id) => ({ id, name: roomName(id), jobs: house.filter((t) => roomIdOf(t) === id), budget: (roomById.get(id) || {}).budget, room: !id.startsWith("legacy:") }));
     const none = house.filter((t) => !roomIdOf(t));
-    if (none.length) rows.push({ id: "__none", name: "No room yet", jobs: none });
-    rows.push({ id: "__admin", name: "Paperwork & fees", jobs: tasks.filter((t) => kindOf(t) === "admin") });
+    if (none.length) rows.push({ id: "__none", name: "Nog geen kamer", jobs: none });
+    rows.push({ id: "__admin", name: "Papierwerk & kosten", jobs: tasks.filter((t) => kindOf(t) === "admin") });
     return rows.map((r) => {
       const budget = hasNum(r.budget) ? Number(r.budget) : null, expected = sumBy(r.jobs, expectedOf);
       return { ...r, budget, planned: sumBy(r.jobs, plannedOf), spent: sumBy(r.jobs, spentOf), expected, diff: budget == null ? null : r2(budget - expected), open: r.jobs.filter((t) => !isDone(t)).length, done: r.jobs.filter(isDone).length };
@@ -1061,30 +1070,30 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const g = v.sortKey === "name" ? (r) => r.name.toLowerCase() : (r) => r[v.sortKey];
     return [...rows].sort((a, b) => cmpVal(g(a), g(b)) * v.sortDir);
   }
-  const fmtDiff = (d) => d == null ? "—" : d < 0 ? `${eur(-d)} over` : `${eur(d)} left`;
+  const fmtDiff = (d) => d == null ? "—" : d < 0 ? `${eur(-d)} te veel` : `${eur(d)} over`;
   const budgetLink = (r) => r.room ? `data-ropen="${esc(r.id)}"` : r.id === "__admin" ? `data-gotab="admin"` : `data-ropen="__none"`;
   function budgetRow(r, i) {
     const ro = canWrite ? "" : " disabled";
-    const bcell = r.room ? `<input class="cell money" data-rb="${esc(r.id)}" inputmode="decimal" value="${amtIn(r.budget)}" placeholder="—" aria-label="Budget for ${esc(r.name)}"${ro}>` : `<span style="display:block;padding:8px 10px;color:var(--muted)">—</span>`;
+    const bcell = r.room ? `<input class="cell money" data-rb="${esc(r.id)}" inputmode="decimal" value="${amtIn(r.budget)}" placeholder="—" aria-label="Budget voor ${esc(r.name)}"${ro}>` : `<span style="display:block;padding:8px 10px;color:var(--muted)">—</span>`;
     return `<tr data-bid="${esc(r.id)}">
       <td class="idx">${i}</td>
       <td class="pad strong">${esc(r.name)}</td>
-      <td class="pad">${r.open} open${r.done ? ` · ${r.done} done` : ""}</td>
+      <td class="pad">${r.open} open${r.done ? ` · ${r.done} gedaan` : ""}</td>
       <td class="r">${bcell}</td>
       <td class="r pad mono">${eur(r.planned)}</td>
       <td class="r pad mono">${eur(r.spent)}</td>
       <td class="r pad mono strong">${eur(r.expected)}</td>
       <td class="r pad mono ${r.diff == null ? "" : r.diff < 0 ? "neg" : "pos"}">${fmtDiff(r.diff)}</td>
-      <td><button class="open-btn" type="button" ${budgetLink(r)}>Open ›</button></td>
+      <td><button class="open-btn" type="button" ${budgetLink(r)}>Openen ›</button></td>
     </tr>`;
   }
   function budgetCardRow(r) {
-    return `<div class="card nochk" ${budgetLink(r)} role="button" tabindex="0" aria-label="${esc(r.name)}: open">
+    return `<div class="card nochk" ${budgetLink(r)} role="button" tabindex="0" aria-label="${esc(r.name)}: openen">
       <div class="t">${esc(r.name)}</div>
-      <div class="meta"><span>${r.open} open${r.done ? ` · ${r.done} done` : ""}</span>
-        <span class="money">Expected ${eur(r.expected)}${r.budget != null ? ` of ${eur(r.budget)}` : ""}</span>
+      <div class="meta"><span>${r.open} open${r.done ? ` · ${r.done} gedaan` : ""}</span>
+        <span class="money">Verwacht ${eur(r.expected)}${r.budget != null ? ` van ${eur(r.budget)}` : ""}</span>
         ${r.diff != null ? `<span class="chip ${r.diff < 0 ? "block" : "clear"}">${fmtDiff(r.diff)}</span>` : ""}
-        ${r.spent ? `<span class="money">${eur(r.spent)} spent</span>` : ""}</div>
+        ${r.spent ? `<span class="money">${eur(r.spent)} uitgegeven</span>` : ""}</div>
     </div>`;
   }
   function renderBudgetCard() {
@@ -1095,44 +1104,44 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (!card.dataset.built) {
       card.dataset.built = "1";
       card.innerHTML = `
-        <div class="rc-head"><h2>Budget for the works</h2></div>
+        <div class="rc-head"><h2>Budget voor de werken</h2></div>
         <div class="bc-inputs">
-          <div class="f"><label for="bTotal">Total budget (€)</label><input id="bTotal" inputmode="decimal" placeholder="e.g. 60.000"></div>
-          <div class="f"><label for="bBuf">Buffer for surprises (%)</label><input id="bBuf" inputmode="decimal" placeholder="${DEFAULT_BUFFER}"></div>
+          <div class="f"><label for="bTotal">Totaal budget (€)</label><input id="bTotal" inputmode="decimal" placeholder="bv. 60.000"></div>
+          <div class="f"><label for="bBuf">Buffer voor verrassingen (%)</label><input id="bBuf" inputmode="decimal" placeholder="${DEFAULT_BUFFER}"></div>
         </div>
         <div class="bc-status" id="bcStatus" aria-live="polite"></div>
         <div class="rc-barwrap"><div class="rc-bar" id="bcBar" role="img"></div><div class="rc-legend" id="bcLegend"></div></div>
         <div class="bc-figs" id="bcFigs"></div>
         <div class="bc-line" id="bcStages"></div>
         <div class="bc-line" id="bcAlloc"></div>
-        <p class="hint" style="margin:0">Expected final cost = what finished jobs actually cost, plus the planned price of open jobs (or what’s already paid, if that’s more). The buffer stays apart: “on track” means everything fits without touching it.</p>`;
+        <p class="hint" style="margin:0">Verwacht eindbedrag = wat afgewerkte klussen echt kostten, plus de geplande prijs van open klussen (of wat al betaald is, als dat meer is). De buffer blijft apart: “op schema” betekent dat alles past zonder eraan te komen.</p>`;
     }
     for (const [sel, val] of [["#bTotal", amtIn(m.planTotal)], ["#bBuf", numIn(hasNum(m.planBuffer) ? m.planBuffer : DEFAULT_BUFFER)]]) { const el = $(sel); el.disabled = !canWrite; if (document.activeElement !== el) el.value = val; }
     const expected = sumBy(tasks, expectedOf), spent = sumBy(tasks, spentOf), planned = sumBy(tasks, plannedOf), sub = subsTotal(), net = expected - sub;
     const { total, buffer, avail, bufPct } = pn;
     let cls = "", big, small;
-    if (total == null) { big = `${eur(expected)} expected so far`; small = "Fill in your total budget to see whether you’re on track."; }
-    else if (expected <= avail) { cls = "ok"; big = "On track"; small = `${eur(avail - expected)} left to plan, with the ${eur(buffer)} buffer still untouched.`; }
-    else if (expected <= total) { cls = "warn"; big = "Into the buffer"; small = `${eur(expected - avail)} of the ${eur(buffer)} buffer is already needed.`; }
-    else { cls = "hot"; big = `${eur(expected - total)} over budget`; small = "Even with the buffer. Look for jobs to drop, postpone or get cheaper quotes for."; }
+    if (total == null) { big = `${eur(expected)} verwacht tot nu toe`; small = "Vul je totale budget in om te zien of je op schema zit."; }
+    else if (expected <= avail) { cls = "ok"; big = "Op schema"; small = `Nog ${eur(avail - expected)} vrij om te plannen, en de buffer van ${eur(buffer)} is nog onaangeroerd.`; }
+    else if (expected <= total) { cls = "warn"; big = "In de buffer"; small = `${eur(expected - avail)} van de buffer van ${eur(buffer)} is al nodig.`; }
+    else { cls = "hot"; big = `${eur(expected - total)} over budget`; small = "Zelfs met de buffer erbij. Zoek klussen om te schrappen, uit te stellen of goedkoper te laten offreren."; }
     const s = $("#bcStatus"); s.className = "bc-status " + cls; s.innerHTML = `${esc(big)}<small>${esc(small)}</small>`;
     const max = Math.max(total || 0, expected, spent, 1), pct = (v) => Math.min(100, (v / max) * 100).toFixed(1) + "%";
     $("#bcBar").innerHTML = `<span class="rc-est" style="width:${pct(expected)}"></span><span class="rc-spent" style="width:${pct(spent)}"></span>${total ? `<span class="rc-mark avail" style="left:${pct(avail)}"></span><span class="rc-mark" style="left:calc(${pct(total)} - 1px)"></span>` : ""}`;
-    $("#bcBar").setAttribute("aria-label", `Spent ${eur(spent)}, expected ${eur(expected)}${total ? `, budget ${eur(total)} of which ${eur(buffer)} buffer` : ""}`);
-    $("#bcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Expected <b>${eur(expected)}</b></span>${total ? `<span><i class="sw avail"></i>Without buffer <b>${eur(avail)}</b></span><span><i class="sw mark"></i>Total budget <b>${eur(total)}</b></span>` : ""}`;
+    $("#bcBar").setAttribute("aria-label", `Uitgegeven ${eur(spent)}, verwacht ${eur(expected)}${total ? `, budget ${eur(total)} waarvan ${eur(buffer)} buffer` : ""}`);
+    $("#bcLegend").innerHTML = `<span><i class="sw spent"></i>Uitgegeven <b>${eur(spent)}</b></span><span><i class="sw est"></i>Verwacht <b>${eur(expected)}</b></span>${total ? `<span><i class="sw avail"></i>Zonder buffer <b>${eur(avail)}</b></span><span><i class="sw mark"></i>Totaal budget <b>${eur(total)}</b></span>` : ""}`;
     $("#bcFigs").innerHTML = `
-      <div class="stat"><div class="k">Budget</div><div class="v num">${eur(total)}</div><div class="s">${total != null ? `incl. ${numIn(bufPct)}% buffer (${eur(buffer)})` : "not set yet"}</div></div>
-      <div class="stat"><div class="k">Expected final</div><div class="v num">${eur(expected)}</div><div class="s">planned prices add up to <b>${eur(planned)}</b></div></div>
-      <div class="stat"><div class="k">Spent so far</div><div class="v num">${eur(spent)}</div><div class="s"><b>${eur(Math.max(expected - spent, 0))}</b> still to pay</div></div>
-      <div class="stat"><div class="k">Subsidies</div><div class="v num">${sub ? "− " : ""}${eur(sub)}</div><div class="s">eligible, applied or received</div></div>
-      <div class="stat"><div class="k">Net cost to you</div><div class="v num">${eur(net)}</div><div class="s"><b>${eur(net / 2)}</b> each, split 50/50</div></div>`;
+      <div class="stat"><div class="k">Budget</div><div class="v num">${eur(total)}</div><div class="s">${total != null ? `incl. ${numIn(bufPct)}% buffer (${eur(buffer)})` : "nog niet ingevuld"}</div></div>
+      <div class="stat"><div class="k">Verwacht eindbedrag</div><div class="v num">${eur(expected)}</div><div class="s">geplande prijzen samen: <b>${eur(planned)}</b></div></div>
+      <div class="stat"><div class="k">Al uitgegeven</div><div class="v num">${eur(spent)}</div><div class="s">nog <b>${eur(Math.max(expected - spent, 0))}</b> te betalen</div></div>
+      <div class="stat"><div class="k">Premies</div><div class="v num">${sub ? "− " : ""}${eur(sub)}</div><div class="s">in aanmerking, aangevraagd of ontvangen</div></div>
+      <div class="stat"><div class="k">Netto kost voor jullie</div><div class="v num">${eur(net)}</div><div class="s"><b>${eur(net / 2)}</b> elk, 50/50 gedeeld</div></div>`;
     const open = tasks.filter((t) => !isDone(t)), by = (k) => open.filter((t) => stageOf(t) === k);
     const stg = (k) => { const l = by(k); return l.length ? `<span class="chip stage-${k}">${STAGE[k]}: ${l.length}${k === "none" ? "" : " · " + eur(sumBy(l, plannedOf))}</span>` : ""; };
-    $("#bcStages").innerHTML = open.length ? `<span>How solid the plan is, for the ${open.length} open item${open.length === 1 ? "" : "s"}:</span>${stg("agreed")}${stg("quote")}${stg("guess")}${stg("none")}` : "";
+    $("#bcStages").innerHTML = open.length ? `<span>Hoe vast het plan staat, voor ${open.length === 1 ? "het open item" : `de ${open.length} open items`}:</span>${stg("agreed")}${stg("quote")}${stg("guess")}${stg("none")}` : "";
     const R = sumBy(budgetRows().filter((r) => r.room), (r) => num(r.budget));
-    $("#bcAlloc").innerHTML = total == null ? (R ? `<span>Room budgets add up to <b>${eur(R)}</b>.</span>` : "") :
-      R > avail ? `<span class="hot">Room budgets add up to ${eur(R)}, ${eur(R - avail)} more than the ${eur(avail)} available without the buffer.</span>` :
-      `<span>Room budgets: <b>${eur(R)}</b> given to rooms · <b>${eur(avail - R)}</b> not given to a room yet.</span>`;
+    $("#bcAlloc").innerHTML = total == null ? (R ? `<span>De kamerbudgetten zijn samen <b>${eur(R)}</b>.</span>` : "") :
+      R > avail ? `<span class="hot">De kamerbudgetten zijn samen ${eur(R)}: ${eur(R - avail)} meer dan de ${eur(avail)} die er zonder buffer is.</span>` :
+      `<span>Kamerbudgetten: <b>${eur(R)}</b> verdeeld over kamers · <b>${eur(avail - R)}</b> nog niet aan een kamer gegeven.</span>`;
   }
   $("#budgetCard").addEventListener("change", (e) => {
     const el = e.target; if (el.id !== "bTotal" && el.id !== "bBuf") return;
@@ -1147,7 +1156,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   // ---------- room page ----------
   const isRealRoom =(id) => id === WHOLE || (id && roomById.has(id));
   function writeRoomMeta(id, fields) {
-    if (!roomCol || !canWrite) { toast("This list is read-only for you right now."); return; }
+    if (!roomCol || !canWrite) { toast("Je kan deze lijst nu niet aanpassen."); return; }
     if (id === WHOLE && !roomById.has(WHOLE)) { roomCol.set(WHOLE, { name: WHOLE_LABEL, builtin: true, order: 0, createdAt: Date.now(), updatedAt: Date.now(), ...fields }).catch(handleWriteErr); return; }
     write(roomCol, id, fields);
   }
@@ -1159,13 +1168,13 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (card.dataset.room !== id) {
       card.dataset.room = id;
       card.innerHTML = `
-        <div class="rc-head"><h2 id="rcName"></h2>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Rename or manage rooms</button>` : ""}<button class="linkbtn small" type="button" id="rcAll">Back to all rooms</button></div>
+        <div class="rc-head"><h2 id="rcName"></h2>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Kamers hernoemen of beheren</button>` : ""}<button class="linkbtn small" type="button" id="rcAll">Terug naar alle kamers</button></div>
         <div class="rc-stats" id="rcStats"></div>
         <div class="rc-money">
-          <div class="f rc-budget"><label for="rcBudget">Budget for this room (€)</label><input id="rcBudget" class="num" inputmode="decimal" placeholder="—"${ro}></div>
+          <div class="f rc-budget"><label for="rcBudget">Budget voor deze kamer (€)</label><input id="rcBudget" class="num" inputmode="decimal" placeholder="—"${ro}></div>
           <div class="rc-barwrap"><div class="rc-bar" id="rcBar" role="img"></div><div class="rc-legend" id="rcLegend"></div></div>
         </div>
-        <div class="f"><label for="rcNotes">Room notes</label><textarea id="rcNotes" placeholder="Measurements, paint colours, materials, ideas, what’s behind the walls…"${ro}></textarea></div>`;
+        <div class="f"><label for="rcNotes">Notities bij deze kamer</label><textarea id="rcNotes" placeholder="Afmetingen, verfkleuren, materiaal, ideeën, wat er achter de muren zit…"${ro}></textarea></div>`;
       $("#rcNotes").value = meta.notes || ""; $("#rcBudget").value = amtIn(meta.budget);
     } else {
       if (document.activeElement !== $("#rcNotes") && !rcTimer) $("#rcNotes").value = meta.notes || "";
@@ -1177,14 +1186,14 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const urgent = open.filter((t) => (t.priority || 3) === 1).length, blocked = open.filter((t) => blockers(t).length).length;
     const est = sumBy(jobs, expectedOf), spent = sum(jobs, "actualCost"), hrs =jobs.filter((t) => t.doneBy === "Kilian (personal)").reduce((a, t) => a + (Number(t.hours) || 0), 0);
     const showDone = done && st.house.status === "open";
-    $("#rcStats").innerHTML = `<span><b>${open.length}</b> open</span>${urgent ? `<span class="hot">${urgent} urgent</span>` : ""}${blocked ? `<span>${blocked} waiting on something</span>` : ""}<span><b>${done}</b> done${showDone ? ` <button class="linkbtn small" type="button" id="rcShowDone">show</button>` : ""}</span>${hrs ? `<span>${hrs.toLocaleString("nl-BE")} h by Kilian</span>` : ""}`;
+    $("#rcStats").innerHTML = `<span><b>${open.length}</b> open</span>${urgent ? `<span class="hot">${urgent} dringend</span>` : ""}${blocked ? `<span>${blocked} wacht op iets</span>` : ""}<span><b>${done}</b> gedaan${showDone ? ` <button class="linkbtn small" type="button" id="rcShowDone">tonen</button>` : ""}</span>${hrs ? `<span>${hrs.toLocaleString("nl-BE")} u door Kilian</span>` : ""}`;
     const budget = meta.budget != null && meta.budget !== "" ? Number(meta.budget) : null;
     const max = Math.max(budget || 0, est, spent, 1);
     const pct = (v) => Math.min(100, (v / max) * 100).toFixed(1) + "%";
     $("#rcBar").innerHTML = `<span class="rc-est" style="width:${pct(est)}"></span><span class="rc-spent" style="width:${pct(spent)}"></span>${budget ? `<span class="rc-mark" style="left:${pct(budget)}"></span>` : ""}`;
-    $("#rcBar").setAttribute("aria-label", `Spent ${eur(spent)}, expected ${eur(est)}${budget ? `, budget ${eur(budget)}` : ""}`);
+    $("#rcBar").setAttribute("aria-label", `Uitgegeven ${eur(spent)}, verwacht ${eur(est)}${budget ? `, budget ${eur(budget)}` : ""}`);
     const over = budget != null && est > budget ? est - budget : 0;
-    $("#rcLegend").innerHTML = `<span><i class="sw spent"></i>Spent <b>${eur(spent)}</b></span><span><i class="sw est"></i>Expected <b>${eur(est)}</b></span>${budget != null ? `<span><i class="sw mark"></i>Budget <b>${eur(budget)}</b></span>` : ""}${over ? `<span class="hot">Expected cost is ${eur(over)} over budget</span>` : budget != null ? `<span>${eur(budget - est)} left</span>` : ""}`;
+    $("#rcLegend").innerHTML = `<span><i class="sw spent"></i>Uitgegeven <b>${eur(spent)}</b></span><span><i class="sw est"></i>Verwacht <b>${eur(est)}</b></span>${budget != null ? `<span><i class="sw mark"></i>Budget <b>${eur(budget)}</b></span>` : ""}${over ? `<span class="hot">De verwachte kost is ${eur(over)} hoger dan het budget</span>` : budget != null ? `<span>nog ${eur(budget - est)} over</span>` : ""}`;
   }
   let rcTimer = null;
   $("#roomCard").addEventListener("input", (e) => {
@@ -1219,7 +1228,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         const name = String(t.room || "").trim();
         if (t.roomId !== undefined) id = t.roomId;
         else if (!name) id = "";
-        else if (name === WHOLE_LABEL) id = WHOLE;
+        else if (name === WHOLE_LABEL || name === "Whole house") id = WHOLE;
         else {
           const ex = rooms.find((r) => (r.name || "").toLowerCase() === name.toLowerCase());
           if (ex) id = ex.id;
@@ -1247,8 +1256,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (f === "done") {
       const prev = { status: t.status || "todo", doneAt: t.doneAt || "" };
       patch(id, { status: el.checked ? "done" : "todo", doneAt: el.checked ? today() : "" });
-      if (el.checked) toast(`Done: “${t.title}”`, () => patch(id, prev));
-      else toast(`Back on the to-do list: “${t.title}”`, () => patch(id, prev));
+      if (el.checked) toast(`Gedaan: “${t.title}”`, () => patch(id, prev));
+      else toast(`Terug op de lijst: “${t.title}”`, () => patch(id, prev));
       return;
     }
     if ((f === "estCost" && estDerived(t)) || (f === "actualCost" && actDerived(t))) { el.value = numIn(t[f]); return; }
@@ -1315,7 +1324,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     e.preventDefault();
     const title = $("#quickAdd").value.trim(), sel = $("#quickSel").value;
     if (!title) { $("#quickAdd").focus(); return; }
-    if (!canWrite || !col) { toast("You can’t add items here right now."); return; }
+    if (!canWrite || !col) { toast("Je kan hier nu niets toevoegen."); return; }
     $("#quickAdd").value = "";
     try {
       if (st.tab === "subs") {
@@ -1325,7 +1334,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       } else {
         col.add(newTask("house", title, { roomId: sel === "__new" ? "" : sel, trade: st.house.trade, priority: st.house.pri ? Number(st.house.pri) : 3, owner: st.house.owner && st.house.owner !== "none" ? st.house.owner : "" }));
       }
-      toast(`Added “${title}”${st.tab === "house" && roomName(sel) ? " to " + roomName(sel) : ""}`);
+      toast(`“${title}” toegevoegd${st.tab === "house" && roomName(sel) ? " aan " + roomName(sel) : ""}`);
     } catch (err) { $("#quickAdd").value = title; handleWriteErr(err); }
   });
 
@@ -1335,60 +1344,60 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     $("#panel").innerHTML = html; $("#panel").hidden = false; $("#scrim").hidden = false;
     document.body.style.overflow = "hidden"; refreshPanelLinks(); $("#pClose").focus();
   }
-  const head = () => `<div class="panel-head"><span class="saved" aria-live="polite">${canWrite ? "Changes save automatically" : "View only"}</span><button class="btn" type="button" id="pClose">Close</button></div>`;
+  const head = () => `<div class="panel-head"><span class="saved" aria-live="polite">${canWrite ? "Wijzigingen worden automatisch bewaard" : "Alleen bekijken"}</span><button class="btn" type="button" id="pClose">Sluiten</button></div>`;
   function openTask(id) {
     const t = byId.get(id); if (!t) return;
     flushTimers(); panel = { type: "task", id };
     const ro = canWrite ? "" : " disabled", kind = kindOf(t);
     const houseBits = kind === "house" ? `
         <div class="row2">
-          <div class="f"><label for="pRoom">Room</label><select id="pRoom" data-p="roomId"${ro}>${opts([["", "No room yet"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</select>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Add or rename rooms</button>` : ""}</div>
-          <div class="f"><label for="pTrade">Type of work</label><select id="pTrade" data-p="trade"${ro}>${opts([["", "—"], ...TRADES.map((x) => [x, x])], t.trade)}</select></div>
+          <div class="f"><label for="pRoom">Kamer</label><select id="pRoom" data-p="roomId"${ro}>${opts([["", "Nog geen kamer"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t))}</select>${canWrite ? `<button class="linkbtn small" type="button" data-rooms="manage">Kamers toevoegen of hernoemen</button>` : ""}</div>
+          <div class="f"><label for="pTrade">Soort werk</label><select id="pTrade" data-p="trade"${ro}>${opts([["", "—"], ...TRADES.map((x) => [x, trL(x)])], t.trade)}</select></div>
         </div>
-        <div class="f"><span class="lbl">Tools &amp; materials</span><div class="tagbox" id="pTools"></div></div>` : `
+        <div class="f"><span class="lbl">Gereedschap &amp; materiaal</span><div class="tagbox" id="pTools"></div></div>` : `
         <div class="row2">
-          <div class="f"><label for="pCat">Category</label><select id="pCat" data-p="category"${ro}>${opts([["", "—"], ...CATS.map((x) => [x, x])], t.category)}</select></div>
-          <div class="f"><label for="pDue">Due</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>
+          <div class="f"><label for="pCat">Categorie</label><select id="pCat" data-p="category"${ro}>${opts([["", "—"], ...CATS.map((x) => [x, catL(x)])], t.category)}</select></div>
+          <div class="f"><label for="pDue">Tegen</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>
         </div>`;
     showPanel(head() + `<div class="panel-body">
-        <div class="f"><label for="pTitle">${kind === "house" ? "Fix / job" : "Paperwork"}</label><input id="pTitle" class="title-in" data-p="title" value="${esc(t.title)}"${ro}></div>
-        ${canWrite ? `<div class="kindswitch">Listed under <b>${kind === "house" ? "In the house" : "Paperwork"}</b> · <button class="btn" type="button" id="pMove">Move to ${kind === "house" ? "Paperwork" : "In the house"}</button></div>` : ""}
+        <div class="f"><label for="pTitle">${kind === "house" ? "Klus" : "Papierwerk"}</label><input id="pTitle" class="title-in" data-p="title" value="${esc(t.title)}"${ro}></div>
+        ${canWrite ? `<div class="kindswitch">Staat onder <b>${kind === "house" ? "In huis" : "Papierwerk"}</b> · <button class="btn" type="button" id="pMove">Verplaatsen naar ${kind === "house" ? "Papierwerk" : "In huis"}</button></div>` : ""}
         <div class="row2">
           <div class="f"><label for="pStatus">Status</label><select id="pStatus" data-p="status"${ro}>${opts(Object.entries(STATUS), t.status || "todo")}</select></div>
-          <div class="f"><label for="pPri">Priority</label><select id="pPri" data-p="priority"${ro}>${opts(Object.entries(PRI), t.priority || 3)}</select></div>
+          <div class="f"><label for="pPri">Prioriteit</label><select id="pPri" data-p="priority"${ro}>${opts(Object.entries(PRI), t.priority || 3)}</select></div>
         </div>
         <div class="row2">
-          <div class="f"><label for="pOwner">Who’s on it</label><select id="pOwner" data-p="owner"${ro}>${opts(OWNERS.map((o) => [o, o || "Unassigned"]), t.owner)}</select></div>
-          ${kind === "house" ? `<div class="f"><label for="pDue">Due</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>` : `<div class="f"><label for="pSub">Subsidy</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select></div>`}
+          <div class="f"><label for="pOwner">Wie doet het</label><select id="pOwner" data-p="owner"${ro}>${opts(OWNERS.map((o) => [o, ownL(o) || "Niemand"]), t.owner)}</select></div>
+          ${kind === "house" ? `<div class="f"><label for="pDue">Tegen</label><input id="pDue" type="date" data-p="due" value="${esc(t.due || "")}"${ro}></div>` : `<div class="f"><label for="pSub">Premie</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select></div>`}
         </div>
         ${houseBits}
-        ${kind === "house" ? `<div class="f"><label for="pSub">Subsidy</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select><p class="hint" style="margin:2px 0 0">Add new subsidies in the Subsidies tab, then link them here.</p></div>` : ""}
-        <div class="f"><label for="pNotes">Notes</label><textarea id="pNotes" data-p="notes" placeholder="${kind === "house" ? "Measurements, what to buy, photos taken, contractor’s number…" : "Who to call, reference numbers, links…"}"${ro}>${esc(t.notes || "")}</textarea></div>
+        ${kind === "house" ? `<div class="f"><label for="pSub">Premie</label><select id="pSub" data-p="subsidyId"${ro}>${opts(subPairs(), t.subsidyId)}</select><p class="hint" style="margin:2px 0 0">Voeg nieuwe premies toe in het tabblad Premies en koppel ze dan hier.</p></div>` : ""}
+        <div class="f"><label for="pNotes">Notities</label><textarea id="pNotes" data-p="notes" placeholder="${kind === "house" ? "Afmetingen, wat te kopen, foto’s, nummer van de aannemer…" : "Wie bellen, referentienummers, links…"}"${ro}>${esc(t.notes || "")}</textarea></div>
         <div class="section"><div class="money-wrap" id="pMoney"></div></div>
         ${kind === "house" ? `<div class="section">
-          <h3>Labour</h3>
+          <h3>Werk</h3>
           <div class="row2">
-            <div class="f"><label for="pBy">Work done by</label><select id="pBy" data-p="doneBy"${ro}>${opts(DONEBY.map((o) => [o, o || "—"]), t.doneBy)}</select></div>
-            <div class="f"><label for="pHrs">Hours</label><input id="pHrs" class="num" inputmode="decimal" data-p="hours" value="${numIn(t.hours)}"${ro}></div>
+            <div class="f"><label for="pBy">Werk gedaan door</label><select id="pBy" data-p="doneBy"${ro}>${opts(DONEBY.map((o) => [o, byL(o) || "—"]), t.doneBy)}</select></div>
+            <div class="f"><label for="pHrs">Uren</label><input id="pHrs" class="num" inputmode="decimal" data-p="hours" value="${numIn(t.hours)}"${ro}></div>
           </div>
-          <p class="hint">Hours marked “Kilian (personal)” add up in the header, for the valuation in your partner agreement. Work through his company is invoiced instead.</p>
+          <p class="hint">Uren met “Kilian (privé)” worden bovenaan opgeteld, voor de waardering in jullie partnerovereenkomst. Werk via zijn firma wordt gewoon gefactureerd.</p>
         </div>` : ""}
         <div class="section">
-          <h3>Waits on</h3>
-          <p class="hint">Tick what must be finished first. Paperwork and house jobs can depend on each other.</p>
+          <h3>Wacht op</h3>
+          <p class="hint">Vink aan wat eerst klaar moet zijn. Papierwerk en klussen in huis kunnen van elkaar afhangen.</p>
           <div class="deplist" id="pDeps"></div>
           <div class="f" id="pUnlocks"></div>
         </div>
-        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Delete</button></div></div>` : ""}
+        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Verwijderen</button></div></div>` : ""}
       </div>`);
   }
   function openRooms(focusNew) {
     flushTimers(); panel = { type: "rooms", id: "rooms" };
     showPanel(head() + `<div class="panel-body">
-        <div class="f"><span class="lbl">Rooms</span><h2 class="panel-h">Rooms in the house</h2></div>
-        <p class="hint" style="margin:0">“${WHOLE_LABEL}” is always there for general jobs. Add your own rooms below; renaming a room updates every job in it.</p>
+        <div class="f"><span class="lbl">Kamers</span><h2 class="panel-h">Kamers in huis</h2></div>
+        <p class="hint" style="margin:0">“${WHOLE_LABEL}” staat er altijd, voor algemene klussen. Voeg hieronder je eigen kamers toe; als je een kamer hernoemt, verandert dat bij elke klus in die kamer.</p>
         <div class="roomlist" id="roomsList"></div>
-        ${canWrite ? `<form class="roomadd" id="roomAdd" autocomplete="off"><input id="newRoom" placeholder="New room, e.g. Bathroom upstairs" aria-label="New room name" maxlength="60"><button class="btn primary" type="submit">Add room</button></form>` : ""}
+        ${canWrite ? `<form class="roomadd" id="roomAdd" autocomplete="off"><input id="newRoom" placeholder="Nieuwe kamer, bv. Badkamer boven" aria-label="Naam nieuwe kamer" maxlength="60"><button class="btn primary" type="submit">Kamer toevoegen</button></form>` : ""}
       </div>`);
     if (focusNew && $("#newRoom")) $("#newRoom").focus();
   }
@@ -1397,13 +1406,13 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (!force && document.activeElement && box.contains(document.activeElement) && document.activeElement.tagName === "INPUT") return;
     const counts = {}; tasks.forEach((t) => { const r = roomIdOf(t); if (r) counts[r] = (counts[r] || 0) + 1; });
     const list = sortedRooms(), ro = canWrite ? "" : " disabled";
-    box.innerHTML = `<div class="roomrow-item fixed"><span class="rname">${WHOLE_LABEL}</span><span class="rcount">${counts[WHOLE] || 0} jobs · always there</span><span class="rbtns"><button class="btn icon" type="button" data-ropen="${WHOLE}" aria-label="Open ${WHOLE_LABEL}">Open</button></span></div>` +
+    box.innerHTML = `<div class="roomrow-item fixed"><span class="rname">${WHOLE_LABEL}</span><span class="rcount">${counts[WHOLE] || 0} klus${counts[WHOLE] === 1 ? "" : "sen"} · altijd aanwezig</span><span class="rbtns"><button class="btn icon" type="button" data-ropen="${WHOLE}" aria-label="${WHOLE_LABEL} openen">Openen</button></span></div>` +
       (list.length ? list.map((r, i) => `<div class="roomrow-item" data-rid="${esc(r.id)}">
-        <input class="rinput" data-rname="${esc(r.id)}" value="${esc(r.name || "")}" aria-label="Room name" maxlength="60"${ro}>
-        <span class="rcount">${counts[r.id] || 0} job${counts[r.id] === 1 ? "" : "s"}</span>
-        <span class="rbtns"><button class="btn icon" type="button" data-ropen="${esc(r.id)}" aria-label="Open ${esc(r.name)}">Open</button></span>
-        ${canWrite ? `<span class="rbtns"><button class="btn icon" type="button" data-rmove="up" ${i === 0 ? "disabled" : ""} aria-label="Move ${esc(r.name)} up">↑</button><button class="btn icon" type="button" data-rmove="down" ${i === list.length - 1 ? "disabled" : ""} aria-label="Move ${esc(r.name)} down">↓</button><button class="btn icon danger" type="button" data-rdel aria-label="Delete ${esc(r.name)}">✕</button></span>` : ""}
-      </div>`).join("") : `<p class="hint" style="margin:6px 0 0">No rooms yet. Add the first one below.</p>`);
+        <input class="rinput" data-rname="${esc(r.id)}" value="${esc(r.name || "")}" aria-label="Naam van de kamer" maxlength="60"${ro}>
+        <span class="rcount">${counts[r.id] || 0} klus${counts[r.id] === 1 ? "" : "sen"}</span>
+        <span class="rbtns"><button class="btn icon" type="button" data-ropen="${esc(r.id)}" aria-label="${esc(r.name)} openen">Openen</button></span>
+        ${canWrite ? `<span class="rbtns"><button class="btn icon" type="button" data-rmove="up" ${i === 0 ? "disabled" : ""} aria-label="${esc(r.name)} naar boven">↑</button><button class="btn icon" type="button" data-rmove="down" ${i === list.length - 1 ? "disabled" : ""} aria-label="${esc(r.name)} naar beneden">↓</button><button class="btn icon danger" type="button" data-rdel aria-label="${esc(r.name)} verwijderen">✕</button></span>` : ""}
+      </div>`).join("") : `<p class="hint" style="margin:6px 0 0">Nog geen kamers. Voeg hieronder de eerste toe.</p>`);
   }
   function roomNameTaken(name, exceptId) {
     const n = name.trim().toLowerCase();
@@ -1411,10 +1420,10 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   }
   async function addRoom(name) {
     name = name.trim(); if (!name) return null;
-    if (roomNameTaken(name)) { toast(`There’s already a room with that name.`); return null; }
+    if (roomNameTaken(name)) { toast(`Er is al een kamer met die naam.`); return null; }
     const order = rooms.reduce((m, r) => Math.max(m, r.order ?? 0), 0) + 1;
     const ref = await roomCol.add({ name, order, createdAt: Date.now(), updatedAt: Date.now() });
-    toast(`Added room “${name}”`);
+    toast(`Kamer “${name}” toegevoegd`);
     return ref;
   }
   function openSub(id) {
@@ -1422,27 +1431,27 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     flushTimers(); panel = { type: "sub", id };
     const ro = canWrite ? "" : " disabled";
     showPanel(head() + `<div class="panel-body">
-        <div class="f"><label for="sName">Subsidy</label><input id="sName" class="title-in" data-sp="name" value="${esc(s.name)}"${ro}></div>
+        <div class="f"><label for="sName">Premie</label><input id="sName" class="title-in" data-sp="name" value="${esc(s.name)}"${ro}></div>
         <div class="row2">
           <div class="f"><label for="sStatus">Status</label><select id="sStatus" data-sp="status"${ro}>${opts(Object.entries(SUB), s.status || "check")}</select></div>
-          <div class="f"><label for="sDead">Apply before</label><input id="sDead" type="date" data-sp="deadline" value="${esc(s.deadline || "")}"${ro}></div>
+          <div class="f"><label for="sDead">Aanvragen voor</label><input id="sDead" type="date" data-sp="deadline" value="${esc(s.deadline || "")}"${ro}></div>
         </div>
         <div class="row2">
-          <div class="f"><label for="sExp">Expected (€)</label><input id="sExp" class="num" inputmode="decimal" data-sp="expected" value="${numIn(s.expected)}"${ro}></div>
-          <div class="f"><label for="sRec">Received (€)</label><input id="sRec" class="num" inputmode="decimal" data-sp="received" value="${numIn(s.received)}"${ro}></div>
+          <div class="f"><label for="sExp">Verwacht (€)</label><input id="sExp" class="num" inputmode="decimal" data-sp="expected" value="${numIn(s.expected)}"${ro}></div>
+          <div class="f"><label for="sRec">Ontvangen (€)</label><input id="sRec" class="num" inputmode="decimal" data-sp="received" value="${numIn(s.received)}"${ro}></div>
         </div>
-        <div class="f"><label for="sCond">Conditions &amp; proof needed</label><textarea id="sCond" data-sp="conditions" placeholder="e.g. contractor invoice, before/after photos, apply within 2 years of final invoice"${ro}>${esc(s.conditions || "")}</textarea></div>
+        <div class="f"><label for="sCond">Voorwaarden &amp; nodige bewijzen</label><textarea id="sCond" data-sp="conditions" placeholder="bv. factuur van de aannemer, foto’s voor/na, aanvragen binnen 2 jaar na de eindfactuur"${ro}>${esc(s.conditions || "")}</textarea></div>
         <div class="f"><label for="sLink">Website</label><input id="sLink" data-sp="link" type="url" value="${esc(s.link || "")}" placeholder="https://"${ro}><div id="sLinkOut"></div></div>
-        <div class="f"><label for="sNotes">Notes</label><textarea id="sNotes" data-sp="notes"${ro}>${esc(s.notes || "")}</textarea></div>
-        <div class="section"><h3>Linked jobs</h3><div id="sLinked"></div></div>
-        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Delete subsidy</button></div></div>` : ""}
+        <div class="f"><label for="sNotes">Notities</label><textarea id="sNotes" data-sp="notes"${ro}>${esc(s.notes || "")}</textarea></div>
+        <div class="section"><h3>Gekoppelde klussen</h3><div id="sLinked"></div></div>
+        ${canWrite ? `<div class="section"><div class="confirm" id="pDelWrap"><button class="btn danger" type="button" id="pDel">Premie verwijderen</button></div></div>` : ""}
       </div>`);
   }
   function renderTagBox(t) {
     const box = $("#pTools"); if (!box) return;
-    if (document.activeElement && document.activeElement.id === "pToolIn") { box.querySelectorAll(".chip").forEach((c) => c.remove()); box.insertAdjacentHTML("afterbegin", toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="Remove ${esc(x)}">×</button>` : ""}</span>`).join("")); return; }
-    box.innerHTML = toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="Remove ${esc(x)}">×</button>` : ""}</span>`).join("") +
-      (canWrite ? `<input id="pToolIn" list="toollist" placeholder="${toolsOf(t).length ? "Add another" : "e.g. Ladder, then Enter"}" aria-label="Add tool or material">` : (toolsOf(t).length ? "" : `<span class="count">None</span>`));
+    if (document.activeElement && document.activeElement.id === "pToolIn") { box.querySelectorAll(".chip").forEach((c) => c.remove()); box.insertAdjacentHTML("afterbegin", toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="${esc(x)} weghalen">×</button>` : ""}</span>`).join("")); return; }
+    box.innerHTML = toolsOf(t).map((x) => `<span class="chip tool">${esc(x)}${canWrite ? `<button type="button" data-rmtool="${esc(x)}" aria-label="${esc(x)} weghalen">×</button>` : ""}</span>`).join("") +
+      (canWrite ? `<input id="pToolIn" list="toollist" placeholder="${toolsOf(t).length ? "Nog iets toevoegen" : "bv. Ladder, dan Enter"}" aria-label="Gereedschap of materiaal toevoegen">` : (toolsOf(t).length ? "" : `<span class="count">Geen</span>`));
   }
   function refreshPanelLinks() {
     if (!panel) return;
@@ -1450,24 +1459,24 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (panel.type === "sub") {
       const s = subById.get(panel.id); if (!s) { closePanel(); return; }
       const lt = linkedTasks(s.id);
-      $("#sLinked").innerHTML = lt.length ? `<div class="chips">${lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}${t.estCost != null ? " · " + eur(t.estCost) : ""}</button>`).join("")}</div><p class="hint" style="margin:8px 0 0">Planned cost of linked jobs: <b>${eur(sum(lt, "estCost"))}</b> · spent ${eur(sum(lt, "actualCost"))}</p>` : `<p class="hint" style="margin:0">No jobs linked yet. Pick this subsidy in a job’s Subsidy column.</p>`;
+      $("#sLinked").innerHTML = lt.length ? `<div class="chips">${lt.map((t) => `<button class="chip" type="button" data-open="${esc(t.id)}">${esc(t.title)}${t.estCost != null ? " · " + eur(t.estCost) : ""}</button>`).join("")}</div><p class="hint" style="margin:8px 0 0">Geplande kost van de gekoppelde klussen: <b>${eur(sum(lt, "estCost"))}</b> · uitgegeven ${eur(sum(lt, "actualCost"))}</p>` : `<p class="hint" style="margin:0">Nog geen klussen gekoppeld. Kies deze premie in de kolom Premie van een klus.</p>`;
       const url = (s.link || "").trim();
-      $("#sLinkOut").innerHTML = /^https?:\/\//i.test(url) ? `<a class="linkout" href="${esc(url)}" target="_blank" rel="noopener">Open website ↗</a>` : "";
+      $("#sLinkOut").innerHTML = /^https?:\/\//i.test(url) ? `<a class="linkout" href="${esc(url)}" target="_blank" rel="noopener">Website openen ↗</a>` : "";
       return;
     }
     const t = byId.get(panel.id); if (!t) { closePanel(); return; }
     renderTagBox(t); renderMoney(t);
     const pr = $("#pRoom");
-    if (pr && document.activeElement !== pr) pr.innerHTML = opts([["", "No room yet"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t));
+    if (pr && document.activeElement !== pr) pr.innerHTML = opts([["", "Nog geen kamer"], ...roomPairs(), ...(roomIdOf(t).startsWith("legacy:") ? [[roomIdOf(t), roomName(roomIdOf(t))]] : [])], roomIdOf(t));
     const box = $("#pDeps"); if (!box) return;
     const others = tasks.filter((o) => o.id !== t.id).sort((a, b) => isDone(a) - isDone(b) || (a.title || "").localeCompare(b.title || ""));
     const mine = new Set(t.dependsOn || []);
     box.innerHTML = others.length ? others.map((o) => {
       const cyc = !mine.has(o.id) && dependsTransitively(o.id, t.id);
-      return `<label class="${cyc ? "dis" : ""}"><input type="checkbox" value="${esc(o.id)}"${mine.has(o.id) ? " checked" : ""}${cyc || !canWrite ? " disabled" : ""}><span>${esc(o.title)}${isDone(o) ? " · done" : ""}${cyc ? " · already waits on this" : ""}</span><span class="k">${kindOf(o) === "admin" ? "Paperwork" : esc(roomName(roomIdOf(o)) || "House")}</span></label>`;
-    }).join("") : `<label class="dis"><span>Add more items to link them.</span></label>`;
+      return `<label class="${cyc ? "dis" : ""}"><input type="checkbox" value="${esc(o.id)}"${mine.has(o.id) ? " checked" : ""}${cyc || !canWrite ? " disabled" : ""}><span>${esc(o.title)}${isDone(o) ? " · gedaan" : ""}${cyc ? " · wacht hier zelf al op" : ""}</span><span class="k">${kindOf(o) === "admin" ? "Papierwerk" : esc(roomName(roomIdOf(o)) || "Huis")}</span></label>`;
+    }).join("") : `<label class="dis"><span>Voeg meer items toe om ze te koppelen.</span></label>`;
     const unlocks = tasks.filter((o) => (o.dependsOn || []).includes(t.id));
-    $("#pUnlocks").innerHTML = unlocks.length ? `<span class="lbl">Finishing this unblocks</span><div class="chips">${unlocks.map((o) => `<button class="chip" type="button" data-open="${esc(o.id)}">${esc(o.title)}</button>`).join("")}</div>` : "";
+    $("#pUnlocks").innerHTML = unlocks.length ? `<span class="lbl">Als dit klaar is, kan dit verder</span><div class="chips">${unlocks.map((o) => `<button class="chip" type="button" data-open="${esc(o.id)}">${esc(o.title)}</button>`).join("")}</div>` : "";
   }
   // quotes & payments inside the job panel; rebuilt on every change, keeping the field you're typing in
   let pendingFocus = null;
@@ -1493,52 +1502,52 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const a = document.activeElement, inBox = a && box.contains(a);
     const keep = inBox ? { sel: moneyKey(a), text: (a.tagName === "INPUT" && a.type !== "checkbox") || a.tagName === "TEXTAREA", value: a.value, s: (() => { try { return [a.selectionStart, a.selectionEnd]; } catch (e) { return null; } })() } : null;
     const ro = canWrite ? "" : " disabled", qs = quotesOf(t), ps = paysOf(t), c = chosenQuote(t), stg = stageOf(t);
-    let html = `<h3>Planned price</h3>
+    let html = `<h3>Geplande prijs</h3>
       <div class="planhead"><span class="pv">${hasNum(t.estCost) ? eur(t.estCost) : "—"}</span><span class="chip stage-${stg}">${STAGE[stg]}</span></div>`;
     html += estDerived(t)
-      ? `<p class="hint" style="margin:0">From ${c.who ? `<b>${esc(c.who)}</b>’s` : "the chosen"} quote${c.signed ? ", signed" : ""}. Click “✓ Chosen” again to go back to your own guess.</p>`
-      : `<div class="f"><label for="pEst">${qs.length ? "Your own guess (€), until you choose a quote" : "Your own guess (€)"}</label><input id="pEst" class="num" inputmode="decimal" data-p="estCost" value="${amtIn(t.estCost)}" placeholder="e.g. 1.500"${ro}></div>`;
-    html += `<div class="f"><span class="lbl">Quotes${qs.length ? ` (${qs.length})` : ""}</span><div class="qlist">` + qs.map((q, i) => {
+      ? `<p class="hint" style="margin:0">Uit de offerte van ${c.who ? `<b>${esc(c.who)}</b>` : "de gekozen aannemer"}${c.signed ? ", getekend" : ""}. Klik nog eens op “✓ Gekozen” om terug te gaan naar je eigen schatting.</p>`
+      : `<div class="f"><label for="pEst">${qs.length ? "Je eigen schatting (€), tot je een offerte kiest" : "Je eigen schatting (€)"}</label><input id="pEst" class="num" inputmode="decimal" data-p="estCost" value="${amtIn(t.estCost)}" placeholder="bv. 1.500"${ro}></div>`;
+    html += `<div class="f"><span class="lbl">Offertes${qs.length ? ` (${qs.length})` : ""}</span><div class="qlist">` + qs.map((q, i) => {
       const tot = quoteTotal(q), n = i + 1;
       return `<div class="qitem${q.chosen ? " chosen" : ""}" data-qid="${esc(q.id)}">
-        <div class="qrow"><input data-q="who" value="${esc(q.who || "")}" placeholder="Contractor or shop" aria-label="Quote ${n}: contractor or shop"${ro}>
-          <input data-q="amount" class="num" inputmode="decimal" value="${amtIn(q.amount)}" placeholder="Amount €" aria-label="Quote ${n}: amount in euro"${ro}>
-          <select data-q="vat" aria-label="Quote ${n}: VAT"${ro}>${opts(Object.entries(VAT), q.vat || "incl")}</select></div>
-        <div class="qrow2"><input type="date" data-q="date" value="${esc(q.date || "")}" aria-label="Quote ${n}: date"${ro}>
-          <input data-q="note" value="${esc(q.note || "")}" placeholder="What’s included, valid until…" aria-label="Quote ${n}: note"${ro}></div>
-        <div class="qfoot"><span>${tot == null ? "No amount yet" : q.vat && q.vat !== "incl" ? `Incl. VAT <b>${eur(tot)}</b>` : `<b>${eur(tot)}</b> incl. VAT`}</span>
-          ${canWrite ? `<button class="btn small${q.chosen ? " on" : ""}" type="button" data-qchoose="${esc(q.id)}" aria-pressed="${q.chosen ? "true" : "false"}">${q.chosen ? "✓ Chosen" : "Choose this one"}</button>` : q.chosen ? `<span class="chip stage-quote">Chosen</span>` : ""}
-          ${q.chosen ? `<label class="qsigned"><input type="checkbox" data-q="signed"${q.signed ? " checked" : ""}${ro}> Signed / agreed</label>` : ""}
-          ${canWrite ? `<button class="linkbtn small danger" type="button" data-qdel="${esc(q.id)}">Remove</button>` : ""}</div>
+        <div class="qrow"><input data-q="who" value="${esc(q.who || "")}" placeholder="Aannemer of winkel" aria-label="Offerte ${n}: aannemer of winkel"${ro}>
+          <input data-q="amount" class="num" inputmode="decimal" value="${amtIn(q.amount)}" placeholder="Bedrag €" aria-label="Offerte ${n}: bedrag in euro"${ro}>
+          <select data-q="vat" aria-label="Offerte ${n}: btw"${ro}>${opts(Object.entries(VAT), q.vat || "incl")}</select></div>
+        <div class="qrow2"><input type="date" data-q="date" value="${esc(q.date || "")}" aria-label="Offerte ${n}: datum"${ro}>
+          <input data-q="note" value="${esc(q.note || "")}" placeholder="Wat inbegrepen is, geldig tot…" aria-label="Offerte ${n}: notitie"${ro}></div>
+        <div class="qfoot"><span>${tot == null ? "Nog geen bedrag" : q.vat && q.vat !== "incl" ? `Incl. btw <b>${eur(tot)}</b>` : `<b>${eur(tot)}</b> incl. btw`}</span>
+          ${canWrite ? `<button class="btn small${q.chosen ? " on" : ""}" type="button" data-qchoose="${esc(q.id)}" aria-pressed="${q.chosen ? "true" : "false"}">${q.chosen ? "✓ Gekozen" : "Deze kiezen"}</button>` : q.chosen ? `<span class="chip stage-quote">Gekozen</span>` : ""}
+          ${q.chosen ? `<label class="qsigned"><input type="checkbox" data-q="signed"${q.signed ? " checked" : ""}${ro}> Getekend / akkoord</label>` : ""}
+          ${canWrite ? `<button class="linkbtn small danger" type="button" data-qdel="${esc(q.id)}">Weghalen</button>` : ""}</div>
       </div>`;
     }).join("") + `</div>`;
     const priced = qs.filter((q) => quoteTotal(q) != null).sort((x, y) => quoteTotal(x) - quoteTotal(y));
-    if (priced.length > 1) { const lo = priced[0], hi = priced[priced.length - 1]; html += `<p class="hint" style="margin:4px 0 0">Cheapest: <b>${esc(lo.who || "unnamed")}</b> at ${eur(quoteTotal(lo))}${quoteTotal(hi) > quoteTotal(lo) ? ` · ${eur(quoteTotal(hi) - quoteTotal(lo))} less than the most expensive` : ""}.</p>`; }
-    if (canWrite) html += `<button class="btn small add" type="button" id="pAddQuote">+ Add a quote</button>`;
+    if (priced.length > 1) { const lo = priced[0], hi = priced[priced.length - 1]; html += `<p class="hint" style="margin:4px 0 0">Goedkoopst: <b>${esc(lo.who || "zonder naam")}</b> met ${eur(quoteTotal(lo))}${quoteTotal(hi) > quoteTotal(lo) ? ` · ${eur(quoteTotal(hi) - quoteTotal(lo))} minder dan de duurste` : ""}.</p>`; }
+    if (canWrite) html += `<button class="btn small add" type="button" id="pAddQuote">+ Offerte toevoegen</button>`;
     html += `</div>`;
-    html += `<h3 class="mt">Payments</h3><div class="qlist">` + ps.map((p, i) => {
+    html += `<h3 class="mt">Betalingen</h3><div class="qlist">` + ps.map((p, i) => {
       const n = i + 1;
       return `<div class="payitem" data-pid="${esc(p.id)}">
-        <input type="date" data-pay="date" value="${esc(p.date || "")}" aria-label="Payment ${n}: date"${ro}>
-        <input data-pay="amount" class="num" inputmode="decimal" value="${amtIn(p.amount)}" placeholder="Amount €" aria-label="Payment ${n}: amount in euro"${ro}>
-        <select data-pay="kind" aria-label="Payment ${n}: type"${ro}>${opts(Object.entries(PAYKIND), p.kind || "invoice")}</select>
-        ${canWrite ? `<button class="btn icon danger" type="button" data-paydel="${esc(p.id)}" aria-label="Remove payment ${n}">✕</button>` : "<span></span>"}
-        <input class="paynote" data-pay="note" value="${esc(p.note || "")}" placeholder="Note, e.g. invoice number" aria-label="Payment ${n}: note"${ro}>
+        <input type="date" data-pay="date" value="${esc(p.date || "")}" aria-label="Betaling ${n}: datum"${ro}>
+        <input data-pay="amount" class="num" inputmode="decimal" value="${amtIn(p.amount)}" placeholder="Bedrag €" aria-label="Betaling ${n}: bedrag in euro"${ro}>
+        <select data-pay="kind" aria-label="Betaling ${n}: soort"${ro}>${opts(Object.entries(PAYKIND), p.kind || "invoice")}</select>
+        ${canWrite ? `<button class="btn icon danger" type="button" data-paydel="${esc(p.id)}" aria-label="Betaling ${n} weghalen">✕</button>` : "<span></span>"}
+        <input class="paynote" data-pay="note" value="${esc(p.note || "")}" placeholder="Notitie, bv. factuurnummer" aria-label="Betaling ${n}: notitie"${ro}>
       </div>`;
     }).join("") + `</div>`;
-    if (!ps.length && hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Spent so far was entered as one amount: <b>${eur(t.actualCost)}</b>. Adding a payment keeps it as the first line.</p>`;
-    if (!ps.length && !hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Add each deposit, invoice or final bill when you pay it.</p>`;
-    if (canWrite) html += `<button class="btn small add" type="button" id="pAddPay">+ Add a payment</button>`;
+    if (!ps.length && hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Wat al uitgegeven is, staat als één bedrag: <b>${eur(t.actualCost)}</b>. Als je een betaling toevoegt, blijft dat de eerste lijn.</p>`;
+    if (!ps.length && !hasNum(t.actualCost)) html += `<p class="hint" style="margin:0">Voeg elk voorschot, elke factuur of eindfactuur toe wanneer je ze betaalt.</p>`;
+    if (canWrite) html += `<button class="btn small add" type="button" id="pAddPay">+ Betaling toevoegen</button>`;
     if (ps.length || hasNum(t.actualCost)) {
       const paid = spentOf(t), plan = hasNum(t.estCost) ? Number(t.estCost) : null;
       let extra = "";
       if (plan != null) {
         const d = r2(paid - plan);
-        if (d > 0) extra = `<span class="hot">${eur(d)} more than planned${plan ? ` (+${Math.round(d / plan * 100)}%)` : ""}</span>`;
-        else if (isDone(t)) extra = d < 0 ? `<span class="okc">${eur(-d)} less than planned</span>` : "exactly as planned";
-        else extra = d < 0 ? `<b>${eur(-d)}</b> still to pay` : "fully paid";
+        if (d > 0) extra = `<span class="hot">${eur(d)} meer dan gepland${plan ? ` (+${Math.round(d / plan * 100)}%)` : ""}</span>`;
+        else if (isDone(t)) extra = d < 0 ? `<span class="okc">${eur(-d)} minder dan gepland</span>` : "precies zoals gepland";
+        else extra = d < 0 ? `nog <b>${eur(-d)}</b> te betalen` : "volledig betaald";
       }
-      html += `<p class="paysum" style="margin:0">Paid <b>${eur(paid)}</b>${plan != null ? ` of ${eur(plan)} planned` : ""}${extra ? " · " + extra : ""}</p>`;
+      html += `<p class="paysum" style="margin:0">Betaald <b>${eur(paid)}</b>${plan != null ? ` van ${eur(plan)} gepland` : ""}${extra ? " · " + extra : ""}</p>`;
     }
     box.innerHTML = html;
     if (pendingFocus) { const el = box.querySelector(pendingFocus); pendingFocus = null; if (el) el.focus(); }
@@ -1581,18 +1590,18 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       const quotes = quotesOf(t).map((q) => ({ ...q, chosen: !was && q.id === id, signed: !was && q.id === id ? !!q.signed : false }));
       pendingFocus = `[data-qchoose="${id}"]`;
       writeQuotes(t, quotes);
-      if (!was) { const q = quotes.find((x) => x.id === id); if (quoteTotal(q) == null) toast("Fill in this quote’s amount and it becomes the planned price."); }
+      if (!was) { const q = quotes.find((x) => x.id === id); if (quoteTotal(q) == null) toast("Vul het bedrag van deze offerte in, dan wordt het de geplande prijs."); }
       return true;
     }
     const qd = e.target.closest("[data-qdel]");
     if (qd) {
       const prev = { quotes: quotesOf(t), estCost: t.estCost ?? null }, q = prev.quotes.find((x) => x.id === qd.dataset.qdel);
       writeQuotes(t, prev.quotes.filter((x) => x.id !== qd.dataset.qdel));
-      toast(`Removed the quote${q && q.who ? " from " + q.who : ""}`, () => patch(t.id, prev)); return true;
+      toast(`Offerte${q && q.who ? " van " + q.who : ""} weggehaald`, () => patch(t.id, prev)); return true;
     }
     if (e.target.id === "pAddPay") {
       let pays = paysOf(t).map((p) => ({ ...p }));
-      if (!pays.length && hasNum(t.actualCost)) pays.push({ id: newId(), date: t.doneAt || today(), amount: Number(t.actualCost), kind: "other", note: "Entered earlier as one amount" });
+      if (!pays.length && hasNum(t.actualCost)) pays.push({ id: newId(), date: t.doneAt || today(), amount: Number(t.actualCost), kind: "other", note: "Eerder als één bedrag ingevuld" });
       const p = { id: newId(), date: today(), amount: null, kind: "invoice", note: "" };
       pendingFocus = `[data-pid="${p.id}"] [data-pay="amount"]`;
       writePays(t, [...pays, p]); return true;
@@ -1601,7 +1610,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (pd) {
       const prev = { payments: paysOf(t), actualCost: t.actualCost ?? null }, p = prev.payments.find((x) => x.id === pd.dataset.paydel);
       writePays(t, prev.payments.filter((x) => x.id !== pd.dataset.paydel));
-      toast(`Removed the payment${p && hasNum(p.amount) ? " of " + eur(p.amount) : ""}`, () => patch(t.id, prev)); return true;
+      toast(`Betaling${p && hasNum(p.amount) ? " van " + eur(p.amount) : ""} weggehaald`, () => patch(t.id, prev)); return true;
     }
     return false;
   }
@@ -1621,7 +1630,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if ((rec[f] ?? "") === (v ?? "")) return;
     const fields = { [f]: v };
     if (f === "status" && !isSub) fields.doneAt = v === "done" ? today() : "";
-    const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saving…";
+    const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Bewaren…";
     (isSub ? patchSub : patch)(rec.id, fields);
   }
   function addTool(raw) {
@@ -1645,7 +1654,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (el.closest("#pDeps")) {
       const t = byId.get(panel.id); if (!t) return;
       const set = new Set(t.dependsOn || []); el.checked ? set.add(el.value) : set.delete(el.value);
-      const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Saving…";
+      const s = document.querySelector(".panel .saved"); if (s) s.textContent = "Bewaren…";
       patch(t.id, { dependsOn: [...set] }); return;
     }
     if (el.id === "pToolIn") { if (el.value.trim()) { addTool(el.value); el.value = ""; } return; }
@@ -1654,8 +1663,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       if (!r) return;
       if (!name) { el.value = r.name; return; }
       if (name === r.name) return;
-      if (roomNameTaken(name, rid)) { toast(`There’s already a room with that name.`); el.value = r.name; return; }
-      write(roomCol, rid, { name }); toast(`Renamed to “${name}”`);
+      if (roomNameTaken(name, rid)) { toast(`Er is al een kamer met die naam.`); el.value = r.name; return; }
+      write(roomCol, rid, { name }); toast(`Hernoemd naar “${name}”`);
       return;
     }
     if (el.id === "newRoom") return;
@@ -1694,7 +1703,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     if (del) {
       const row = del.closest("[data-rid]"), rid = row.dataset.rid, r = roomById.get(rid);
       const n = tasks.filter((t) => roomIdOf(t) === rid).length;
-      row.insertAdjacentHTML("afterend", `<div class="confirm rconfirm" data-rconfirm="${esc(rid)}"><span>Delete “${esc(r ? r.name : "")}”?${n ? (n === 1 ? " Its 1 job moves to “No room yet”." : ` Its ${n} jobs move to “No room yet”.`) : ""}</span><button class="btn danger" type="button" data-rdelyes="${esc(rid)}">Yes, delete</button><button class="btn" type="button" data-rdelno>Keep it</button></div>`);
+      row.insertAdjacentHTML("afterend", `<div class="confirm rconfirm" data-rconfirm="${esc(rid)}"><span>“${esc(r ? r.name : "")}” verwijderen?${n ? (n === 1 ? " De klus erin gaat naar “Nog geen kamer”." : ` De ${n} klussen erin gaan naar “Nog geen kamer”.`) : ""}</span><button class="btn danger" type="button" data-rdelyes="${esc(rid)}">Ja, verwijderen</button><button class="btn" type="button" data-rdelno>Toch houden</button></div>`);
       del.disabled = true;
       return;
     }
@@ -1705,7 +1714,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       for (const t of tasks) if (roomIdOf(t) === rid) patch(t.id, { roomId: "" });
       roomCol.doc(rid).delete().catch(handleWriteErr);
       if (st.house.room === rid) { st.house.room = ""; saveView(); }
-      toast(`Deleted room “${r ? r.name : ""}”`);
+      toast(`Kamer “${r ? r.name : ""}” verwijderd`);
       return;
     }
     const rm = e.target.closest("[data-rmtool]");
@@ -1713,10 +1722,10 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const op = e.target.closest("[data-open]"); if (op) { openTask(op.dataset.open); return; }
     if (id === "pMove") {
       const t = byId.get(panel.id); const to = kindOf(t) === "house" ? "admin" : "house";
-      patch(t.id, { kind: to }); toast(`Moved to ${to === "admin" ? "Paperwork" : "In the house"}`); setTimeout(() => openTask(t.id), 80); return;
+      patch(t.id, { kind: to }); toast(`Verplaatst naar ${to === "admin" ? "Papierwerk" : "In huis"}`); setTimeout(() => openTask(t.id), 80); return;
     }
-    if (id === "pDel") $("#pDelWrap").innerHTML = `<span>Delete for both of you?</span><button class="btn danger" type="button" id="pDelYes">Yes, delete</button><button class="btn" type="button" id="pDelNo">Keep it</button>`;
-    if (id === "pDelNo") $("#pDelWrap").innerHTML = `<button class="btn danger" type="button" id="pDel">Delete</button>`;
+    if (id === "pDel") $("#pDelWrap").innerHTML = `<span>Voor jullie allebei verwijderen?</span><button class="btn danger" type="button" id="pDelYes">Ja, verwijderen</button><button class="btn" type="button" id="pDelNo">Toch houden</button>`;
+    if (id === "pDelNo") $("#pDelWrap").innerHTML = `<button class="btn danger" type="button" id="pDel">Verwijderen</button>`;
     if (id === "pDelYes") {
       const p = panel; closePanel();
       try {
@@ -1724,12 +1733,12 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
           const s = subById.get(p.id);
           subCol.doc(p.id).delete().catch(handleWriteErr);
           for (const t of linkedTasks(p.id)) patch(t.id, { subsidyId: "" });
-          toast(`Deleted “${s ? s.name : "subsidy"}”`);
+          toast(`“${s ? s.name : "Premie"}” verwijderd`);
         } else {
           const t = byId.get(p.id);
           col.doc(p.id).delete().catch(handleWriteErr);
           for (const o of tasks) if ((o.dependsOn || []).includes(p.id)) patch(o.id, { dependsOn: o.dependsOn.filter((x) => x !== p.id) });
-          toast(`Deleted “${t ? t.title : "item"}”`);
+          toast(`“${t ? t.title : "Item"}” verwijderd`);
         }
       } catch (err) { handleWriteErr(err); }
     }
@@ -1745,25 +1754,25 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     const n = (v) => v == null || v === "" ? "" : String(v).replace(".", ",");
     let head, rows;
     if (st.tab === "done") {
-      head = ["Finished", "List", "Room / category", "Done on", "Done by", "Who", "Hours", "Spent EUR", "Planned EUR", "Difference EUR", "Notes"];
-      rows = sortDone(visibleDone()).map((t) => [t.title, kindOf(t) === "house" ? "In the house" : "Paperwork", whereOf(t), doneKey(t), t.doneBy, t.owner, n(t.hours), n(t.actualCost), n(t.estCost), varianceOf(t) ? n(varianceOf(t).d) : "", t.notes]);
+      head = ["Afgewerkt", "Lijst", "Kamer / categorie", "Gedaan op", "Gedaan door", "Wie", "Uren", "Uitgegeven EUR", "Gepland EUR", "Verschil EUR", "Notities"];
+      rows = sortDone(visibleDone()).map((t) => [t.title, kindOf(t) === "house" ? "In huis" : "Papierwerk", whereOf(t), doneKey(t), byL(t.doneBy), ownL(t.owner), n(t.hours), n(t.actualCost), n(t.estCost), varianceOf(t) ? n(varianceOf(t).d) : "", t.notes]);
     } else if (st.tab === "budget") {
-      head = ["Room or list", "Open jobs", "Done jobs", "Budget EUR", "Planned EUR", "Spent EUR", "Expected final EUR", "Left (+) / over (-) EUR"];
+      head = ["Kamer of lijst", "Open klussen", "Gedane klussen", "Budget EUR", "Gepland EUR", "Uitgegeven EUR", "Verwacht eindbedrag EUR", "Over (+) / te veel (-) EUR"];
       rows = sortBudget(budgetRows()).map((r) => [r.name, r.open, r.done, n(r.budget), n(r2(r.planned)), n(r2(r.spent)), n(r2(r.expected)), n(r.diff)]);
       const pn = planNumbers();
-      rows.push([], ["Total budget", "", "", n(pn.total)], ["Buffer %", "", "", n(pn.bufPct)], ["Subsidies", "", "", n(r2(subsTotal()))]);
+      rows.push([], ["Totaal budget", "", "", n(pn.total)], ["Buffer %", "", "", n(pn.bufPct)], ["Premies", "", "", n(r2(subsTotal()))]);
     } else if (st.tab === "subs") {
-      head = ["Subsidy", "Status", "Expected EUR", "Received EUR", "Apply before", "Linked jobs", "Conditions", "Website", "Notes"];
+      head = ["Premie", "Status", "Verwacht EUR", "Ontvangen EUR", "Aanvragen voor", "Gekoppelde klussen", "Voorwaarden", "Website", "Notities"];
       rows = visibleSubs().map((s) => [s.name, SUB[s.status] || "", n(s.expected), n(s.received), s.deadline, linkedTasks(s.id).map((t) => t.title).join(", "), s.conditions, s.link, s.notes]);
     } else {
       const kind = st.tab;
-      head = ["Item", "List", "Room", "Type of work", "Category", "Priority", "Status", "Who", "Done by", "Hours", "Due", "Planned EUR", "Price based on", "Chosen quote from", "Spent EUR", "Payments", "Tools & materials", "Subsidy", "Waits on", "Notes"];
-      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In the house" : "Paperwork", roomName(roomIdOf(t)), t.trade, t.category, "P" + (t.priority || 3), STATUS[t.status] || "", t.owner, t.doneBy, n(t.hours), t.due, n(t.estCost), STAGE[stageOf(t)], estDerived(t) ? chosenQuote(t).who || "" : "", n(t.actualCost), paysOf(t).length, toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
+      head = ["Item", "Lijst", "Kamer", "Soort werk", "Categorie", "Prioriteit", "Status", "Wie", "Gedaan door", "Uren", "Tegen", "Gepland EUR", "Prijs op basis van", "Gekozen offerte van", "Uitgegeven EUR", "Betalingen", "Gereedschap & materiaal", "Premie", "Wacht op", "Notities"];
+      rows = sortTasks(visibleTasks(kind), st[kind]).map((t) => [t.title, kind === "house" ? "In huis" : "Papierwerk", roomName(roomIdOf(t)), trL(t.trade), catL(t.category), "P" + (t.priority || 3), STATUS[t.status] || "", ownL(t.owner), byL(t.doneBy), n(t.hours), t.due, n(t.estCost), STAGE[stageOf(t)], estDerived(t) ? chosenQuote(t).who || "" : "", n(t.actualCost), paysOf(t).length, toolsOf(t).join(", "), (subById.get(t.subsidyId) || {}).name || "", deps(t).map((d) => d.title).join(", "), t.notes]);
     }
     const csv = "﻿" + [head, ...rows].map((r) => r.map(q).join(";")).join("\r\n");
-    const name = { house: "house-jobs", admin: "paperwork", subs: "subsidies", done: "done", budget: "budget" }[st.tab];
-    try { await downloadsNS.save({ filename: `kortrijkstraat-17-${name}-${today()}.csv`, data: csv }); toast("Saved. It opens in Excel or Numbers."); }
-    catch (e) { if (e && e.code === "declined") return; toast(e && e.code === "rate_limited" ? "A save is already waiting for you." : "Export isn’t available here."); }
+    const name = { house: "klussen", admin: "papierwerk", subs: "premies", done: "gedaan", budget: "budget" }[st.tab];
+    try { await downloadsNS.save({ filename: `kortrijkstraat-17-${name}-${today()}.csv`, data: csv }); toast("Bewaard. Het bestand opent in Excel of Numbers."); }
+    catch (e) { if (e && e.code === "declined") return; toast(e && e.code === "rate_limited" ? "Er staat al een download klaar." : "Exporteren lukt hier niet."); }
   }
 
   // ---------- boot (Firebase) ----------
@@ -1784,8 +1793,8 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
 
   if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("PASTE")) {
     loadedT = loadedS = true; canWrite = false;
-    const b = $("#banner"); b.textContent = "Setup isn’t finished: paste your Firebase config at the top of the script in index.html (see README, step 3)."; b.hidden = false;
-    $("#addForm").hidden = true; setSync("Not connected"); render();
+    const b = $("#banner"); b.textContent = "De installatie is niet af: plak je Firebase-configuratie bovenaan het script in index.html (zie README, stap 3)."; b.hidden = false;
+    $("#addForm").hidden = true; setSync("Niet verbonden"); render();
     return;
   }
 
@@ -1819,11 +1828,11 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       if (c === "auth/popup-closed-by-user" || c === "auth/cancelled-popup-request") return;
       if (c === "auth/popup-blocked" || c === "auth/operation-not-supported-in-this-environment") { try { await signInWithRedirect(auth, provider); return; } catch (e2) { e = e2; } }
       $("#gateErr").textContent = c === "auth/unauthorized-domain"
-        ? "This web address isn’t allowed yet. In Firebase → Authentication → Settings → Authorized domains, add " + location.hostname + "."
-        : "Sign-in didn’t work (" + (e && e.code || "unknown error") + "). Try again.";
+        ? "Dit webadres is nog niet toegelaten. Voeg in Firebase → Authentication → Settings → Authorized domains dit toe: " + location.hostname + "."
+        : "Aanmelden is niet gelukt (" + (e && e.code || "onbekende fout") + "). Probeer opnieuw.";
     }
   });
-  getRedirectResult(auth).catch((e) => { $("#gateErr").textContent = "Sign-in didn’t work (" + (e && e.code) + ")."; });
+  getRedirectResult(auth).catch((e) => { $("#gateErr").textContent = "Aanmelden is niet gelukt (" + (e && e.code) + ")."; });
   const doSignOut = () => signOut(auth);
   $("#signOutBtn").addEventListener("click", doSignOut);
   $("#gateOut").addEventListener("click", doSignOut);
@@ -1832,7 +1841,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
   function showDenied(email) {
     unsubs.forEach((f) => f()); unsubs = [];
     showApp(false);
-    $("#gateMsg").textContent = (email || "This account") + " doesn’t have access to this list. Sign in with the Google account Oberon added.";
+    $("#gateMsg").textContent = (email || "Dit account") + " heeft geen toegang tot deze lijst. Meld je aan met het Google-account dat Oberon heeft toegevoegd.";
     $("#gateBtn").hidden = true; $("#gateOut").hidden = false;
   }
   onAuthStateChanged(auth, (u) => {
@@ -1840,7 +1849,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     closePanel();
     if (!u) {
       showApp(false);
-      $("#gateMsg").textContent = "Sign in with your Google account to open the shared works list.";
+      $("#gateMsg").textContent = "Meld je aan met je Google-account om de gedeelde werkenlijst te openen.";
       $("#gateBtn").hidden = false; $("#gateOut").hidden = true; $("#acct").hidden = true;
       return;
     }
@@ -1849,15 +1858,15 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
     canWrite = true; $("#addForm").hidden = false; $("#banner").hidden = true;
     col = wrapCol("tasks"); subCol = wrapCol("subsidies"); roomCol = wrapCol("rooms");
     tasks = []; subs = []; rooms = []; byId = new Map(); subById = new Map(); roomById = new Map(); loadedT = loadedS = loadedR = false;
-    setSync("Connecting…"); render();
+    setSync("Verbinden…"); render();
     const onErr = (err) => {
       if (err && err.code === "permission-denied") return showDenied(u.email);
-      setSync("Disconnected · reload the page");
+      setSync("Verbinding verbroken · herlaad de pagina");
     };
     unsubs.push(col.onSnapshot((snap) => {
       tasks = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
       byId = new Map(tasks.map((t) => [t.id, t])); loadedT = true;
-      setSync(snap.fromCache ? "Offline · changes sync later" : "Live · shared", !snap.fromCache); render();
+      setSync(snap.fromCache ? "Offline · wijzigingen worden later gesynchroniseerd" : "Live · gedeeld", !snap.fromCache); render();
     }, onErr));
     unsubs.push(subCol.onSnapshot((snap) => {
       subs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -1876,7 +1885,7 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
       tasks: Object.fromEntries(tasks.map((t) => [t.id, strip(t)])), subsidies: Object.fromEntries(subs.map((s) => [s.id, strip(s)])), rooms: Object.fromEntries(rooms.map((r) => [r.id, strip(r)])) };
     downloadsNS.save({ filename: `kortrijkstraat-17-backup-${today()}.json`, data: JSON.stringify(out, null, 1) });
   });
-  const pickFile = () => { if (!canWrite) { toast("Sign in first."); return; } $("#importIn").value = ""; $("#importIn").click(); };
+  const pickFile = () => { if (!canWrite) { toast("Meld je eerst aan."); return; } $("#importIn").value = ""; $("#importIn").click(); };
   $("#importBtn").addEventListener("click", pickFile);
   $("#importHintBtn").addEventListener("click", pickFile);
   let pendingImport = null;
@@ -1892,19 +1901,19 @@ import { initializeFirestore, getFirestore, persistentLocalCache, collection, do
         entries.slice(i, i + 400).forEach(([c, id, body]) => batch.set(doc(fs, c, id), body));
         await batch.commit();
       }
-      toast(`Imported ${entries.length} items.`);
+      toast(`${entries.length} items geïmporteerd.`);
     } catch (e) { handleWriteErr(e); }
   }
   $("#importIn").addEventListener("change", async (e) => {
     const file = e.target.files && e.target.files[0]; if (!file) return;
     let data;
-    try { data = JSON.parse(await file.text()); } catch (err) { toast("That file isn’t a backup of this list."); return; }
-    if (!data || data.format !== "kortrijkstraat-17-backup") { toast("That file isn’t a backup of this list."); return; }
+    try { data = JSON.parse(await file.text()); } catch (err) { toast("Dat bestand is geen back-up van deze lijst."); return; }
+    if (!data || data.format !== "kortrijkstraat-17-backup") { toast("Dat bestand is geen back-up van deze lijst."); return; }
     const n = Object.keys(data.tasks || {}).length + Object.keys(data.subsidies || {}).length + Object.keys(data.rooms || {}).length;
     if (!tasks.length && !subs.length) return runImport(data);
     pendingImport = data;
     const c = $("#importConfirm");
-    c.innerHTML = `<span>Import ${n} items? Items with the same ID are replaced by the backup version.</span><button class="btn" type="button" id="impYes">Import</button><button class="btn" type="button" id="impNo">Cancel</button>`;
+    c.innerHTML = `<span>${n} items importeren? Items met dezelfde ID worden vervangen door de versie uit de back-up.</span><button class="btn" type="button" id="impYes">Importeren</button><button class="btn" type="button" id="impNo">Annuleren</button>`;
     c.hidden = false;
   });
   $("#importConfirm").addEventListener("click", (e) => {
