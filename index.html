@@ -81,6 +81,7 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 .brand h1 span { color: var(--accent); }
 .brand p { margin: 6px 0 0; color: var(--muted); }
 .sprol { display: inline-block; font-family: var(--f-display); font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 0 9px; font-size: 12px; letter-spacing: .02em; vertical-align: 1px; }
+.brand h1 .sprol { font-size: 14px; padding: 2px 10px; vertical-align: middle; letter-spacing: .02em; }
 .sync { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .sync i { width: 8px; height: 8px; border-radius: 50%; background: var(--p4); display: inline-block; }
 .sync.live i { background: var(--ok); }
@@ -397,8 +398,8 @@ input.cell.money.derived { color: var(--accent); cursor: default; }
 <div class="wrap" id="app">
   <header class="top">
     <div class="brand">
-      <h1>Kortrijkstraat <span>17</span></h1>
-      <p>Borgerhout · jobkes Obe &amp; Spil · <span class="sprol" title="Sprol">Sprol</span></p>
+      <h1>Kortrijkstraat <span>17</span> <span class="sprol" title="Sprol">Sprol</span></h1>
+      <p>Jobkes Obe &amp; Spil</p>
     </div>
     <div class="topright">
       <div class="sync" id="sync"><i></i><span>Verbinden…</span></div>
